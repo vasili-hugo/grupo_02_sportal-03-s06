@@ -1,0 +1,155 @@
+/* HEADER --------------------------------------------------- */
+#header {
+    display: grid;
+    grid-template-columns: 72px 72px calc(50vw - 144px - 56px) 56px 1fr 56px 56px 20px;
+    grid-template-rows: 72px 16px 40px 16px 1fr;
+}
+
+
+#header-upper {
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 8;
+    background-color: #950000;
+    z-index: -1;
+}
+
+#header-banner {
+    grid-row: 2 / span 4;
+    grid-column: 1 / span 8;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(../images/sport/run.jpg);
+    background-size: cover;
+    background-position:center;
+    background-position-y: 30%;
+    z-index: -2;
+    border-bottom: 2px solid white;
+}
+
+#header-circle {
+    grid-row: 1 / span 3;
+    grid-column: 1 / span 2;
+    background-image: url(/images/sportal_logo_000.png);
+    background-position: 50% 25%;
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-color: #950000;
+    border-radius: 0 0 50% 50%;
+}
+
+#header-login {
+    text-decoration: none;
+    grid-row: 1 / span 1;
+    grid-column: 5 / span 3;
+    color: white;
+    font-size: 20px;
+    align-self: center;
+    text-align: end;
+    z-index: 4;
+}
+
+#header-login a:link,
+#header-login a:visited,
+#header-login a:active {
+    color: white;
+}
+
+#header-login:hover {
+    color: black;
+}
+
+#header-search-fill{
+    grid-row: 2 / span 2;
+    grid-column: 2 / span 1;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: -1;
+}
+
+#header-search-box {
+    grid-row: 2 / span 2;
+    grid-column: 3 / span 4;
+
+    background-color: white;
+    border-radius: 0 28px 28px 0;
+
+    border: none;
+}
+
+#header-search-box input {
+    border: none;
+    width: calc(100% - 56px);
+    height: 56px;
+    position: relative;
+    outline: none;
+}
+
+#header-glass {
+    display: block;
+    grid-row: 2 / span 2;
+    grid-column: 6 / span 1;
+    font-size: 1em;
+    color: #707070;
+    z-index: 2;
+    align-self: center;
+    text-align: center;
+  }
+#header-menu{
+    grid-row: 3 / span 1;
+    grid-column: 5 / span 3;
+    align-self: start;
+    z-index: 3;
+    display: none;
+}
+
+#header-menu ul{
+    list-style-type:none;
+}
+
+.header-menu li{
+    float: left;
+}
+
+.header-menu a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9em;
+    text-align: center;
+    padding: 4px 6px 0 6px;
+}
+
+.header-menu a:link,
+.header-menu a:visited,
+.header-menu a:active {
+    color: white;
+}
+
+.header-menu a:hover {
+    color: black;
+}
+
+#header-sandwich {
+    grid-row: 3 / span 1;
+    grid-column: 7 / span 1;
+    text-align: end ;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.7em;
+    display: block;
+}
+
+@media (min-width: 600px){
+    #header-search-box {
+        grid-column: 3 / span 2;
+    }
+    #header-glass {
+        grid-column: 4 / span 1;
+    }
+
+    #header-sandwich {
+        display:none;
+    }
+    #header-menu{
+        display: block;
+    }
+}

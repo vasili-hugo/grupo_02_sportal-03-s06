@@ -1,0 +1,483 @@
+
+/*
+========================================================================================================================
+MAIN
+========================================================================================================================
+*/
+main {
+  width: 100%;
+  overflow: scroll;
+}
+
+.goback-link {
+  margin-left: 15px;
+  color: #950000;
+  font-weight: 400;
+}
+.goback-link img{
+  transform: translateY(2px);
+  height: 1.3em;
+  filter:invert(9%) sepia(73%) saturate(5980%) hue-rotate(358deg) brightness(89%) contrast(112%);
+}
+
+
+.goback-link a:visited,
+.goback-link a:link,
+.goback-link a:active{
+  color: #950000
+}
+
+.goback-link a:hover{
+  color: black
+}
+
+.grid-buy {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(200px,1fr));
+  grid-template-rows: repeat(3, 200px);
+  grid-template-areas:
+    "art1 qty1"
+    "art2 qty2"
+    "art3 qty3";
+  justify-content: stretch;
+  align-content: stretch;
+  gap: 0 0;
+}
+
+.art1 {
+  width: 100%;
+  height: 100%;
+  grid-area: art1;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.art2 {
+  width: 100%;
+  height: 100%;
+  grid-area: art2;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.art3 {
+  width: 100%;
+  height: 100%;
+  grid-area: art3;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.lower-rect {
+  background-color: rgb(220, 220, 220);
+  width: 90%;
+  height: 90%;
+  margin: 10px;
+  border-radius: 20px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 20px;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(../imgs/sport/run-update-2021-500x356-2.webp);
+  background-position: center;
+  background-size: cover;
+}
+
+.grid-item1 {
+  display: grid;
+  grid-area: qty1;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4,50px);
+  grid-template-areas:
+    "gi-codigo gi-codigo"
+    "gi-precio gi-marca"
+    "gi-counter ."
+    "gi-info gi-trash";
+  justify-content: center;
+  align-content: center;
+  border-bottom: 1px solid black;
+  gap: 0 0;
+}
+
+.grid-item2 {
+  display: grid;
+  grid-area: qty2;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4,50px);
+  grid-template-areas:
+    "gi-codigo gi-codigo"
+    "gi-precio gi-marca"
+    "gi-counter ."
+    "gi-info gi-trash";
+  justify-content: center;
+  align-content: center;
+  border-bottom: 1px solid black;
+  gap: 0 0;
+}
+
+.grid-item3 {
+  display: grid;
+  grid-area: qty3;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4,50px);
+  grid-template-areas:
+    "gi-codigo gi-codigo"
+    "gi-precio gi-marca"
+    "gi-counter ."
+    "gi-info gi-trash";
+  justify-content: center;
+  align-content: center;
+  border-bottom: 1px solid black;
+  gap: 0 0;
+}
+
+.codigo {
+  grid-area: gi-codigo;
+  margin: 20px;
+  color: #950000;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.precio {
+  grid-area: gi-precio;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: #707070;
+}
+
+.icon {
+  grid-area: gi-marca;
+  text-align: center;
+  width: 8em;
+}
+
+.counter {
+  grid-area: gi-counter;
+  display: flex;
+  justify-content: space-around;
+  font-size: 14;
+  font-weight: bold;
+  text-align: center;
+  width: 60px;
+  height: 40px;
+  border: 2px solid black;
+  padding: 5px;
+  border-radius: 8px;
+  color: #950000;
+  background-color: #b0b0b0;
+}
+
+.upcount {
+  width: 50%;
+  height: auto;
+  font-size: 18px;
+  font-weight: bolder;
+  margin-left: 5px;
+  transition: background-color 1s;
+}
+
+.upcount:hover {
+  background-color: #707070;
+}
+
+.count-value {
+  padding: 5px;
+}
+
+.dncount {
+  width: 50%;
+  height: auto;
+  font-size: 18px;
+  font-weight: bolder;
+  margin-right: 5px;
+  transition: background-color 1s;
+}
+
+.dncount:hover {
+  background-color: #707070;
+}
+
+.informes {
+  grid-area: gi-info;
+  width: 100%;
+  font-size: 1em;
+  color: #950000;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #950000;
+  border-radius: 50%;
+  padding-top: 2px;
+  padding-left: 8px;
+}
+
+.fa-trash {
+  grid-area: gi-trash;
+  font-size: 1.5em;
+  color: #950000;
+}
+/*
+========================================================================================================================
+FORMULARIO
+========================================================================================================================
+*/
+.payment {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin: calc((vw - 375px) / 2);
+  height: 350px;
+  border-radius: 20px;
+  border: 1px solid black;
+  font-size: 20px;
+  color: #707070;
+  position: relative;
+  max-width: 360px;
+  min-width: 360px;
+}
+
+.frm-title {
+  position: relative;
+  font-size: 24px;
+  left: 20px;
+  padding: 10px;
+  color: #950000;
+}
+
+.qty-items {
+  position: relative;
+  left: 302px;
+  top: -33px;
+  color: #950000;
+}
+
+.fa-shopping-cart {
+  position: relative;
+  left: 318px;
+  top: -56px;
+  color: #950000;
+}
+
+.st-lbl1 {
+  position: relative;
+  left: 30px;
+  top: -30px;
+}
+
+.st-lbl2 {
+  position: relative;
+  left: 160px;
+  top: -30px;
+}
+
+.env-sel {
+  position: relative;
+  left: 30px;
+  top: -15px;
+  font-size: 14px;
+}
+
+.env-lbl {
+  position: relative;
+  left: 99px;
+  top: -13px;
+}
+
+.desc-lbl1 {
+  position: relative;
+  left: 30px;
+  top: 0px;
+}
+
+.desc-lbl2 {
+  position: relative;
+  left: 132px;
+  top: 2px;
+}
+
+.tot-line {
+  position: relative;
+  left: 31px;
+  top: -3px;
+}
+
+.tot-lbl1 {
+  position: relative;
+  left: 30px;
+  top: 10px;
+}
+
+.tot-lbl2 {
+  position: relative;
+  left: 174px;
+  top: 10px;
+  font-size: 24px;
+}
+
+.btn-pagar {
+  position: relative;
+  left: 31px;
+  top: 27px;
+  background-color: #950000;
+  color: #b0b0b0;
+  border-radius: 15px;
+  width: 100px;
+  height: 39px;
+  transition: color 250ms;
+}
+
+.btn-pagar:hover {
+  color: white;
+}
+
+.btn-vaciar {
+  position: relative;
+  left: 47px;
+  top: 27px;
+  background-color: #950000;
+  color: #b0b0b0;
+  border-radius: 15px;
+  width: 189px;
+  height: 39px;
+  transition: color 250ms;
+}
+
+.btn-vaciar:hover {
+  color: white;
+}
+
+.btn-continuar {
+  position: relative;
+  left: 31px;
+  top: 40px;
+  background-color: #950000;
+  color: #b0b0b0;
+  border-radius: 15px;
+  width: 309px;
+  height: 39px;
+  transition: color 250ms;
+}
+
+.btn-continuar:hover {
+  color: white;
+}
+/*
+========================================================================================================================
+OTROS PRODUCTOS SIMILARES
+========================================================================================================================
+*/
+.grid-otros {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "otros1 otros2"
+    "otros3 otros4";
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 20px;
+  gap: 0 0;
+}
+
+.txt-otros {
+  text-align: center;
+  font-size: 24px;
+  color: #950000;
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.otros1 {
+  width: 100%;
+  height: 100%;
+  grid-area: otros1;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.otros2 {
+  width: 100%;
+  height: 100%;
+  grid-area: otros2;
+  border-bottom: 1px solid black;
+}
+
+.otros3 {
+  width: 100%;
+  height: 100%;
+  grid-area: otros3;
+  border-right: 1px solid black;
+}
+
+.otros4 {
+  width: 100%;
+  height: 100%;
+  grid-area: otros4;
+}
+
+.lower-otr {
+  background-color: rgb(220, 220, 220);
+  width: 90%;
+  height: 90%;
+  margin: 10px;
+  border-radius: 20px;
+}
+
+
+/*
+========================================================================================================================
+MEDIA QUERIES
+========================================================================================================================
+*/
+@media (min-width: 450px) {
+  .codigo {
+    font-size: 18px;
+  }
+
+  .precio {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 768px) {
+  .codigo {
+    font-size: 20px;
+  }
+
+  .precio {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  
+  .grid-big {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 400px 400px;/*1fr 1fr;*/
+    grid-template-areas:
+      "buy pay"
+      "buy otros";
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0 30px;
+  }
+
+  .grid-buy {
+    grid-area: buy;
+  }
+
+  .payment {
+    grid-area: pay;
+    margin: 20px;
+  }
+
+  .grid-txt-otros {
+    grid-area: otros;
+  }
+}

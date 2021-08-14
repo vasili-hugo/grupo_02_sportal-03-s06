@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/abmProductos.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet"> 
+    <title>Sportal - Portal para Guerreros Urbanos - Uso interno</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-rect-upper">
+          <div class="header-bar"></div>
+        </div>
+        <div class="header-circle"></div>
+        <div class="header-rect-lower">
+          <div class="header-title"><h3>Editor de Productos</h3></div>
+        </div>
+    </header>
+    <main>
+        <div class="form-abm">
+            <form action="/abmProductos/update/updProd" method="POST">
+              <div class="prod-select">
+                <div class="labels prod-title">Producto:</div>
+                <select class="selects prod-options" name="selCod">
+                  <% for (let i = 0 ; i < prodList.length ; i++) { %>
+                    <option value="<%= prodList[i].codigo %>"><%= prodList[i].codigo %></option>
+                  <% } %>
+                </select>
+              </div>
+
+              <label class="labels label-codigo" for="codigo">Código de Producto</label>
+              <input class="inputs input-codigo" type="text" name="codigo" id="codigo" placeholder="<%= prodList.codigo %>">
+
+              <label class="labels label-desc" for="descripcion">Descripción</label>
+              <input class="inputs input-desc" type="text" name="descripcion" id="descripcion" placeholder="<%= prodList.smallDesc %>">
+
+              <label class="labels label-cuento" for="cuento">Descripción Ampliada</label>
+              <textarea class="inputs input-cuento" type="text" name="cuento" id="cuento" placeholder="<%= prodList.bigDesc %>"></textarea>
+
+              <label class="labels label-precio" for="precio">Precio</label>
+              <input class="inputs input-precio" type="number" name="precio" id="precio" placeholder="<%= prodList.price %>">
+
+              <label class="labels label-edad" for="edad">Edad</label>
+              <input class="inputs input-edad" type="number" name="edad" id="edad" placeholder="<%= prodList.age %>">
+
+              <label class="labels label-sexo" for="sexo">Sexo</label>
+              <select class="selects sexo-options" name="sexo">
+                <option value="#" selected>Seleccione una opción</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+              </select>
+
+              <label class="labels label-color" for="color">Color</label>
+              <select class="selects color-options" name="color">
+                <option value="#" selected>Seleccione una opción</option>
+                <option value="A">Amarillo</option>
+                <option value="Z">Azul</option>
+                <option value="B">Blanco</option>
+                <option value="M">Marrón</option>
+                <option value="N">Negro</option>
+                <option value="R">Rojo</option>
+                <option value="V">Verde</option>
+              </select>
+
+              <label class="labels label-icon" for="icon">Archivo de Marca (icono)</label>
+              <input class="inputs input-icon" type="file" name="icon" id="icon" accept=".jpg" placeholder="<%= prodList.icon %>">
+
+              <label class="labels label-image" for="image">Archivo de Imagen Principal</label>
+              <input class="inputs input-image" type="file" name="image" id="image" accept=".jpg" placeholder="<%= prodList.mainImage %>">
+
+              <label class="labels label-image1" for="image1">Archivo de Imagen Lateral Izquierda</label>
+              <input class="inputs input-image1" type="file" name="image1" id="image1" accept=".jpg" placeholder="<%= prodList.leftImage %>">
+
+              <label class="labels label-image2" for="image2">Archivo de Imagen Lateral Derecha</label>
+              <input class="inputs input-image2" type="file" name="image2" id="image2" accept=".jpg" placeholder="<%= prodList.rightImage %>">
+
+              <label class="labels label-image3" for="image3">Archivo de Imagen Superior</label>
+              <input class="inputs input-image3" type="file" name="image3" id="image3" accept=".jpg" placeholder="<%= prodList.upperImage %>">
+
+              <label class="labels label-image4" for="image4">Archivo de Imagen Inferior</label>
+              <input class="inputs input-image4" type="file" name="image4" id="image4" accept=".jpg" placeholder="<%= prodList.lowerImage %>">
+
+              <div class="buttons">
+                <button class="retrive-button" type="submit" formaction="/abmProductos/retrive/retProd">L E E R</button>
+                <button class="accept-button" type="submit">ACEPTAR</button>
+                <button class="delete-button" type="submit" formaction="/abmProductos/delete/delProd">ELIMINAR</button>
+                <button class="cancel-button" type="reset">CANCELAR</button>
+              </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+#container {
+    position:fixed;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 100%;
+    /* breadcump 50px out */
+    grid-template-rows: 266px 1fr 60px;
+}
+
+
+#breadcumb,
+#main,
+#footer {
+    display: block;
+}
