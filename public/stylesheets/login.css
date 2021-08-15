@@ -29,7 +29,7 @@ HEADER
 }
 .header-circle {
     position: fixed;
-    background-image: url(/imgs/sportal_logo_000.png);
+    background-image: url(/images/sportal_logo_000.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 70%;
