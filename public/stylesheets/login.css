@@ -1,0 +1,196 @@
+@import url("normalize.css");
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: auto;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    background-color: rgb(240, 240, 240);
+  }
+/*
+========================================================================================================================
+HEADER
+========================================================================================================================
+*/
+.header-bar {
+    background-color: #950000;
+    width: 100%;
+    height: 74px;
+    max-width: 600px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-top-left-radius: 80px;
+    border-top-right-radius: 80px;
+}
+.header-circle {
+    position: fixed;
+    background-image: url(/imgs/sportal_logo_000.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-color: #950000;
+    border-radius: 50%;
+    width: 124px;
+    height: 124px;
+    left: 20px;
+}
+.header-title {
+    position: fixed;
+    top: 95px;
+    left: 140px;
+    font-size: 13px;
+    color: #950000;
+}
+.header-options-login {
+    display: flex;
+    position: fixed;
+    top: 120px;
+    left: 140px;
+    width: 160px;
+    margin-left: 0%;
+}
+.header-options-login form {
+    display: flex;
+}
+/*
+========================================================================================================================
+MAIN
+========================================================================================================================
+*/
+main {
+    position: absolute;
+    top: 180px;
+    width: 100%;
+    max-width: 600px;
+    font-weight: bold;
+}
+.form-login {
+    padding: 10px;
+}
+.form-login-check {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 40px;
+}
+.form-login-check-bar {
+    width: 100%;
+    display: flex;
+    margin: 10px;
+}
+.form-login-check i {
+    margin-left: 10px;
+    font-size: 3em;
+    font-weight: 10px;
+}
+.form-login-check-restore {
+    margin-top: -20px;
+    margin-right: 10%;
+}
+.form-login-check-restore a {
+    margin: none;
+    font-size: 12px;
+    color: #888;
+}
+.form-login form {
+    display: flex;
+    flex-direction: column;
+}
+.form-login form label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    color: #950000;
+}
+.input-login {
+    border-radius: 50px;
+    width: 65vw;
+    height: 30px;
+    max-width: 400px;
+    margin-top: 10px;
+}
+.e-mail-confirmed {
+    margin-right: 50px;
+    margin-top: 30px;
+}
+.e-mail-confirmed div {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.e-mail-confirmed div i {
+    font-size: 2em;
+    color: red;
+    margin: 0px;
+}
+.e-mail-confirmed-check {
+    margin: 0px 5px;
+    color: #950000;
+    font-size: 20px;
+}
+.e-mail-confirmed-tip {
+    color: #888;
+    font-size: 12px;
+    margin: 5px 0px;
+}
+.login-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 40px;
+    align-items: flex-end;
+    width: 90%;
+}
+.login-to-register {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    margin: 5px 0px;
+}
+.login-to-register label {
+    margin: 10px;
+    width: 100%;
+}
+.register-button {
+    height: 40px;
+    border-radius: 10px;
+    margin: 10px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+}
+.login-buttons-login-button {
+    margin: 10px;
+    width: 45%;
+}
+.login-button {
+    height: 40px;
+    border-radius: 10px;
+    background-color: #950000;
+    color: white;
+    font-weight: bold;
+    margin: 5px 0px;
+    width: 100%;
+}
+/*
+========================================================================================================================
+MAIN
+========================================================================================================================
+*/
+@media (min-width: 600px) {
+    .header-options-login {
+        top: 95px;
+        left: 400px;
+    }
+    .input-login {
+        width: 75vw;
+    }
+    .form-login-check-restore {
+        margin-right: 16%;
+    }
+}
