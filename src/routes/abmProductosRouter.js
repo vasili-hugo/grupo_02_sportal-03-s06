@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var controller = require("../controllers/abmProductosCtrl.js")
+var controller = require("../controllers/abmProductosCtrl.js");
 
 /* GET abm productos. */
 router.get("/retrive/:id",controller.retrive);

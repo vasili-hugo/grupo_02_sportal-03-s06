@@ -1,0 +1,108 @@
+@import url('normalize.css');
+
+/*
+========================================================================================================================
+MAIN
+========================================================================================================================
+*/
+.cargaProducto {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    margin-left: 30vw;
+    background-color: white;
+    max-width: 600px;
+    border-radius: 20px;
+    border: #950000 1px solid;
+}
+h2 {
+    color: #950000;
+    padding-left: 20px;
+}
+.nombre {
+    padding: 20px;
+    padding-bottom: 10px;
+}
+.cargaProducto input {
+    margin-top: 10px;
+    width: 40vw;
+    max-width: 490px;
+    height: 30px;
+    border-radius: 10px;
+}
+.cargaProducto select {
+    margin-top: 10px;
+}
+.codigoProducto {
+    padding: 20px;
+    padding-bottom: 10px;
+}
+.descripcion {
+    padding: 20px;
+    padding-bottom: 10px;
+}
+.descripcion textarea {
+    margin-top: 10px;
+    width: 40vw;
+    max-width: 490px;
+    border-radius: 10px;
+}
+.descripcion ::placeholder {
+    padding: 10px;
+}
+.precio {
+    padding: 20px;
+    padding-bottom: 10px;
+}
+.edad {
+    padding: 20px;
+    padding-bottom: 10px;
+}
+.sexo {
+    padding: 20px;
+    padding-bottom: 10px;
+}
+.color {
+    padding: 20px;
+    padding-bottom: 10px;
+}
+.marca {
+    padding: 20px;
+    padding-bottom: 10px;
+}
+.img-principal {
+    padding: 20px;
+    padding-bottom: 10px
+}
+.img-secundarias {
+    padding: 20px;
+    padding-bottom: 10px
+}
+.buttons {
+    display: flex;
+    margin: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.accept-button {
+    background-color: #950000;
+    color: #b0b0b0;
+    border-radius: 15px;
+    width: 140px;
+    height: 40px;
+    transition: color 250ms;
+}
+.accept-button:hover {
+    color: white;
+}
+.cancel-button {
+    background-color: #950000;
+    color: #b0b0b0;
+    border-radius: 15px;
+    width: 140px;
+    height: 40px;
+    transition: color 250ms;
+}
+.cancel-button:hover {
+    color: white;
+}

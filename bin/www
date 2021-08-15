@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../src/app');
+var app = require('../src/app.js');
 var debug = require('debug')('grupo-02-sportal-02:server');
 var http = require('http');
 
