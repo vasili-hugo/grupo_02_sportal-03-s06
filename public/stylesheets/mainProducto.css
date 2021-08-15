@@ -3,14 +3,12 @@
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
-
 }
 
 .header-search-box-producto {
     width: 45%;
     background-color: white;
     border-radius: 0 28px 28px 0;
-  
     border: none;
     position: fixed;
     left: 86px;
@@ -51,10 +49,10 @@
     list-style: none;
     font-size: 14px;
   }
-  header li{
+  header li {
     padding-right: 5px;
   }
-  header a{
+  header a {
     text-decoration: none;
     color: white;
   }
@@ -95,6 +93,7 @@
     width: 340px;
     height: 340px;
     margin: 5px auto;
+    border-radius: 10px;
   }
   .product-description {
     padding: 5px;
@@ -228,8 +227,8 @@
   }
   @media (min-width: 1200px) {
     .product-image-angles {
-        align-self: flex-start;
-        margin: 0;
+      align-self: flex-start;
+      margin: 0;
     }
 
     .similar-products {
