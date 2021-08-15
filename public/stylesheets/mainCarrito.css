@@ -81,7 +81,7 @@ main {
   height: 100%;
   border: 2px solid rgb(200, 200, 200);
   border-radius: 20px;
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(../imgs/sport/run-update-2021-500x356-2.webp);
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(../images/sport/run-update-2021-500x356-2.webp);
   background-position: center;
   background-size: cover;
 }
