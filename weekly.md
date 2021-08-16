@@ -7,4 +7,5 @@
 - Modificar el entry-point (app.js) y programar ruteos y controladores.
 - Efectuar una prueba preliminar del proyecto invocando las vistas sin parametros.
 - Incorporar JS a las vistas teniendo en cuenta que cabe la posibilidad que sea necesario modificar los archivos de estilos (css). Esto se verifica en aquellas vistas en que se fijo la cantidad de items a mostrar (items en el carrito).
-- Verificar que al vincular varios archivos de estilo en una misma vista, no haya clases o hashtags con el mismo nombre.
+- Verificar que al vincular varios archivos de estilo en una misma vista, no haya clases o ids con el mismo nombre.
+

@@ -28,17 +28,24 @@ Actualmente trabajando en atención al cliente en un comercio de indumentaria de
 Es diseñador gráfico con años de experiencia profesional. Actualmente dirige un equipo de diseñadores en un medio gráfico y se especializa en: **infografía** -  **análisis y procesamiento de datos** (científicos, económicos y espaciales) y en **visualización de información**.  También se desempeña cómo ilustrador 2d, 3d - motion graphics, fotógrafo y editor periodístico.
 
 
-PAGINAS EN PROCESO (algunos links de las primeras dos y del checkout funcionan)
+**PAGINAS QUE CONFORMAN EL PROYECTO**
 
--root o home   ---> index.html<br>
--productos ---> productos.html ( y /productCats  --->  productCats.html, que es una version anterior)<br>
--producto  ---> producto.html<br>
--carrito   ---> productCart.html<br>
--login     ---> login.html<br>
--regisro  ---> register.html<br>
+- root o home -> index.html<br>
+- productos   -> productos.html (anteriormente productCats.html)<br>
+- producto    -> producto.html<br>
+- carrito     -> carrito.html (anteriormente productCart.html)<br>
+- login       -> login.html<br>
+- registro    -> register.html<br>
+- edición     -> abmProductos.html (se agregó para el sprint 3)
 
+Para su ejecución local se debe clonar el proyecto. Luego instale sus dependencias con npm install.<br>
+Para este sprint 3 se cambió la estructura de archivos a partir de definir un nuevo proyecto bajo express-generator y ejs.<br>
+Para correr el proyecto abra una consola y ejecute [node | nodemon] bin\www.<br>
+Desde el browser url http://localhost:3000.<br>
+La pagina de edición de productos no tiene destinado (por el momento) un link desde donde pueda ser vista. Para poder verla url http://localhost:3000/abmproductos
 
-REFERENCIAS CONSULTADAS PARA EL PROYECTO
+**REFERENCIAS CONSULTADAS PARA EL PROYECTO**
+
 - [SoloDeportes](https://www.solodeportes.com.ar/) 
 - [OpenSports](https://www.opensports.com.ar/) 
 - [Adidas](https://www.adidas.com.ar/) 
@@ -53,6 +60,3 @@ REFERENCIAS CONSULTADAS PARA EL PROYECTO
 - Mizuno</br>
 - Topper
 - Gap
-
-
-
