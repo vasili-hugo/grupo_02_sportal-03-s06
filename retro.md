@@ -27,3 +27,25 @@ LESS OF
 STOP DOING
 - html y css unificado (mejor separados por página y después vemos - Podemos separarlo por módulos ya resueltos)
 - No comenzar algo sin estar lo suficientemente informado. Esto toma tiempo pero se recupera al facilitar el trabajo.
+
+** Retrospectiva del Sprint #2 **
+
+EN GENERAL
+- Una etapa muy laboriosa para el equipo pero que fue sobrellevada con mucho esfuerzo. Dado el poco tiempo disponible para definir los detalles de terminación, se xreó un sitio muy agradable visualmente y simple de intuir que se debe hacer para llegar a donde se supone el usuario quiere llegar.
+
+START DOING
+- Limpieza del sitio. No deben quedar archivos en desuso o copias de resguardo en las carpetas de trabajo. De ser necesario crear una carpeta 'Obsoletos' y volcarlos en una subcarpeta.
+
+MORE OF
+- Este es el ultimo empujon para que el sitio este funcional desde el punto de vista visual. A ponerle ganas.
+
+KEEP DOING
+- Primero pienso luego actuo en consecuencia. Visteme despacio que estoy apurado (NB).
+- Nos tomó mas tiempo del previsto poder establecer que queriamos hacer, lo que nos dejó menos tiempo para desarrollarlo pero valió la pena.
+- El tiempo empleado en aprender el uso de otras opciones de css (grid) fue muy importante.
+
+LESS OF
+- Tener que pasar un fin de semana completo para terminar el sprint no es algo que uno espera que suceda, pero dado el resultado de ese sacrificio es justificado.
+
+STOP DOING
+- Mejorar la distribución de tiempos para definir y/o planificar tareas de modo que ese tiempo limitado se aproveche al máximo.
