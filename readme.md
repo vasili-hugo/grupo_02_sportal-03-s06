@@ -30,17 +30,17 @@ Es diseñador gráfico con años de experiencia profesional. Actualmente dirige 
 
 **PAGINAS QUE CONFORMAN EL PROYECTO**
 
--root o home  -> index.html<br>
--productos    -> productos.html (anteriormente productCats.html)<br>
--producto     -> producto.html<br>
--carrito      -> carrito.html (anteriormente productCart.html)<br>
--login        -> login.html<br>
--registro     -> register.html<br>
--edición      -> abmProductos.html (se agregó para el sprint 3)
+- root o home -> index.html<br>
+- productos   -> productos.html (anteriormente productCats.html)<br>
+- producto    -> producto.html<br>
+- carrito     -> carrito.html (anteriormente productCart.html)<br>
+- login       -> login.html<br>
+- registro    -> register.html<br>
+- edición     -> abmProductos.html (se agregó para el sprint 3)
 
 Para su ejecución local se debe clonar el proyecto. Luego instale sus dependencias con npm install.<br>
 Para este sprint 3 se cambió la estructura de archivos a partir de definir un nuevo proyecto bajo express-generator y ejs.<br>
-Para correr el proyecto abra una consola y ejecute node|nodemon bin\www.<br>
+Para correr el proyecto abra una consola y ejecute [node | nodemon] bin\www.<br>
 Desde el browser url http://localhost:3000.<br>
 La pagina de edición de productos no tiene destinado (por el momento) un link desde donde pueda ser vista. Para poder verla url http://localhost:3000/abmproductos
 
