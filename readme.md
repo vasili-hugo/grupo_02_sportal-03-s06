@@ -28,7 +28,7 @@ Actualmente trabajando en atención al cliente en un comercio de indumentaria de
 Es diseñador gráfico con años de experiencia profesional. Actualmente dirige un equipo de diseñadores en un medio gráfico y se especializa en: **infografía** -  **análisis y procesamiento de datos** (científicos, económicos y espaciales) y en **visualización de información**.  También se desempeña cómo ilustrador 2d, 3d - motion graphics, fotógrafo y editor periodístico.
 
 
-## PAGINAS QUE CONFORMAN EL PROYECTO
+**PAGINAS QUE CONFORMAN EL PROYECTO**
 
 -root o home  -> index.html<br>
 -productos    -> productos.html (anteriormente productCats.html)<br>
@@ -44,7 +44,7 @@ Para correr el proyecto abra una consola y ejecute node|nodemon bin\www.<br>
 Desde el browser url http://localhost:3000.<br>
 La pagina de edición de productos no tiene destinado (por el momento) un link desde donde pueda ser vista. Para poder verla url http://localhost:3000/abmproductos
 
-## REFERENCIAS CONSULTADAS PARA EL PROYECTO
+**REFERENCIAS CONSULTADAS PARA EL PROYECTO**
 
 - [SoloDeportes](https://www.solodeportes.com.ar/) 
 - [OpenSports](https://www.opensports.com.ar/) 
@@ -60,6 +60,3 @@ La pagina de edición de productos no tiene destinado (por el momento) un link d
 - Mizuno</br>
 - Topper
 - Gap
-
-
-
