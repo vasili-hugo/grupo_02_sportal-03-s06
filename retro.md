@@ -31,7 +31,7 @@ STOP DOING
 ** Retrospectiva del Sprint #2 **
 
 EN GENERAL
-- Una etapa muy laboriosa para el equipo pero que fue sobrellevada con mucho esfuerzo. Dado el poco tiempo disponible para definir los detalles de terminación, se xreó un sitio muy agradable visualmente y simple de intuir que se debe hacer para llegar a donde se supone el usuario quiere llegar.
+- Una etapa muy laboriosa para el equipo pero que fue sobrellevada con mucho esfuerzo. Dado el poco tiempo disponible para definir los detalles de terminación, se creó un sitio muy agradable visualmente y simple de intuir que se debe hacer para llegar a donde se supone el usuario quiere llegar.
 
 START DOING
 - Limpieza del sitio. No deben quedar archivos en desuso o copias de resguardo en las carpetas de trabajo. De ser necesario crear una carpeta 'Obsoletos' y volcarlos en una subcarpeta.
