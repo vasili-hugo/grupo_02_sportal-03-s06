@@ -27,3 +27,5 @@ LESS OF
 STOP DOING
 - html y css unificado (mejor separados por página y después vemos - Podemos separarlo por módulos ya resueltos)
 - No comenzar algo sin estar lo suficientemente informado. Esto toma tiempo pero se recupera al facilitar el trabajo.
+
+** Retrospectiva del Sprint #2 **

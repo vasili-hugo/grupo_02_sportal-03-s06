@@ -35,19 +35,19 @@
               </div>
 
               <label class="labels label-codigo" for="codigo">Código de Producto</label>
-              <input class="inputs input-codigo" type="text" name="codigo" id="codigo" placeholder="<%= prodList.codigo %>">
+              <input class="inputs input-codigo" type="text" name="codigo" id="codigo" value="<%= prodList.codigo %>">
 
               <label class="labels label-desc" for="descripcion">Descripción</label>
-              <input class="inputs input-desc" type="text" name="descripcion" id="descripcion" placeholder="<%= prodList.smallDesc %>">
+              <input class="inputs input-desc" type="text" name="descripcion" id="descripcion" value="<%= prodList.smallDesc %>">
 
               <label class="labels label-cuento" for="cuento">Descripción Ampliada</label>
-              <textarea class="inputs input-cuento" type="text" name="cuento" id="cuento" placeholder="<%= prodList.bigDesc %>"></textarea>
+              <textarea class="inputs input-cuento" type="text" name="cuento" id="cuento" value="<%= prodList.bigDesc %>"></textarea>
 
               <label class="labels label-precio" for="precio">Precio</label>
-              <input class="inputs input-precio" type="number" name="precio" id="precio" placeholder="<%= prodList.price %>">
+              <input class="inputs input-precio" type="number" name="precio" id="precio" value="<%= prodList.price %>">
 
               <label class="labels label-edad" for="edad">Edad</label>
-              <input class="inputs input-edad" type="number" name="edad" id="edad" placeholder="<%= prodList.age %>">
+              <input class="inputs input-edad" type="number" name="edad" id="edad" value="<%= prodList.age %>">
 
               <label class="labels label-sexo" for="sexo">Sexo</label>
               <select class="selects sexo-options" name="sexo">
@@ -69,22 +69,22 @@
               </select>
 
               <label class="labels label-icon" for="icon">Archivo de Marca (icono)</label>
-              <input class="inputs input-icon" type="file" name="icon" id="icon" accept=".jpg" placeholder="<%= prodList.icon %>">
+              <input class="inputs input-icon" type="file" name="icon" id="icon" accept=".jpg" value="<%= prodList.icon %>">
 
               <label class="labels label-image" for="image">Archivo de Imagen Principal</label>
-              <input class="inputs input-image" type="file" name="image" id="image" accept=".jpg" placeholder="<%= prodList.mainImage %>">
+              <input class="inputs input-image" type="file" name="image" id="image" accept=".jpg" value="<%= prodList.mainImage %>">
 
               <label class="labels label-image1" for="image1">Archivo de Imagen Lateral Izquierda</label>
-              <input class="inputs input-image1" type="file" name="image1" id="image1" accept=".jpg" placeholder="<%= prodList.leftImage %>">
+              <input class="inputs input-image1" type="file" name="image1" id="image1" accept=".jpg" value="<%= prodList.leftImage %>">
 
               <label class="labels label-image2" for="image2">Archivo de Imagen Lateral Derecha</label>
-              <input class="inputs input-image2" type="file" name="image2" id="image2" accept=".jpg" placeholder="<%= prodList.rightImage %>">
+              <input class="inputs input-image2" type="file" name="image2" id="image2" accept=".jpg" value="<%= prodList.rightImage %>">
 
               <label class="labels label-image3" for="image3">Archivo de Imagen Superior</label>
-              <input class="inputs input-image3" type="file" name="image3" id="image3" accept=".jpg" placeholder="<%= prodList.upperImage %>">
+              <input class="inputs input-image3" type="file" name="image3" id="image3" accept=".jpg" value="<%= prodList.upperImage %>">
 
               <label class="labels label-image4" for="image4">Archivo de Imagen Inferior</label>
-              <input class="inputs input-image4" type="file" name="image4" id="image4" accept=".jpg" placeholder="<%= prodList.lowerImage %>">
+              <input class="inputs input-image4" type="file" name="image4" id="image4" accept=".jpg" value="<%= prodList.lowerImage %>">
 
               <div class="buttons">
                 <button class="retrive-button" type="submit" formaction="/abmProductos/retrive/retProd">L E E R</button>
