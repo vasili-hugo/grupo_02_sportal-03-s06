@@ -3,7 +3,92 @@
 <link rel="stylesheet" href="/stylesheets/header.css">
 <link rel="stylesheet" href="/stylesheets/cargaProducto.css">
 <link rel="stylesheet" href="/stylesheets/footer.css">
-
-<%- include('./partials/header')  %> 
-<%- include('./partials/mainCargaProducto')  %>
-<%- include('./partials/footer')  %>
+<title>Sportal - Portal para Guerreros Urbanos</title>
+</head>
+<body>
+    
+    <header>
+        <div class="back-template">
+            <div class="header-bar"></div>
+            <div class="header-circle"></div>
+            <div class="header-title"><h2>Carga de Producto</h2></div>
+        </div>
+    </header>
+<main id='main'>
+    <div class="cargaProducto">
+        <form action="" method="POST">
+            <div class="nombre">
+                <label for="nombreProducto"><h3>Nombre del producto</h3></label>
+                <input type="text" name='nombreProducto' id="nombreProducto" required>
+            </div>
+            <div class="codigoProducto">
+                <label for="codigoProducto"><h3>Código de Producto</h3></label>
+                <input type="text" name="codigoProducto" id="codigoProducto" required>
+            </div>
+            <div class="descripcion">
+                <label for="descripcion"><h3>Descripción del producto</h3></label>
+                <textarea name="descripcion" id="descripcion" cols="30" rows="10" placeholder="Dejá una breve descripción del producto." required></textarea>
+            </div>
+            <div class="precio">
+                <label for="precio"><h3>Precio</h3></label>
+                <input type="number" name="precio" id="precio" required>
+            </div>
+            <div class="edad">
+                <label for="edad"><h3>Edad</h3></label>
+                <input type="text" name="edad" id="edad" required>
+            </div>
+            <div class="sexo">
+                <label for="sexo"><h3>Sexo</h3></label>
+                <select name="sexo" id="sexo" required>
+                    <option value="#" selected>Seleccione un opción</option>
+                    <option value="m">Masculino</option>
+                    <option value="f">Femenino</option>
+                </select>
+            </div>
+            <div class="color">
+                <label for="color"><h3>Color</h3></label>
+                <select name="color" id="color" required>
+                    <option value="#" selected>Seleccione un opción</option>
+                    <option value="amarillo">Amarillo</option>
+                    <option value="azul">Azul</option>
+                    <option value="rojo">Rojo</option>
+                    <option value="Verde">Verde</option>
+                    <option value="Violeta">Violeta</option>
+                    <option value="blanco">Blanco</option>
+                    <option value="negro">Negro</option>
+                    <option value="gris">Gris</option>
+                </select>
+            </div>
+            <div class="marca">
+                <label for="marca"><h3>Archivo de Marca (icono)</h3></label>
+                <input type="file" name="marca" id="marca" accept=".jpg" required>
+            </div>
+            <div class="img-principal">
+                <label for="img-principal"><h3>Archivo de imagen principal</h3></label>
+                <input type="file" name="img-principal" id="img-principal" accept=".jpg" required>
+            </div>
+            <div class="img-secundarias">
+                <label for="img-secundarias-1"><h3>Archivo de imagen secundaria</h3></label>
+                <input type="file" name="img-secundarias-1" id="img-secundarias-1" accept=".jpg" required>
+            </div>
+            <div class="img-secundarias">
+                <label for="img-secundarias-2"><h3>Archivo de imagen secundaria</h3></label>
+                <input type="file" name="img-secundarias-2" id="img-secundarias-2" accept=".jpg" required>
+            </div>
+            <div class="img-secundarias">
+                <label for="img-secundarias-3"><h3>Archivo de imagen secundaria</h3></label>
+                <input type="file" name="img-secundarias-3" id="img-secundarias-3" accept=".jpg" required>
+            </div>
+            <div class="img-secundarias">
+                <label for="img-secundarias-4"><h3>Archivo de imagen secundaria</h3></label>
+                <input type="file" name="img-secundarias-4" id="img-secundarias-4" accept=".jpg" required>
+            </div>
+            <div class="buttons">
+                <button class="accept-button" type="submit">ACEPTAR</button>
+                <button class="cancel-button" type="reset">CANCELAR</button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>
