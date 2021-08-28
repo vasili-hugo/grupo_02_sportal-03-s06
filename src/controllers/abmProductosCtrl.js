@@ -1,5 +1,26 @@
+const fs = require("fs");
+const path = require("path");
+
+function findAll(){
+  //leer el json
+  let productosJson= fs.readFileSync(path.join(__dirname, "../data/products.json"))
+
+  //parsear la inform
+  let data = JSON.parse(productosJson)
+  return data
+}
+
+function writeJson(array){
+  //transformamos en un string
+  let arrayJson = JSON.stringify(array);
+  
+  //procesamos la inform en el Json
+  return fs.writeFileSync(path.join(__dirname, "../data/products.json"), arrayJson);
+
+}
+
 /* GET abm productos. */
-const productos = [
+/* const productos = [
   {
     codigo: "Nuevo",
     precio: 0
@@ -20,13 +41,14 @@ const productos = [
     codigo: "prod4",
     precio: 45
   }
-];
+]; */
 
 const controller = {
 
   retriveAll:
     function(req, res) {
-      res.render("abmProductos",{prodList: productos});
+      let prodList = findAll();
+      res.render("abmProductos",{prodList});
     },
 
   retrive:

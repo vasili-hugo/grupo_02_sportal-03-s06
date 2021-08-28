@@ -4,16 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-// routers
-var indexRouter = require('./routes/indexRouter.js');
-var cargaProductoRouter = require ('./routes/cargaProductoRouter.js')
-var productosRouter = require('./routes/productosRouter.js');
-var productoRouter = require('./routes/productoRouter.js');
-var carritoRouter = require('./routes/carritoRouter.js');
-var loginRouter = require('./routes/loginRouter.js');
-var usersRouter = require('./routes/usersRouter.js');
-var abmProductosRouter = require('./routes/abmProductosRouter.js');
-
 var app = express();
 
 // view engine setup
@@ -25,6 +15,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
+
+// routers
+var indexRouter = require('./routes/indexRouter.js');
+var cargaProductoRouter = require ('./routes/cargaProductoRouter.js')
+var productosRouter = require('./routes/productosRouter.js');
+var productoRouter = require('./routes/productoRouter.js');
+var carritoRouter = require('./routes/carritoRouter.js');
+var loginRouter = require('./routes/loginRouter.js');
+var usersRouter = require('./routes/usersRouter.js');
+var abmProductosRouter = require('./routes/abmProductosRouter.js');
 
 // routes
 app.use('/abmProductos', abmProductosRouter);
