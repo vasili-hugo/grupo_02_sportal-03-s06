@@ -28,6 +28,16 @@ app.use(cookieParser());
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, '../public')));
 
+// routers
+var indexRouter = require('./routes/indexRouter.js');
+//var cargaProductoRouter = require ('./routes/cargaProductoRouter.js')
+var productosRouter = require('./routes/productosRouter.js');
+var productoRouter = require('./routes/productoRouter.js');
+var carritoRouter = require('./routes/carritoRouter.js');
+var loginRouter = require('./routes/loginRouter.js');
+var usersRouter = require('./routes/usersRouter.js');
+//var abmProductosRouter = require('./routes/abmProductosRouter.js');
+
 // routes
 //app.use('/abmProductos', abmProductosRouter);
 //app.use('/cargaProducto', cargaProductoRouter);

@@ -49,3 +49,23 @@ LESS OF
 
 STOP DOING
 - Mejorar la distribución de tiempos para definir y/o planificar tareas de modo que ese tiempo limitado se aproveche al máximo.
+
+** Retrospectiva del Sprint #3 **
+
+EN GENERAL
+- Un sprint menos laborioso que el anterior pero no por ello menos importante. El sitio comienza a tener vida paulatinamente.
+
+START DOING
+- Mejorar la distribución de las tareas para que, de ser posible, no se superpongan o se demoren las que dependan de estas.
+
+MORE OF
+- Mejorar el aspecto visual de las vistas y aprender de este proceso contínuo de mejoramiento para las próximas que faltan.
+
+KEEP DOING
+- Buena onda del grupo.
+- 
+LESS OF
+- Tiempos de incomunicación elevados. Lamentablemente las personas también tienen sus obligaciones laborales, sociales y familiares que hace este tema muy dificil de sobrellevar. Es lo que se ve, banca.
+
+STOP DOING
+- Nada importante que comentar.

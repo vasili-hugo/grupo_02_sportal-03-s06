@@ -15,7 +15,7 @@ Pueden consumir para si mismos o comprar para un familiar directo, para apoyarlo
 Es profesora de Historia egresada de la Universidad Nacional de Tres de Febrero, donde cursó también la licenciatura. Combina la labor docente con tareas de gestión cultural, contando con 10 años de experiencia en instituciones públicas como Museo Evita, Complejo Teatral de BsAs/Teatro San Martín y el Museo Histórico Nacional. 
 
 ## Sergio Perin
-Ingeniero Aeronáutico graduado en la Universidad Tecnológina Nacional (UTN) en 1985.</br>
+Ingeniero Aeronáutico graduado en la Universidad Tecnológica Nacional (UTN) en 1985.</br>
 Posgrado en Ingeniería de Sistemas graduado en la Universidad de Buenos Aires (UBA) en 1990.</br>
 Consultoria, analisis, desarrollo de sistemas para usuarios finales y/o desarrolladores.</br>
 Lenguajes de programación: Assembler, PickBasic, C, VB, VB.Net, C#.Net desde 1986.
