@@ -30,14 +30,18 @@ const controller = {
     function(req, res) {
       let usuario = null;
       let usuarios = rwdJson.readJSON(usersJson);
-      usuario = usuarios.find(function (item){
-        return (item.usuario == req.body.usuario);
-      })
-      if (usuario) {
-        if (usuario.password == req.body.password) {
-          res.send("Usuario logeado como " + req.body.usuario);
+      if (usuarios) {
+        usuario = usuarios.find(function (item){
+          return (item.usuario == req.body.usuario);
+        })
+        if (usuario) {
+          if (usuario.password == req.body.password) {
+            res.send("Usuario logeado como " + req.body.usuario);
+          } else {
+            res.send("Usuario o contraseña inválidos");
+          }
         } else {
-          res.send("Contraseña inválida");
+          res.send("Usuario inexistente");
         }
       } else {
         res.send("Usuario inexistente");
@@ -47,7 +51,6 @@ const controller = {
   // Envia e-mail a la direccion informada para cambio de contraseña
   restore:
     function(req, res) {
-      
       if (req.body.usuario == "") {
         res.send("Debe ingresar un e-mail");
       } else {

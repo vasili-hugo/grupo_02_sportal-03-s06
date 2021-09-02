@@ -28,21 +28,25 @@ Actualmente trabajando en atención al cliente en un comercio de indumentaria de
 Es diseñador gráfico con años de experiencia profesional. Actualmente dirige un equipo de diseñadores en un medio gráfico y se especializa en: **infografía** -  **análisis y procesamiento de datos** (científicos, económicos y espaciales) y en **visualización de información**.  También se desempeña cómo ilustrador 2d, 3d - motion graphics, fotógrafo y editor periodístico.
 
 
-**PAGINAS QUE CONFORMAN EL PROYECTO**
+**VISTAS QUE CONFORMAN EL PROYECTO**
 
-- root o home -> index.html<br>
-- productos   -> productos.html (anteriormente productCats.html)<br>
-- producto    -> producto.html<br>
-- carrito     -> carrito.html (anteriormente productCart.html)<br>
-- login       -> login.html<br>
-- registro    -> register.html<br>
-- edición     -> abmProductos.html (se agregó para el sprint 3)
+- root o home -> index.ejs<br>
+- productos   -> productos.ejs<br>
+- producto    -> producto.ejs<br>
+- carrito     -> carrito.ejs<br>
+- login       -> login.ejs<br>
+- registro    -> register.ejs<br>
+
+**VISTAS QUE CONFORMAN LA EDICION Y/O CREACION DE PRODUCTOS**
+- listado     -> listarProductos.ejs
+- edición     -> editarProducto.ejs
+- creación    -> crearProducto.ejs
 
 Para su ejecución local se debe clonar el proyecto. Luego instale sus dependencias con npm install.<br>
-Para este sprint 3 se cambió la estructura de archivos a partir de definir un nuevo proyecto bajo express-generator y ejs.<br>
+Para este sprint 4 se definieron las BD JSON de usuarios y productos, y las vistas, routers y controllers que los administran.<br>
 Para correr el proyecto abra una consola y ejecute [node | nodemon] bin\www.<br>
-Desde el browser url http://localhost:3000.<br>
-La pagina de edición de productos no tiene destinado (por el momento) un link desde donde pueda ser vista. Para poder verla url http://localhost:3000/abmproductos
+Desde el browser (Google Chrome, Mozilla Firefox o Microsoft Edge) url http://localhost:3000.<br>
+La pagina de edición/creación de productos no tiene destinado (por el momento) un link desde donde pueda ser vista. Para poder verla url http://localhost:3000/productos/listar.
 
 **REFERENCIAS CONSULTADAS PARA EL PROYECTO**
 

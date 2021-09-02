@@ -65,7 +65,7 @@ KEEP DOING
 - Buena onda del grupo.
 - 
 LESS OF
-- Tiempos de incomunicación elevados. Lamentablemente las personas también tienen sus obligaciones laborales, sociales y familiares que hace este tema muy dificil de sobrellevar. Es lo que se ve, banca.
+- Tiempos de incomunicación elevados. Lamentablemente las personas también tienen sus obligaciones laborales, sociales y familiares que lo hace muy dificil de sobrellevar. Es lo que se ve, banca.
 
 STOP DOING
-- Nada importante que comentar.
+- Nada importante que comentar. El grupo ha madurado lo suficiente para que cada uno sepa que tiene que hacer.

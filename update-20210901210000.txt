@@ -2,7 +2,6 @@ On branch main
 Your branch is up to date with 'origin/main'.
 
 Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
 	modified:   package-lock.json
 	modified:   package.json
 	new file:   public/images/logos/NoImagen.jpg
@@ -47,8 +46,3 @@ Changes to be committed:
 	new file:   src/views/partials/breadcrumbListarProductos.ejs
 	new file:   src/views/partials/mainListarProductos.ejs
 	modified:   src/views/register.ejs
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-	"d\357\200\272status.txt"
-
