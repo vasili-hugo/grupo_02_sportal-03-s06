@@ -42,7 +42,7 @@ Es diseñador gráfico con años de experiencia profesional. Actualmente dirige 
 - edición     -> editarProducto.ejs
 - creación    -> crearProducto.ejs
 
-Para su ejecución local se debe clonar el proyecto. Luego instale sus dependencias con npm install.<br>
+Para su ejecución local se debe clonar el proyecto desde https://github.com/vasili-hugo/grupo_02_sportal-02.git. Luego instale sus dependencias con npm install.<br>
 Para este sprint 4 se definieron las BD JSON de usuarios y productos, y las vistas, routers y controllers que los administran.<br>
 Para correr el proyecto abra una consola y ejecute [node | nodemon] bin\www.<br>
 Desde el browser (Google Chrome, Mozilla Firefox o Microsoft Edge) url http://localhost:3000.<br>
