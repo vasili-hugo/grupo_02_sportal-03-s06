@@ -1,0 +1,69 @@
+/*
+========================================================================================================================
+MAIN
+========================================================================================================================
+*/
+.product {
+  display: grid;
+  grid-template-columns: 150px 400px;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-areas:
+    "img id-prod"
+    "img marca"
+    "img rubro"
+    "img modelo"
+    "img descripcion";
+  justify-content: stretch;
+  align-content: flex-start;
+  font-size: 18px;
+  gap: 0px 20px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.image {
+  grid-area: img;
+  width: 100%;
+  margin: 10px;
+  border-radius: 20px;
+  border: 2px black solid;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(220, 220, 220);
+}
+
+.prod-data {
+  margin: 11px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 2px black solid;
+  background-color: rgb(220,220,220);
+}
+
+.id-prod-value, .marca-value, .rubro-value, .modelo-value, .descripcion-value {
+  font-weight: bold;
+  width: 65%;
+}
+
+.id-prod {
+  grid-area: id-prod;
+}
+
+.marca {
+  grid-area: marca;
+}
+
+.rubro {
+  grid-area: rubro;
+}
+
+.modelo {
+  grid-area: modelo;
+}
+
+.descripcion {
+  grid-area: descripcion;
+}

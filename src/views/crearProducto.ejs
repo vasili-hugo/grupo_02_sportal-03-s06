@@ -1,0 +1,106 @@
+<%- include("./partials/head.ejs") %>
+    <link href="/stylesheets/crearProducto.css" rel="stylesheet" />
+    <title>Sportal - Portal para Guerreros Urbanos - Creación de Productos</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-bar">
+          <div class="header-circle"></div>
+            <div class="header-title"><h3>Creación de Productos</h3></div>
+        </div>
+    </header>
+    <main>
+        <div class="form-abm">
+            <form action="/productos/crear" method="POST">
+
+              <label class="labels label-codigo" for="id">Código de Producto</label>
+              <input class="inputs input-codigo" type="text" name="id" id="id">
+              
+              <label class="labels label-marca" for="marca">Marca</label>
+              <select class="selects marca-options" name="brand" id="marca">
+                <option value="#" selected>Seleccione una opción</option>
+                <% let keys = Object.keys(brands); %>
+                <% let values = Object.values(brands); %>
+                <% for (let i = 0 ; i < keys.length ; i++) { %>
+                  <option value="<%= keys[i] %>"><%= values[i] %></option>
+                <% } %>
+              </select>
+
+              <label class="labels label-rubro" for="marca">Rubro</label>
+              <select class="selects rubro-options" name="heading" id="rubro">
+                <option value="#" selected>Seleccione una opción</option>
+                <% keys = Object.keys(headings); %>
+                <% values = Object.values(headings); %>
+                <% for (let i = 0 ; i < keys.length ; i++) { %>
+                  <option value="<%= keys[i] %>"><%= values[i] %></option>
+                <% } %>
+              </select>
+
+              <label class="labels label-modelo" for="modelo">Modelo</label>
+              <input class="inputs input-modelo" type="text" name="model" id="modelo">
+
+              <label class="labels label-desc" for="descripcion">Descripción</label>
+              <textarea class="inputs input-desc" type="text" name="desc" id="desc"></textarea>
+
+              <label class="labels label-precio" for="precio">Precio</label>
+              <input class="inputs input-precio" type="number" name="price" id="precio">
+
+              <label class="labels label-edad" for="edad">Edad</label>
+              <select class="selects edad-options" name="age">
+                <option value="#" selected>Seleccione una opción</option>
+                <% keys = Object.keys(ages); %>
+                <% values = Object.values(ages); %>
+                <% for (let i = 0 ; i < keys.length ; i++) { %>
+                  <option value="<%= keys[i] %>"><%= values[i] %></option>
+                <% } %>
+              </select>
+
+              <label class="labels label-sexo" for="sexo">Sexo</label>
+              <select class="selects sexo-options" name="sex">
+                <option value="#" selected>Seleccione una opción</option>
+                <% keys = Object.keys(sex); %>
+                <% values = Object.values(sex); %>
+                <% for (let i = 0 ; i < keys.length ; i++) { %>
+                  <option value="<%= keys[i] %>"><%= values[i] %></option>
+                <% } %>
+              </select>
+
+              <label class="labels label-color" for="color">Color</label>
+              <select class="selects color-options" name="color">
+                <option value="#" selected>Seleccione una opción</option>
+                <% keys = Object.keys(colors); %>
+                <% values = Object.values(colors); %>
+                <% for (let i = 0 ; i < keys.length ; i++) { %>
+                  <option value="<%= keys[i] %>"><%= values[i] %></option>
+                <% } %>
+              </select>
+
+              <label class="labels label-icon" for="icon">Archivo de Marca (icono)</label>
+              <input class="inputs input-icon" type="file" name="icon" id="icon" accept="<%= misc.imageExt %>">
+
+              <label class="labels label-image" for="image">Archivo de Imagen Principal</label>
+              <input class="inputs input-image" type="file" name="image" id="image" accept="<%= misc.imageExt %>">
+
+              <label class="labels label-image1" for="image1">Archivo de Imagen Lateral Izquierda</label>
+              <input class="inputs input-image1" type="file" name="leftImage" id="image1" accept="<%= misc.imageExt %>">
+
+              <label class="labels label-image2" for="image2">Archivo de Imagen Lateral Derecha</label>
+              <input class="inputs input-image2" type="file" name="rightImage" id="image2" accept="<%= misc.imageExt %>">
+
+              <label class="labels label-image3" for="image3">Archivo de Imagen Superior</label>
+              <input class="inputs input-image3" type="file" name="upperImage" id="image3" accept="<%= misc.imageExt %>">
+
+              <label class="labels label-image4" for="image4">Archivo de Imagen Inferior</label>
+              <input class="inputs input-image4" type="file" name="lowerImage" id="image4" accept="<%= misc.imageExt %>">
+
+              <div class="buttons">
+                <button class="accept-button" type="submit">ACEPTAR</button>
+                <button class="cancel-button" type="reset">CANCELAR</button>
+              </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
