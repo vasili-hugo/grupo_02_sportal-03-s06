@@ -3,6 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var methodOverride = require("method-override");
+
+// routers
+var indexRouter = require('./routes/indexRouter.js');
+//var cargaProductoRouter = require ('./routes/cargaProductoRouter.js')
+var productosRouter = require('./routes/productosRouter.js');
+var productoRouter = require('./routes/productoRouter.js');
+var carritoRouter = require('./routes/carritoRouter.js');
+var loginRouter = require('./routes/loginRouter.js');
+var usersRouter = require('./routes/usersRouter.js');
+//var abmProductosRouter = require('./routes/abmProductosRouter.js');
 
 var app = express();
 
@@ -14,25 +25,27 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, '../public')));
 
 // routers
 var indexRouter = require('./routes/indexRouter.js');
-var cargaProductoRouter = require ('./routes/cargaProductoRouter.js')
+//var cargaProductoRouter = require ('./routes/cargaProductoRouter.js')
 var productosRouter = require('./routes/productosRouter.js');
 var productoRouter = require('./routes/productoRouter.js');
 var carritoRouter = require('./routes/carritoRouter.js');
 var loginRouter = require('./routes/loginRouter.js');
 var usersRouter = require('./routes/usersRouter.js');
-var abmProductosRouter = require('./routes/abmProductosRouter.js');
+//var abmProductosRouter = require('./routes/abmProductosRouter.js');
 
 // routes
-app.use('/abmProductos', abmProductosRouter);
-app.use('/cargaProducto', cargaProductoRouter);
+//app.use('/abmProductos', abmProductosRouter);
+//app.use('/cargaProducto', cargaProductoRouter);
 app.use('/productos', productosRouter);
-app.use('/producto', productoRouter);
+app.use('/producto', productoRouter); // Cuando se revise la vista de productos, cada producto debera se llamado por /productos/detail/:id desde productosRouter.detail
+                                      // luego eliminar esta ruta y su router (productoRouter.js)
 app.use('/carrito', carritoRouter);
-app.use('/registro', usersRouter);
+app.use('/register', usersRouter);
 app.use('/login', loginRouter);
 app.use('/users', usersRouter);
 app.use('/index', indexRouter);

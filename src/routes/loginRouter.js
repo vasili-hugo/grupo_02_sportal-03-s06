@@ -3,8 +3,8 @@ var router = express.Router();
 var controller = require("../controllers/loginCtrl.js")
 
 /* GET login page. */
-router.get("/user-restore",controller.forgotUser);
-router.get("/pass-restore",controller.forgotPass);
-router.get("/",controller.retrive);
+router.post("/access",controller.store);    // Verifica credenciales del usuario
+router.post("/restore",controller.restore); // Envia e-mail a la direccion informada para cambio de contraseña
+router.get("/",controller.create);          // Muestra formulario de Login
 
 module.exports = router;

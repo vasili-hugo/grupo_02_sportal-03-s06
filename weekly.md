@@ -1,11 +1,7 @@
-** Sprint 3 **
-
-- Crear carpetas "routes", "controllers" y "\views\partials". Instalar EJS. (Listo SLP 10/08/2021).
-- Mover todos los archivos que no sean necesarios a una subcarpeta dentro de la carpeta 'obsoletos'.
-- Establecer partes comunes, generales o particulares, en que puedan descomponerse las vistas para crear los archivos a incluir.
-- Establecer las rutas necesarias.
-- Modificar el entry-point (app.js) y programar ruteos y controladores.
-- Efectuar una prueba preliminar del proyecto invocando las vistas sin parametros.
-- Incorporar JS a las vistas teniendo en cuenta que cabe la posibilidad que sea necesario modificar los archivos de estilos (css). Esto se verifica en aquellas vistas en que se fijo la cantidad de items a mostrar (items en el carrito).
-- Verificar que al vincular varios archivos de estilo en una misma vista, no haya clases o ids con el mismo nombre.
-
+** Sprint 4 **
+- Verificar vistas y partials del proyecto. Crear, modificar o eliminar según corresponda.
+- Parametrizar las vistas tanto como sea posible. Esto minimiza tiempos de mantenimiento y posibles errores.
+- Verificar rutas (middlewares, routes y controllers) del proyecto. Crear, modificar o eliminar según corresponda.
+- Verificar meétodos y propiedades de los controllers del proyecto. Crear, modificar o eliminar según corresponda.
+- No borrar código generado por un tercero. Comentarlo para que este lo pueda ver y comprender la causa.
+- Comentar lo necesario para que lo codificado pueda ser entendido por un tercero. No podemos depender de nuestra memoria, pasado cierto tiempo nos convertimos en un tercero. Esto alcanza a todo el proyecto, vistas, partials, roters, controllers, DB, etc.
