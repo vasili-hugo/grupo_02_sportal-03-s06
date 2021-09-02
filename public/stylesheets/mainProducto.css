@@ -107,15 +107,16 @@
   }
   .desc-title {
     display: flex;
+    align-items: center;
     margin: 0px 10px 10px 10px;
   }
   .desc-title img {
-    width: 120px;
-    margin-left: -10%;
+    width: 80px;
+    margin-right: 10px;
   }
   .desc-title h3 {
     width: 130px;
-    margin-left: -30px;
+
   }
   .product-desc-price {
     margin-right: 10px;
