@@ -72,7 +72,8 @@ main {
 .pass-advice{
     color: #888;
     font-size: 11px;
-    margin-top: -10px;
+    margin-left: 5px;
+    margin-bottom: 10px;
 }
 .form-register {
     padding: 17px;
@@ -180,9 +181,6 @@ main {
     margin-left: 15px;
     margin-top: 5px;
     color: #950000;
-    border: #950000 1px solid;
-    border-radius: 5px;
-    padding: 5px;
 }
 #invalid {
     background-color: pink;

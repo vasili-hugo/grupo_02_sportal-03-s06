@@ -3,8 +3,9 @@
 // In / Out File System
 const rwdJson = require("./rwd-json.js");
 
-//Requerimos de validaciones
+//Requisitos de registracion
 const { validationResult } = require ('express-validator');
+const bcrypt = require ('bcryptjs');
 
 // JSON path
 const usersJson = "../../data/users.json";
@@ -40,7 +41,27 @@ const controller = {
           oldData: req.body
         })
       } else {
+        let newItem = {
+          usuario: req.body.usuario,
+          password: bcrypt.hashSync(req.body.password, 10),
+          nombre: req.body.nombre,
+          apellido: req.body.apellido,
+          dni: req.body.dni,
+          celular: req.body.celular,
+          direccion: req.body.direccion,
+          cp: req.body.cp,
+          localidad: req.body.localidad
+        }
         let usuarios = [];
+        usuarios = rwdJson.readJSON(usersJson);
+        if (usuarios == undefined) {
+          usuarios.push(newItem);
+          rwdJson.writeJSON(usersJson, usuarios, true);
+        } else {
+          usuarios.push(newItem);
+          rwdJson.writeJSON(usersJson, usuarios, false);
+        }
+        /* let usuarios = [];
         let usuario = req.body.usuario;
         usuarios = rwdJson.readJSON(usersJson);
         let itemUsuario;
@@ -48,19 +69,9 @@ const controller = {
           itemUsuario = usuarios.find(function (item) {
             return (usuario == item.usuario);
           });
-        }
+        } 
         if (itemUsuario == null) {
           if (req.body.password == req.body.checkPassword) {
-            let newItem = {
-              usuario: req.body.usuario,
-              password: req.body.password,
-              nombre: req.body.nombre,
-              apellido: req.body.apellido,
-              dni: req.body.dni,
-              celular: req.body.celular,
-              direccion: req.body.direccion,
-              cp: req.body.cp,
-              localidad: req.body.localidad
             }
             if (usuarios == undefined) {
               let usuarios = [];
@@ -70,11 +81,11 @@ const controller = {
               usuarios.push(newItem);
               rwdJson.writeJSON(usersJson, usuarios, false);
             }
-            res.redirect ("/login");
-          }
-        }
-      }
+          }*/
+        res.redirect ("/login");
+      } 
     }
+    
 }
 
 module.exports = controller;

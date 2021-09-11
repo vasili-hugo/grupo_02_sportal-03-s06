@@ -1,13 +1,29 @@
 var express = require('express');
 var router = express.Router();
 var controller = require("../controllers/usersCtrl.js");
+const rwdJson = require("../controllers/rwd-json");
+// JSON path
+const usersJson = "../../data/users.json";
 
 const { body } = require ('express-validator');
 
 const validation = [
-    body ('usuario').isEmail().withMessage('Debes ingresar un e-mail válido.'),
-    body ('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres.').matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i").withMessage('La contraseña no cumple alguno de las sugerencias requeridas.'),
-    /* body ('checkPassword').equals(req.body.password).withMessage('Las contraseñas no coinciden.') */
+    body ('usuario').notEmpty().withMessage('Debes ingresar tu correo electrónico').bail()
+    .isEmail().withMessage('Debes ingresar un e-mail válido.').bail()
+    .custom(value => {
+        if (rwdJson.findUserByEmail(value, usersJson)) {
+            throw new Error ('El correo que intenta registrar ya esta en uso.')
+        }
+        return true;
+    }),
+    body ('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres.').bail().matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i").withMessage('La contraseña no cumple alguno de las sugerencias requeridas.'),
+    body ('checkPassword').notEmpty().withMessage('Debes completar nuevamente tu contraseña.').bail()
+    .custom( (value, {req}) => {
+        if (value != req.body.password) {
+            throw new Error('Las contraseñas no coinciden.');
+        }
+        return true;
+    }),
     body ('nombre').notEmpty().withMessage('Debes ingresar tu nombre.'),
     body ('apellido').notEmpty().withMessage('Debes ingresar tu apellido.'),
     body ('dni').isInt().withMessage('Debes ingresar tu DNI.'),

@@ -48,6 +48,18 @@ let rwdJson = {
       }
       return;
     }
+  ,
+  //Busca si el e-mail ingresado ya esta en uso. Si esta en uso devuelve true.
+  findUserByEmail: function (usuarioBuscado, fileName) {
+    let usuarios = [];
+    usuarios = this.readJSON(fileName);
+    let usuarioEncontrado = usuarios.find (user => user.usuario == usuarioBuscado)
+    if (usuarioEncontrado != undefined) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 module.exports = rwdJson;

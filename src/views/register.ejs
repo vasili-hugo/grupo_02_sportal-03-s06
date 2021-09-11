@@ -28,7 +28,7 @@
                 <div class="form-register-check-divided">
                     <div class="form-register-check">
                         <div class="form-register-check-bar-top">
-                            <label for="password">Contraseña<input class="input-register" id="<%= locals.errors && errors.password ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.password : null %>" type="password" name="password" id="password"></label>
+                            <label for="password">Contraseña<input class="input-register" id="<%= locals.errors && errors.password ? 'invalid' : 'null' %>" type="password" name="password" id="password"></label>
                             <% if (locals.errors && errors.password) { %>
                                 <div class="error-text">
                                     <%= errors.password.msg %>
@@ -38,7 +38,12 @@
                     </div>
                     <div class="form-register-check">
                         <div class="form-register-check-bar">
-                            <label for="checkPassword">Repetir contraseña<input class="input-register" id="<%= locals.errors && errors.checkPassword ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.checkPassword : null %>" type="password" name="checkPassword" id="checkPassword"></label>
+                            <label for="checkPassword">Repetir contraseña<input class="input-register" id="<%= locals.errors && errors.checkPassword ? 'invalid' : 'null' %>" type="password" name="checkPassword" id="checkPassword"></label>
+                            <% if (locals.errors && errors.checkPassword) { %>
+                                <div class="error-text">
+                                    <%= errors.checkPassword.msg %>
+                                </div>
+                            <% } %>
                         </div>
                     </div>
                 </div>
