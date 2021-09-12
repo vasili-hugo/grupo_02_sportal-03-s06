@@ -3,6 +3,9 @@
 // In / Out File System
 const rwdJson = require("./rwd-json.js");
 
+//Requisitos de registracion
+const { validationResult } = require ('express-validator');
+
 // JSON path
 const usersJson = "../../data/users.json";
 
@@ -28,7 +31,16 @@ const controller = {
   // Verifica credenciales del usuario
   store:
     function(req, res) {
-      let usuario = null;
+      let validacionDeErrores = validationResult(req);
+      if (validacionDeErrores.errors.length > 0) {
+        return res.render ('login', { 
+          errors: validacionDeErrores.mapped(),
+          oldData: req.body
+        })
+      } else {
+        res.redirect ('/home')
+      }
+      /* let usuario = null;
       let usuarios = rwdJson.readJSON(usersJson);
       if (usuarios) {
         usuario = usuarios.find(function (item){
@@ -45,7 +57,7 @@ const controller = {
         }
       } else {
         res.send("Usuario inexistente");
-      }
+      } */
     }
   ,
   // Envia e-mail a la direccion informada para cambio de contraseña

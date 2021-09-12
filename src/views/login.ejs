@@ -11,16 +11,26 @@
     </header>
     <main>
         <div class="form-login">
-            <form action="/login/access" method="POST">
+            <form action="/login" method="POST">
                 <div class="form-login-check">
                     <div class="form-login-check-bar">
-                        <label for="usuario">e-mail<input class="input-login" type="email" name="usuario" id="usuario"></label>
+                        <label for="usuario">e-mail<input class="input-login" id="<%= locals.errors && errors.usuario ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.usuario : null %>" type="email" name="usuario" id="usuario"></label>
+                        <% if (locals.errors && errors.usuario) { %>
+                            <div class="error-text">
+                                <%= errors.usuario.msg %>
+                            </div>
+                        <% } %>
                     </div>
                 </div>
 
                 <div class="form-login-check">
                     <div class="form-login-check-bar">
-                        <label for="password">Contraseña<input class="input-login" type="password" name="password" id="password"></label>
+                        <label for="password">Contraseña<input class="input-login" id="<%= locals.errors && errors.password ? 'invalid' : 'null' %>" type="password" name="password" id="password"></label>
+                        <% if (locals.errors && errors.password) { %>
+                            <div class="error-text">
+                                <%= errors.password.msg %>
+                            </div>
+                        <% } %>
                     </div>
                     <div class="form-login-check-restore">
                         <button class="restore-button" type="submit" formaction="/login/restore">No recuerdo mi contraseña</button>

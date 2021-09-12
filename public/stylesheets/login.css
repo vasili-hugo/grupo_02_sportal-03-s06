@@ -71,6 +71,7 @@ main {
 .form-login-check-bar {
     width: 100%;
     display: flex;
+    flex-direction: column;
     margin: 10px;
 }
 .form-login-check i {
@@ -79,7 +80,6 @@ main {
     font-weight: 10px;
 }
 .form-login-check-restore {
-    margin-top: -25px;
     margin-right: 0px;
     font-size: 12px;
 }
@@ -138,6 +138,15 @@ main {
     width: 100%;
     top: 100px;
     left: 190px;
+}
+.error-text {
+    font-size: 11px;
+    margin-left: 15px;
+    margin-top: -15px;
+    color: #950000;
+}
+#invalid {
+    background-color: pink;
 }
 /*
 ========================================================================================================================
