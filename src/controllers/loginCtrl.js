@@ -39,7 +39,11 @@ const controller = {
         })
       } else {
         let usuarios = rwdJson.readJSON(usersJson);
-        req.session.usuarioLogueado = usuarios.find (user => user.usuario == req.body.usuario);
+        let usuarioEncontrado = usuarios.find (user => user.usuario == req.body.usuario);
+        req.session.usuarioLogueado = usuarioEncontrado;
+        if (req.body.recordam != undefined) {
+          res.cookies('recordame', usuarioEncontrado.email);
+        }
         res.redirect ('/home');
       }
       /* let usuario = null;
