@@ -38,7 +38,9 @@ const controller = {
           oldData: req.body
         })
       } else {
-        res.redirect ('/home')
+        let usuarios = rwdJson.readJSON(usersJson);
+        req.session.usuarioLogueado = usuarios.find (user => user.usuario == req.body.usuario);
+        res.redirect ('/home');
       }
       /* let usuario = null;
       let usuarios = rwdJson.readJSON(usersJson);
@@ -63,12 +65,22 @@ const controller = {
   // Envia e-mail a la direccion informada para cambio de contraseña
   restore:
     function(req, res) {
-      if (req.body.usuario == "") {
-        res.send("Debe ingresar un e-mail");
+      let validacionDeErrores = validationResult(req);
+      if (validacionDeErrores.errors.length > 0) {
+        return res.render ('login', { 
+          errors: validacionDeErrores.mapped(),
+          oldData: req.body
+        })
       } else {
         res.send("Se ha enviado un e-mail a la dirección " + req.body.usuario);
       }
     }
+      /* if (req.body.usuario == "") {
+        res.send("Debe ingresar un e-mail");
+      } else {
+        res.send("Se ha enviado un e-mail a la dirección " + req.body.usuario);
+      }
+    } */
 }; 
 
 module.exports = controller;

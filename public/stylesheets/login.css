@@ -139,6 +139,18 @@ main {
     top: 100px;
     left: 190px;
 }
+.check-recordame {
+    display: flex;
+    flex-direction: row;
+    font-weight: bold;
+    color: #950000;
+    margin: 0px 0px 5px auto;
+    font-size: 12px;
+    height: 12px;
+}
+.check-recordame label {
+    margin-left: 5px;
+}
 .error-text {
     font-size: 11px;
     margin-left: 15px;
