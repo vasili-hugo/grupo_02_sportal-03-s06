@@ -12,7 +12,7 @@ const { body } = require ('express-validator');
 const validations = [
     body ('usuario').notEmpty().withMessage('Debes ingresar el correo electronico.').bail()
     .custom( value  => {
-        if (!rwdJson.findUserByEmail(value, usersJson)){
+        if (!findUserByEmail(value, usersJson)){
             throw new Error ('El correo ingresado no esta registrado.')
         }
         return true;
@@ -29,8 +29,16 @@ const validations = [
 ]
 
 /* GET login page. */
-router.get("/", authUsuario, controller.create);                        // Muestra formulario de Login, si el usuario esta logueado lo redirige al home
-router.post("/", validations, controller.store);                        // Verifica credenciales del usuario
+router.get("/", authUsuario, controller.create);                     // Muestra formulario de Login, si el usuario esta logueado lo redirige al home
+router.post("/", validations, controller.store);                     // Verifica credenciales del usuario
 router.post("/restore", validations, controller.restore);            // Envia e-mail a la direccion informada para cambio de contraseña
+
+function findUserByEmail (value, usersJson) {
+    let usuarios = rwdJson.readJSON(usersJson);
+    let usuario = usuarios.find (function(item) {
+        return item.usuario == value;
+    });
+    return (usuario);
+}
 
 module.exports = router;

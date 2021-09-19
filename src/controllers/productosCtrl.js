@@ -2,6 +2,7 @@
 
 /* Bitacora
 17/09/2021 - Se reemplazo todo el codigo que contemplaba lectura y escritura del JSON por el modelo.
+19/09/2021 - Este modulo incorpora los metodos del controlador productoCtrl.js, quedando este ultimo obsoleto.
 */
 
 // Funcionalidades del Modelo
@@ -15,8 +16,17 @@ const config = require("./config.js");
 
 // Controller
 const controller = {
+  // Muestra los datos de un producto
+  readOne:
+    function (req, res) {
+      let producto = Productos.oneRecord(req);
+      let misc = config.misc;
+      let others = similars (req, 4);
+      res.render("producto", {producto, misc, others});
+    }
+  ,
   // Muestra todos los productos correspondientes a ese rubro
-  retrive:
+  readAll:
     function (req, res) {
       let products = [];
       let misc = config.misc;
@@ -202,6 +212,42 @@ const controller = {
         res.redirect("/productos/listar");       
       }
    }
-}; 
+};
+
+// Obtiene hasta un maximo de 'maxItems' productos para ser mostrados como similares.
+// Si se tienen mas de 'maxItems', los productos se seleccionan aleatoriamente.
+function similars (req, maxItems) {
+  let others = [];
+  let productos = Productos.allRecords();
+  if (productos) {
+    let producto = Productos.oneRecord(req);
+    if (producto) {
+      let family = producto.family;
+      let newProducts = productos.filter (function (item) {
+        return (item.family == family && item.id != req.params.id);
+      });
+      if (newProducts) {
+        if (newProducts.length > 0) {
+          if (newProducts.length > maxItems) {
+            let idxs = [];
+            let idx = 0;
+            let i = 0;
+            do {
+              idx = (Math.random() * (newProducts.length - 1)).toFixed(0);
+              if (!idxs.includes(idx)) {
+                idxs.push(idx);
+                others.push(newProducts[idx]);
+                i++;
+              }
+            } while (i < maxItems);
+          } else {
+            others = newProducts;
+          }
+        }
+      }
+    }
+  }
+  return others;
+}
 
 module.exports = controller;

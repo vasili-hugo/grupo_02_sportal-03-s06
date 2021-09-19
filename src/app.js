@@ -37,9 +37,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // routes
 app.use('/productos', productosRouter);
-//app.use('/producto', productoRouter); // Cuando se revise la vista de productos, cada producto debera ser
-                                      // llamado por /productos/detail/:id desde productosRouter.detail
-                                      // luego eliminar esta ruta y su router (productoRouter.js)
+//app.use('/producto', productoRouter);
 app.use('/carrito', carritoRouter);
 app.use('/register', usersRouter);
 app.use('/login', loginRouter);
