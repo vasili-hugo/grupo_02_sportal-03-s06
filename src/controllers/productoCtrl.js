@@ -42,8 +42,9 @@ function similars (req, maxItems) {
                 i++;
               }
             } while (i < maxItems);
+          } else {
+            others = newProducts;
           }
-          others = newProducts;
         }
       }
     }

@@ -17,19 +17,20 @@ Estas son, a mi criterio, las tareas pendientes de completar ademas de las neces
 
 Vista Index:
 - Cambiar las imagenes de los diferentes rubros para que concuerden con lo que se desea mostrar.
-- Ver que debe buscarse segun lo detallado en la barra de busqueda.
-- Crear los links en la barra de navegacion.
+Hecho - Ver que debe buscarse segun lo detallado en la barra de busqueda.
+Hecho - Crear los links en la barra de navegacion.
 - El Login debe cambiar al avatar del usuario y reemplazar texto por "Login" por "Logout".
 - Agregar en el navbar el acceso al formulario de listado de productos para crear/editar si el usuario es Administrador.
 - Asignar links a los iconos de la barra del footer.
+- Falta agregar la imagen y el link al rubro 'Tech'.
 
 Vista Productos:
-- Mostrar solo las imagines que concuerden con el rubro seleccionado.
+Hecho - Mostrar solo los productos que concuerden con el rubro seleccionado.
 - Aplicar filtros y ordenamiento.
 
 Vista Producto:
-- Incorporar las imagenes que tiene asignadas el producto.
-- Criterio para seleccionar las imagenes en "Otros productos similares".
+Hecho - Incorporar las imagenes que tiene asignadas el producto.
+Hecho - Criterio para seleccionar las imagenes en "Otros productos similares".
 - El cliente solo puede informar la cantidad que desea comprar de ese producto. Los demas datos (Sexo, Edad y Color) solo deben ser informados para que los vea el cliente, ya que estan configurados en el producto.
 
 Vista Carrito:
@@ -48,11 +49,11 @@ Vista Register:
 
 Vistas Internas
 Vista listar Productos:
-- Aprovechar todo el viewport disponible.***** Listo *****
+Hecho - Aprovechar todo el viewport disponible.
 - Solo puede acceder un usuario Administrador.
 
 Vista Edicion de Productos:
-- Incorporar Multer y Express-Validator. ***** Listo *****
+Hecho - Incorporar Multer y Express-Validator.
 
 Vista Creacion de Productos:
-- Incorporar Multer y Express-Validator> ***** Listo *****
+Hecho - Incorporar Multer y Express-Validator.

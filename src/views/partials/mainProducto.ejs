@@ -66,29 +66,37 @@
             <div class='similar-products-1line'>
                 <div class="image-left">
                     <!--img src="images/sport/run-update-2021-500x356-2.webp">-->
-                    <a href="/producto/<%= others[0].id %>">
-                        <img src="<%= misc.pathImages %><%= (others[0].image) ? others[0].image : misc.defaultImage %>">
-                    </a>
+                    <% if (others[0]) { %>
+                        <a href="/productos/detail/<%= others[0].id %>">
+                            <img src="<%= misc.pathImages %><%= (others[0].image) ? others[0].image : misc.defaultImage %>">
+                        </a>
+                    <% } %>
                 </div>
                 <div>
                     <!--<img src="images/sport/run-update-2021-500x356-2.webp">-->
-                    <a href="/producto/<%= others[1].id %>">
-                        <img src="<%= misc.pathImages %><%= (others[1].image) ? others[1].image : misc.defaultImage %>">
-                    </a>
+                    <% if (others[1]) { %>
+                        <a href="/productos/detail/<%= others[1].id %>">
+                            <img src="<%= misc.pathImages %><%= (others[1].image) ? others[1].image : misc.defaultImage %>">
+                        </a>
+                    <% } %>
                 </div>
             </div>
             <div class='similar-products-2line'>
                 <div class="image-left">
                     <!--<img src="images/sport/run-update-2021-500x356-2.webp">-->
-                    <a href="/producto/<%= others[2].id %>">
-                        <img src="<%= misc.pathImages %><%= (others[2].image) ? others[2].image : misc.defaultImage %>">
-                    </a>
+                    <% if (others[2]) { %>
+                        <a href="/productos/detail/<%= others[2].id %>">
+                            <img src="<%= misc.pathImages %><%= (others[2].image) ? others[2].image : misc.defaultImage %>">
+                        </a>
+                    <% } %>
                 </div>
                 <div>
                     <!--<img src="images/sport/run-update-2021-500x356-2.webp">-->
-                    <a href="/producto/<%= others[3].id %>">
-                        <img src="<%= misc.pathImages %><%= (others[3].image) ? others[3].image : misc.defaultImage %>">
-                    </a>
+                    <% if (others[3]) { %>
+                        <a href="/productos/detail/<%= others[3].id %>">
+                            <img src="<%= misc.pathImages %><%= (others[3].image) ? others[3].image : misc.defaultImage %>">
+                        </a>
+                    <% } %>
                 </div>
             </div>
         </div>

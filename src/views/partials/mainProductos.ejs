@@ -7,7 +7,7 @@
         <% for (let i = 0 ; i < (products.length) ? products.length : 0 ; i++) { %>
             <div class='item <%= (Math.random()>0.6 & Math.random()>0.4 ) ? "large" : "" %>'>
                 <div class="cell">
-                    <a href="/producto/<%= products[i].id %>" target="_self">
+                    <a href="/productos/detail/<%= products[i].id %>" target="_self">
                         <!--<div class="pict" style="background-image: url(images/sport/run-update-2021-500x356-2.webp);"></div>-->
                         <div class="pict" style="background-image: url(<%=misc.pathImages%><%=products[i].image%>);"></div>
                     </a>
