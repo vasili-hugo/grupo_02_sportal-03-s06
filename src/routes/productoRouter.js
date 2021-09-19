@@ -3,6 +3,6 @@ var router = express.Router();
 var controller = require("../controllers/productoCtrl.js")
 
 /* GET producto. */
-router.get("/",controller.retrive);
+router.get("/:id",controller.retrive);
 
 module.exports = router;

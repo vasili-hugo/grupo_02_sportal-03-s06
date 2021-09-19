@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var controller = require("../controllers/usersCtrl.js");
-const rwdJson = require("../controllers/rwd-json");
+const rwdJson = require("../models/rwd-json.js");
 // JSON path
 const usersJson = "../../data/users.json";
 

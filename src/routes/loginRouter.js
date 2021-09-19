@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var controller = require("../controllers/loginCtrl.js");
-const rwdJson = require("../controllers/rwd-json");
+const rwdJson = require("../models/rwd-json.js");
 const bcrypt = require ('bcryptjs');
-const authUsuario = require ('../middlewares/authUsuario');
+const authUsuario = require ('../middlewares/authUsuario.js');
 // JSON path
 const usersJson = "../../data/users.json";
 

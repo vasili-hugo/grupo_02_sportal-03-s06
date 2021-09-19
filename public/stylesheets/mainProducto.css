@@ -166,6 +166,7 @@
   }
   .similar-products h3 {
     margin-bottom: 10px;
+    text-align: center;
   }
   .similar-products-1line {
     display: flex;

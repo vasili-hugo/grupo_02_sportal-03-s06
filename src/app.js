@@ -1,21 +1,23 @@
+/* Bitacora
+10/09/2021 - Se agrego el componente 'Session'. Achtung!!! debe ser insertado el app.use(session(...)) antes del app.use(express.static(...))
+*/
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var methodOverride = require("method-override");
-var session = require ('express-session');
-var recordame = require('./middlewares/recordame');
+var session = require("express-session");
+var recordame = require('./middlewares/recordame.js');
 
 // routers
 var indexRouter = require('./routes/indexRouter.js');
-//var cargaProductoRouter = require ('./routes/cargaProductoRouter.js')
 var productosRouter = require('./routes/productosRouter.js');
 var productoRouter = require('./routes/productoRouter.js');
 var carritoRouter = require('./routes/carritoRouter.js');
 var loginRouter = require('./routes/loginRouter.js');
 var usersRouter = require('./routes/usersRouter.js');
-//var abmProductosRouter = require('./routes/abmProductosRouter.js');
 
 var app = express();
 
@@ -28,25 +30,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(methodOverride("_method"));
-app.use(express.static(path.join(__dirname, '../public')));
-app.use(session({ secret: 'El secreto de Sportal!!'}));
+app.use(session({secret: "HugoLucianoSergio", resave: true, saveUninitialized: true}));
 app.use(recordame);
+app.use(express.static(path.join(__dirname, '../public')));
 
 // routers
 var indexRouter = require('./routes/indexRouter.js');
-//var cargaProductoRouter = require ('./routes/cargaProductoRouter.js')
 var productosRouter = require('./routes/productosRouter.js');
 var productoRouter = require('./routes/productoRouter.js');
 var carritoRouter = require('./routes/carritoRouter.js');
 var loginRouter = require('./routes/loginRouter.js');
 var usersRouter = require('./routes/usersRouter.js');
-//var abmProductosRouter = require('./routes/abmProductosRouter.js');
 
 // routes
-//app.use('/abmProductos', abmProductosRouter);
-//app.use('/cargaProducto', cargaProductoRouter);
 app.use('/productos', productosRouter);
-app.use('/producto', productoRouter); // Cuando se revise la vista de productos, cada producto debera se llamado por /productos/detail/:id desde productosRouter.detail
+app.use('/producto', productoRouter); // Cuando se revise la vista de productos, cada producto debera ser
+                                      // llamado por /productos/detail/:id desde productosRouter.detail
                                       // luego eliminar esta ruta y su router (productoRouter.js)
 app.use('/carrito', carritoRouter);
 app.use('/register', usersRouter);

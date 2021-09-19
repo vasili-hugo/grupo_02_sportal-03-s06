@@ -1,14 +1,14 @@
-var express = require('express');
-var router = express.Router();
-var controller = require("../controllers/productosCtrl.js")
+const express = require('express');
+const router = express.Router();
+const controller = require("../controllers/productosCtrl.js");
+const uploadMany = require('../middlewares/productoImages.js');
+const productoValidate = require("../middlewares/productoValid.js");
 
 /* GET products page. */
-router.get("/",controller.retrive);                // Muestra todos los productos para los clientes
-router.get("/listar",controller.abmList);          // Muestra todos los productos para administrarlos
-router.get("/crear",controller.abmCreate);         // Muestra el formulario para crear un nuevo producto
-router.post("/crear",controller.abmInsert);        // Crea un nuevo producto
-router.get("/editar/:id",controller.abmEdit);      // Muestra un producto para editarlo
-router.put("/editar/:id",controller.abmUpdate);    // Actualiza un producto
-router.delete("/editar/:id",controller.abmDelete); // Elimina un producto
+router.get("/:id", controller.retrive);                                        // Muestra todos los productos correspondientes a ese rubro                                   // Muestra todos los productos para administrarlos
+router.post("/crear", uploadMany, productoValidate, controller.abmInsert);     // Crea un nuevo producto
+router.get("/editar/:id", controller.abmEdit);                                 // Muestra un producto para editarlo
+router.put("/editar/:id", uploadMany, productoValidate, controller.abmUpdate); // Actualiza un producto
+router.delete("/editar/:id", controller.abmDelete);                            // Elimina un producto
 
 module.exports = router;

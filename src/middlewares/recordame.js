@@ -1,4 +1,4 @@
-const rwdJson = require("../controllers/rwd-json");
+const rwdJson = require("../models/rwd-json.js");
 const usersJson = "../../data/users.json";
 
 function recordame (req, res, next) {

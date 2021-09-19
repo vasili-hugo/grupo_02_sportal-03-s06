@@ -5,15 +5,12 @@
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
-
 }
 
 #main-container {
     display: grid;
     grid-template-columns: repeat(2, calc(100vw / 2));
     grid-template-rows: repeat(6, calc((100vw / 2) * 1.5));
-    grid-auto-flow: row dense;
-    /* border:2px red solid; */
     background-color: #ddd;
     grid-gap: 1px;
     overflow-x: hidden;
@@ -23,11 +20,6 @@
 .item {
     padding: 10px;
     background-color: white;
-
-}
-
-.large{
-    grid-column: auto / span 2;
 }
 
 .cell {
@@ -46,14 +38,12 @@
     height: 100%;
     background-color: #AAA;
     border-radius: calc(100vw / (2 * 8));
+    /*background-image: url(../images/sport/run-update-2021-500x356-2.webp);*/
     background-position: center;
     background-size: cover;
 }
 
 .producto-ficha {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     font-size: 12px;
     color: #950000;
     overflow: hidden;
@@ -67,29 +57,18 @@
     font-size: 1.1em;
 }
 
-.description{
-    font-weight: 600;
-}
-
-
-.description-bottom{
+.icon-info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-
-.icon-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items:flex-end;
+    align-items: center;
+    width: 100%;
 }
 
 .icon {
-    width: 50px;
-    height: 50px;
-    background-position: center;
-    background-size: cover;
+    max-width: 80px;
+    margin-left: -10px;
+    margin-top: 0px;
 }
 
 .info {
@@ -97,7 +76,7 @@
     color: #950000;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 400px) {
     #main-container {
         grid-template-columns: repeat(3, calc(100vw / 3));
         grid-template-rows: repeat(5, calc((100vw / 3) * 1.5));
@@ -113,7 +92,7 @@
     }
 }
 
-@media (min-width: 700px) {
+@media (min-width: 600px) {
     #main-container {
         grid-template-columns: repeat(4, calc(100vw / 4));
         grid-template-rows: repeat(5, calc((100vw / 4) * 1.5));
@@ -129,32 +108,15 @@
     }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 900px) {
     #main-container {
         grid-template-columns: repeat(5, calc(100vw / 5));
-        grid-template-rows: repeat(5, calc((100vw / 5) * 1.5));
+        grid-template-rows: repeat(4, calc((100vw / 5) * 1.5));
     }
 
     .pict,
     .cell {
         border-radius: calc(100vw / (5 * 8));
-    }
-
-    .producto-ficha {
-        font-size: 16px;
-    }
-
-}
-
-@media (min-width: 1500px) {
-    #main-container {
-        grid-template-columns: repeat(6, calc(100vw / 6));
-        grid-template-rows: repeat(5, calc((100vw / 6) * 1.5));
-    }
-
-    .pict,
-    .cell {
-        border-radius: calc(100vw / (6 * 8));
     }
 
     .producto-ficha {

@@ -1,7 +1,7 @@
 // Login
 
 // In / Out File System
-const rwdJson = require("./rwd-json.js");
+const rwdJson = require("../models/rwd-json.js");
 
 //Requisitos de registracion
 const { validationResult } = require ('express-validator');
