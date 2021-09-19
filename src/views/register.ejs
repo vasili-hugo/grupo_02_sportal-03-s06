@@ -13,22 +13,37 @@
     </header>
     <main>
         <div class="form-register">
-            <form action="/users/create" method="POST">
+            <form action="/register" method="POST">
                 <div class="form-register-check-top">
                     <div class="form-register-check-bar-user">
-                        <label for="usuario">e-mail<input class="input-register" type="text" name="usuario" id="usuario"></label>
+                        <label for="usuario">e-mail<input class="input-register" id="<%= locals.errors && errors.usuario ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.usuario : null %>" type="text" name="usuario" id="usuario"></label>
+                        <% if (locals.errors && errors.usuario) { %>
+                            <div class="error-text">
+                                <%= errors.usuario.msg %>
+                            </div>
+                        <% } %>
                     </div>
                 </div>
                 
                 <div class="form-register-check-divided">
                     <div class="form-register-check">
                         <div class="form-register-check-bar-top">
-                            <label for="password">Contraseña<input class="input-register" type="password" name="password" id="password"></label>
+                            <label for="password">Contraseña<input class="input-register" id="<%= locals.errors && errors.password ? 'invalid' : 'null' %>" type="password" name="password" id="password"></label>
+                            <% if (locals.errors && errors.password) { %>
+                                <div class="error-text">
+                                    <%= errors.password.msg %>
+                                </div>
+                            <% } %>
                         </div>
                     </div>
                     <div class="form-register-check">
                         <div class="form-register-check-bar">
-                            <label for="checkPassword">Repetir contraseña<input class="input-register" type="password" name="checkPassword" id="checkPassword"></label>
+                            <label for="checkPassword">Repetir contraseña<input class="input-register" id="<%= locals.errors && errors.checkPassword ? 'invalid' : 'null' %>" type="password" name="checkPassword" id="checkPassword"></label>
+                            <% if (locals.errors && errors.checkPassword) { %>
+                                <div class="error-text">
+                                    <%= errors.checkPassword.msg %>
+                                </div>
+                            <% } %>
                         </div>
                     </div>
                 </div>
@@ -40,12 +55,22 @@
                 <div class="form-register-check-divided">
                     <div class="form-register-check">
                         <div class="form-register-check-bar-top">
-                            <label for="nombre">Nombre<input class="input-register" type="text" name="nombre" id="nombre"></label>
+                            <label for="nombre">Nombre<input class="input-register" id="<%= locals.errors && errors.nombre ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.nombre : null %>" type="text" name="nombre" id="nombre"></label>
+                            <% if (locals.errors && errors.nombre) { %>
+                                <div class="error-text">
+                                    <%= errors.nombre.msg %>
+                                </div>
+                            <% } %>
                         </div>
                     </div>
                     <div class="form-register-check">
                         <div class="form-register-check-bar">
-                            <label for="apellido">Apellido<input class="input-register" type="text" name="apellido" id="apellido"></label>
+                            <label for="apellido">Apellido<input class="input-register" id="<%= locals.errors && errors.apellido ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.apellido : null %>" type="text" name="apellido" id="apellido"></label>
+                            <% if (locals.errors && errors.apellido) { %>
+                                <div class="error-text">
+                                    <%= errors.apellido.msg %>
+                                </div>
+                            <% } %>
                         </div>
                     </div>
                 </div>
@@ -53,12 +78,22 @@
                 <div class="form-register-check-divided">
                     <div class="form-register-check">
                         <div class="form-register-check-bar-top">
-                            <label for="dni">DNI<input class="input-register" type="number" name="dni" id="dni"></label>
+                            <label for="dni">DNI<input class="input-register" id="<%= locals.errors && errors.dni ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.dni : null %>" type="number" name="dni" id="dni"></label>
+                            <% if (locals.errors && errors.dni) { %>
+                                <div class="error-text">
+                                    <%= errors.dni.msg %>
+                                </div>
+                            <% } %>
                         </div>
                     </div>
                     <div class="form-register-check">
                         <div class="form-register-check-bar">
-                            <label for="celular">Celular<input class="input-register" type="number" name="celular" id="celular"></label>
+                            <label for="celular">Celular<input class="input-register" id="<%= locals.errors && errors.celular ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.celular : null %>" type="number" name="celular" id="celular"></label>
+                            <% if (locals.errors && errors.celular) { %>
+                                <div class="error-text">
+                                    <%= errors.celular.msg %>
+                                </div>
+                            <% } %>
                         </div>
                     </div>
                 </div>
@@ -66,19 +101,34 @@
                 <div class="form-register-check-divided">
                     <div class="form-register-check">
                         <div class="form-register-check-bar-top">
-                            <label for="direccion">Dirección de Envío<input class="input-register" type="text" name="direccion" id="direccion"></label>
+                            <label for="direccion">Dirección de Envío<input class="input-register" id="<%= locals.errors && errors.direccion ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.direccion : null %>" type="text" name="direccion" id="direccion"></label>
+                            <% if (locals.errors && errors.direccion) { %>
+                                <div class="error-text">
+                                    <%= errors.direccion.msg %>
+                                </div>
+                            <% } %>
                         </div>
                     </div>
                     <div class="form-register-check">
                         <div class="form-register-check-bar">
-                            <label for="cp">Código postal<input class="input-register" type="number" name="cp" id="cp"></label>
+                            <label for="cp">Código postal<input class="input-register" id="<%= locals.errors && errors.cp ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.cp : null %>" type="number" name="cp" id="cp"></label>
+                            <% if (locals.errors && errors.cp) { %>
+                                <div class="error-text">
+                                    <%= errors.cp.msg %>
+                                </div>
+                            <% } %>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-register-check-loc">
                     <div class="form-register-check-bar-top">
-                        <label for="localidad">Localidad<input class="input-register" type="text" name="localidad" id="localidad"></label>
+                        <label for="localidad">Localidad<input class="input-register" id="<%= locals.errors && errors.localidad ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.localidad : null %>" type="text" name="localidad" id="localidad"></label>
+                        <% if (locals.errors && errors.localidad) { %>
+                            <div class="error-text">
+                                <%= errors.localidad.msg %>
+                            </div>
+                        <% } %>
                     </div>
                 </div>
 
