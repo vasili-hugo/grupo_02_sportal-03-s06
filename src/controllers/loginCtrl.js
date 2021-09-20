@@ -1,7 +1,10 @@
 // Login
 
 // In / Out File System
-const rwdJson = require("./rwd-json.js");
+const rwdJson = require("../models/rwd-json.js");
+
+//Requisitos de registracion
+const { validationResult } = require ('express-validator');
 
 // JSON path
 const usersJson = "../../data/users.json";
@@ -28,7 +31,22 @@ const controller = {
   // Verifica credenciales del usuario
   store:
     function(req, res) {
-      let usuario = null;
+      let validacionDeErrores = validationResult(req);
+      if (validacionDeErrores.errors.length > 0) {
+        return res.render ('login', { 
+          errors: validacionDeErrores.mapped(),
+          oldData: req.body
+        })
+      } else {
+        let usuarios = rwdJson.readJSON(usersJson);
+        let usuarioEncontrado = usuarios.find (user => user.usuario == req.body.usuario);
+        req.session.usuarioLogueado = usuarioEncontrado;
+        if (req.body.recordam != undefined) {
+          res.cookies('recordame', usuarioEncontrado.email);
+        }
+        res.redirect ('/home');
+      }
+      /* let usuario = null;
       let usuarios = rwdJson.readJSON(usersJson);
       if (usuarios) {
         usuario = usuarios.find(function (item){
@@ -45,18 +63,28 @@ const controller = {
         }
       } else {
         res.send("Usuario inexistente");
-      }
+      } */
     }
   ,
   // Envia e-mail a la direccion informada para cambio de contraseña
   restore:
     function(req, res) {
-      if (req.body.usuario == "") {
-        res.send("Debe ingresar un e-mail");
+      let validacionDeErrores = validationResult(req);
+      if (validacionDeErrores.errors.length > 0) {
+        return res.render ('login', { 
+          errors: validacionDeErrores.mapped(),
+          oldData: req.body
+        })
       } else {
         res.send("Se ha enviado un e-mail a la dirección " + req.body.usuario);
       }
     }
+      /* if (req.body.usuario == "") {
+        res.send("Debe ingresar un e-mail");
+      } else {
+        res.send("Se ha enviado un e-mail a la dirección " + req.body.usuario);
+      }
+    } */
 }; 
 
 module.exports = controller;

@@ -1,5 +1,10 @@
 // In / Out File System
 
+/* Bitacora
+17/09/2021 - Se elimino el parametro 'brackets' de la funcion 'writeJSON'.
+           - Se movio de la carpeta 'controllers' a la carpeta 'models'.
+*/
+
 const fs = require('fs');
 const path = require("path");
 
@@ -22,13 +27,9 @@ let rwdJson = {
   ,
   // Graba un JSON objeto.
   writeJSON:
-    // brackets = true agrega [] en los extremos del JSON. Por defecto siempre informe un valor falso.
-    function(fileName, newJson, brackets){
+    function(fileName, newJson){
       try {
         let newFile = JSON.stringify(newJson)
-        if (brackets) {
-          newFile = "[" + newFile + "]";
-        }
         fs.writeFileSync(path.join(__dirname, fileName),newFile);
         this.errMsg = false;
       } catch (error) {
@@ -48,18 +49,6 @@ let rwdJson = {
       }
       return;
     }
-  ,
-  //Busca si el e-mail ingresado ya esta en uso. Si esta en uso devuelve true.
-  findUserByEmail: function (usuarioBuscado, fileName) {
-    let usuarios = [];
-    usuarios = this.readJSON(fileName);
-    let usuarioEncontrado = usuarios.find (user => user.usuario == usuarioBuscado)
-    if (usuarioEncontrado != undefined) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }
 
 module.exports = rwdJson;

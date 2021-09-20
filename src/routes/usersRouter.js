@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var controller = require("../controllers/usersCtrl.js");
-const rwdJson = require("../controllers/rwd-json");
+const rwdJson = require("../models/rwd-json.js");
 // JSON path
 const usersJson = "../../data/users.json";
 
 const { body } = require ('express-validator');
+const authUsuario = require('../middlewares/authUsuario.js');
 
 const validation = [
     body ('usuario').notEmpty().withMessage('Debes ingresar tu correo electrónico').bail()
@@ -35,6 +36,6 @@ const validation = [
 
 /* GET users listing. */
 router.post("/", validation, controller.store); // Crea un nuevo usuario
-router.get("/",controller.create); // Muestra formulario de Registro
+router.get("/", authUsuario, controller.create); // Muestra formulario de Registro
 
 module.exports = router;

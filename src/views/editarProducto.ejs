@@ -12,90 +12,132 @@
     </header>
     <main>
         <div class="form-abm">
-            <form action="/productos/editar/<%= prodList.id %>?_method=PUT" method="POST">
+            <form action="/productos/editar/<%= prodList.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                            
+              <div class="spacer"></div>
+
+              <div class="step-aside">
+                <div class="step-down-half">
+                  <label class="labels label-marca" for="marca">Marca</label>
+                  <select class="selects marca-options" name="brand">
+                    <option value="">Seleccione una opción</option>
+                    <% let keys = Object.keys(brands); %>
+                    <% for (let i = 0 ; i < keys.length ; i++) { %>
+                      <option value="<%= keys[i] %>" <%= (prodList.brand == keys[i]) ? "selected" : "" %>><%= brands[keys[i]] %></option>
+                    <% } %>
+                  </select>
+                  <label class="errmsg"><%= ((errors.brand) ? errors.brand.msg : "") %></label>
+                </div>
+
+                <div class="step-down-half">
+                  <label class="labels label-rubro" for="marca">Rubro</label>
+                  <select class="selects rubro-options" name="heading" id="rubro">
+                    <option value="">Seleccione una opción</option>
+                    <% keys = Object.keys(headings); %>
+                    <% for (let i = 0 ; i < keys.length ; i++) { %>
+                      <option value="<%= keys[i] %>" <%= (prodList.heading == keys[i]) ? "selected" : "" %>><%= headings[keys[i]] %></option>
+                    <% } %>
+                  </select>
+                  <label class="errmsg"><%= ((errors.heading) ? errors.heading.msg : "") %></label>
+                </div>
+              </div>
               
-              <label class="labels label-marca" for="marca">Marca</label>
-              <select class="selects marca-options" name="brand">
-                <option value="#">Seleccione una opción</option>
-                <% let keys = Object.keys(brands); %>
-                <% let values = Object.values(brands); %>
-                <% for (let i = 0 ; i < keys.length ; i++) { %>
-                  <option value="<%= keys[i] %>" <%= (prodList.brand == keys[i]) ? "selected" : "" %>><%= values[i] %></option>
-                <% } %>
-              </select>
+              <div class="step-aside">
+                <div class="step-down-half">
+                  <label class="labels label-modelo" for="modelo">Modelo</label>
+                  <input class="inputs input-modelo" type="text" name="model" id="modelo" value="<%= prodList.model %>">
+                  <label class="errmsg"><%= ((errors.model) ? errors.model.msg : "") %></label>
+                </div>
 
-              <label class="labels label-rubro" for="marca">Rubro</label>
-              <select class="selects rubro-options" name="heading" id="rubro">
-                <option value="#" selected>Seleccione una opción</option>
-                <% keys = Object.keys(headings); %>
-                <% values = Object.values(headings); %>
-                <% for (let i = 0 ; i < keys.length ; i++) { %>
-                  <option value="<%= keys[i] %>" <%= (prodList.heading == keys[i]) ? "selected" : "" %>><%= values[i] %></option>
-                <% } %>
-              </select>
+                <div class="step-down-half">
+                  <label class="labels label-familia" for="familia">Familia de Producto</label>
+                  <input class="inputs input-familia" type="text" name="family" id="familia" value="<%= prodList.family %>">
+                  <label class="errmsg"><%= ((errors.family) ? errors.family.msg : "") %></label>
+                </div>
+              </div>
 
-              <label class="labels label-modelo" for="modelo">Modelo</label>
-              <input class="inputs input-modelo" type="text" name="model" id="modelo" value="<%= prodList.model %>">
+              <div class="step-down-desc">
+                <label class="labels label-desc" for="descripcion">Descripción</label>
+                <textarea class="inputs input-desc" type="text" name="desc" id="desc"><%= prodList.desc %></textarea>
+                <label class="errmsg"><%= ((errors.desc) ? errors.desc.msg : "") %></label>
+              </div>
 
-              <label class="labels label-desc" for="descripcion">Descripción</label>
-              <textarea class="inputs input-desc" type="text" name="desc" id="desc"><%= prodList.desc %></textarea>
+              <div class="step-aside">
+                <div class="step-down-half">
+                  <label class="labels label-precio" for="precio">Precio</label>
+                  <input class="inputs input-precio" type="number" name="price" id="precio" value="<%= prodList.price %>">
+                  <label class="errmsg"><%= ((errors.price) ? errors.price.msg : "") %></label>
+                </div>
 
-              <label class="labels label-precio" for="precio">Precio</label>
-              <input class="inputs input-precio" type="number" name="price" id="precio" value="<%= prodList.price %>">
+                <div class="step-down-half">
+                  <label class="labels label-edad" for="edad">Edad</label>
+                  <select class="selects edad-options" name="age">
+                    <option value="">Seleccione una opción</option>
+                    <% keys = Object.keys(ages); %>
+                    <% for (let i = 0 ; i < keys.length ; i++) { %>
+                      <option value="<%= keys[i] %>" <%= (prodList.age == keys[i]) ? "selected" : "" %>><%= ages[keys[i]] %></option>
+                    <% } %>
+                  </select>
+                  <label class="errmsg"><%= ((errors.age) ? errors.age.msg : "") %></label>
+                </div>
+              </div>
 
-              <label class="labels label-edad" for="edad">Edad</label>
-              <select class="selects edad-options" name="age">
-                <option value="#">Seleccione una opción</option>
-                <% keys = Object.keys(ages); %>
-                <% values = Object.values(ages); %>
-                <% for (let i = 0 ; i < keys.length ; i++) { %>
-                  <option value="<%= keys[i] %>" <%= (prodList.age == keys[i]) ? "selected" : "" %>><%= values[i] %></option>
-                <% } %>
-              </select>
+              <div class="step-aside">
+                <div class="step-down-half">
+                  <label class="labels label-sexo" for="sexo">Sexo</label>
+                  <select class="selects sexo-options" name="sex">
+                    <option value="">Seleccione una opción</option>
+                    <% keys = Object.keys(sex); %>
+                    <% for (let i = 0 ; i < keys.length ; i++) { %>
+                      <option value="<%= keys[i] %>" <%= (prodList.sex == keys[i]) ? "selected" : "" %>><%= sex[keys[i]] %></option>
+                    <% } %>
+                  </select>
+                  <label class="errmsg"><%= ((errors.sex) ? errors.sex.msg : "") %></label>
+                </div>
 
-              <label class="labels label-sexo" for="sexo">Sexo</label>
-              <select class="selects sexo-options" name="sex">
-                <option value="#">Seleccione una opción</option>
-                <% keys = Object.keys(sex); %>
-                <% values = Object.values(sex); %>
-                <% for (let i = 0 ; i < keys.length ; i++) { %>
-                  <option value="<%= keys[i] %>" <%= (prodList.sex == keys[i]) ? "selected" : "" %>><%= values[i] %></option>
-                <% } %>
-              </select>
+                <div class="step-down-half">
+                  <label class="labels label-color" for="color">Color</label>
+                  <select class="selects color-options" name="color">
+                    <option value="">Seleccione una opción</option>
+                    <% keys = Object.keys(colors); %>
+                    <% for (let i = 0 ; i < keys.length ; i++) { %>
+                      <option value="<%= keys[i] %>" <%= (prodList.color == keys[i]) ? "selected" : "" %>><%= colors[keys[i]] %></option>
+                    <% } %>
+                  </select>
+                  <label class="errmsg"><%= ((errors.color) ? errors.color.msg : "") %></label>
+                </div>
+              </div>
 
-              <label class="labels label-color" for="color">Color</label>
-              <select class="selects color-options" name="color">
-                <option value="#">Seleccione una opción</option>
-                <% keys = Object.keys(colors); %>
-                <% values = Object.values(colors); %>
-                <% for (let i = 0 ; i < keys.length ; i++) { %>
-                  <option value="<%= keys[i] %>" <%= (prodList.color == keys[i]) ? "selected" : "" %>><%= values[i] %></option>
-                <% } %>
-              </select>
               <div class="grid-image">
-                <label class="labels label-icon" for="icon">Archivo de Marca (icono)<%= prodList.icon == "" ? "" : " (" + prodList.icon + ")" %></label>
-                <input class="inputs input-icon" type="file" name="icon" id="icon" accept="<%= misc.imageExt %>" value="<%= prodList.icon %>">
-                <img class="image-icon" src="<%= misc.pathLogos %><%= prodList.icon %>">
+                <label class="labels label-icon" for="icon">Archivo de Marca (icono)<%= " (" + ((prodList.icon) ? prodList.icon : misc.defaultImage) + ")" %></label>
+                <input class="inputs input-icon" type="file" name="icon" id="icon" accept="<%= misc.imageExt %>" value="<%= (prodList.icon) ? prodList.icon : misc.defaultImage %>">
+                <label class="errmsg"><%= ((errors.icon) ? errors.icon.msg : "") %></label>
+                <img class="image-icon" src="<%= misc.pathImages %><%= (prodList.icon) ? prodList.icon : misc.defaultImage %>">
 
-                <label class="labels label-image" for="image">Archivo de Imagen Principal<%= prodList.image == "" ? "" : " (" + prodList.image + ")" %></label>
-                <input class="inputs input-image" type="file" name="image" id="image" accept="<%= misc.imageExt %>" value="<%= prodList.image %>">
-                <img class="image-image" src="<%= misc.pathImages %><%= prodList.image %>">
+                <label class="labels label-image" for="image">Archivo de Imagen Principal<%= " (" + ((prodList.image) ? prodList.image : misc.defaultImage) + ")" %></label>
+                <input class="inputs input-image" type="file" name="image" id="image" accept="<%= misc.imageExt %>" value="<%= (prodList.image) ? prodList.image : misc.defaultImage %>">
+                <label class="errmsg"><%= ((errors.image) ? errors.image.msg : "") %></label>
+                <img class="image-image" src="<%= misc.pathImages %><%= (prodList.image) ? prodList.image : misc.defaultImage %>">
 
-                <label class="labels label-image1" for="image1">Archivo de Imagen Lateral Izquierda<%= prodList.leftImage == "" ? "" : " (" + prodList.leftImage + ")" %></label>
-                <input class="inputs input-image1" type="file" name="leftImage" id="image1" accept="<%= misc.imageExt %>" value="<%= prodList.leftImage %>">
-                <img class="image-image1" src="<%= misc.pathImages %><%= prodList.leftImage %>">
+                <label class="labels label-image1" for="image1">Archivo de Imagen Lateral Izquierda<%= " (" + ((prodList.leftImage) ? prodList.leftImage : misc.defaultImage) + ")" %></label>
+                <input class="inputs input-image1" type="file" name="leftImage" id="image1" accept="<%= misc.imageExt %>" value="<%= (prodList.leftImage) ? prodList.leftImage : misc.defaultImage %>">
+                <label class="errmsg"><%= ((errors.leftImage) ? errors.leftImage.msg : "") %></label>
+                <img class="image-image1" src="<%= misc.pathImages %><%= (prodList.leftImage) ? prodList.leftImage : misc.defaultImage %>">
 
-                <label class="labels label-image2" for="image2">Archivo de Imagen Lateral Derecha<%= prodList.rightImage == "" ? "" : " (" + prodList.rightImage + ")" %></label>
-                <input class="inputs input-image2" type="file" name="rightImage" id="image2" accept="<%= misc.imageExt %>" value="<%= prodList.rightImage %>">
-                <img class="image-image2" src="<%= misc.pathImages %><%= prodList.rightImage %>">
+                <label class="labels label-image2" for="image2">Archivo de Imagen Lateral Derecha<%= " (" + ((prodList.rightImage) ? prodList.rightImage : misc.defaultImage) + ")" %></label>
+                <input class="inputs input-image2" type="file" name="rightImage" id="image2" accept="<%= misc.imageExt %>" value="<%= (prodList.rightImage) ? prodList.rightImage : misc.defaultImage %>">
+                <label class="errmsg"><%= ((errors.rightImage) ? errors.rightImage.msg : "") %></label>
+                <img class="image-image2" src="<%= misc.pathImages %><%= (prodList.rightImage) ? prodList.rightImage : misc.defaultImage %>">
 
-                <label class="labels label-image3" for="image3">Archivo de Imagen Superior<%= prodList.upperImage == "" ? "" : " (" + prodList.upperImage + ")" %></label>
-                <input class="inputs input-image3" type="file" name="upperImage" id="image3" accept="<%= misc.imageExt %>" value="<%= prodList.upperImage %>">
-                <img class="image-image3" src="<%= misc.pathImages %><%= prodList.upperImage %>">
+                <label class="labels label-image3" for="image3">Archivo de Imagen Superior<%= " (" + ((prodList.upperImage) ? prodList.upperImage : misc.defaultImage) + ")" %></label>
+                <input class="inputs input-image3" type="file" name="upperImage" id="image3" accept="<%= misc.imageExt %>" value="<%= (prodList.upperImage) ? prodList.upperImage : misc.defaultImage %>">
+                <label class="errmsg"><%= ((errors.upperImage) ? errors.upperImage.msg : "") %></label>
+                <img class="image-image3" src="<%= misc.pathImages %><%= (prodList.upperImage) ? prodList.upperImage : misc.defaultImage %>">
 
-                <label class="labels label-image4" for="image4">Archivo de Imagen Inferior<%= prodList.lowerImage == "" ? "" : " (" + prodList.lowerImage + ")" %></label>
-                <input class="inputs input-image4" type="file" name="lowerImage" id="image4" accept="<%= misc.imageExt %>" value="<%= prodList.lowerImage %>">
-                <img class="image-image4" src="<%= misc.pathImages %><%= prodList.lowerImage %>">
+                <label class="labels label-image4" for="image4">Archivo de Imagen Inferior<%= " (" + ((prodList.lowerImage) ? prodList.lowerImage : misc.defaultImage) + ")" %></label>
+                <input class="inputs input-image4" type="file" name="lowerImage" id="image4" accept="<%= misc.imageExt %>" value="<%= (prodList.lowerImage) ? prodList.lowerImage : misc.defaultImage %>">
+                <label class="errmsg"><%= ((errors.lowerImage) ? errors.lowerImage.msg : "") %></label>
+                <img class="image-image4" src="<%= misc.pathImages %><%= (prodList.lowerImage) ? prodList.lowerImage : misc.defaultImage %>">
               </div>
               <div class="buttons">
                 <button class="accept-button" type="submit">ACEPTAR</button>

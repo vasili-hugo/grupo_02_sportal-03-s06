@@ -1,7 +1,7 @@
 // Usuarios
 
 // In / Out File System
-const rwdJson = require("./rwd-json.js");
+const rwdJson = require("../models/rwd-json.js");
 
 //Requisitos de registracion
 const { validationResult } = require ('express-validator');
@@ -52,15 +52,10 @@ const controller = {
           cp: req.body.cp,
           localidad: req.body.localidad
         }
-        let usuarios = [];
-        usuarios = rwdJson.readJSON(usersJson);
-        if (usuarios == undefined) {
-          usuarios.push(newItem);
-          rwdJson.writeJSON(usersJson, usuarios, true);
-        } else {
-          usuarios.push(newItem);
-          rwdJson.writeJSON(usersJson, usuarios, false);
-        }
+        let usuarios = rwdJson.readJSON(usersJson);
+        if (!usuarios) {usuarios = []};
+        usuarios.push(newItem);
+        rwdJson.writeJSON(usersJson, usuarios);
         /* let usuarios = [];
         let usuario = req.body.usuario;
         usuarios = rwdJson.readJSON(usersJson);

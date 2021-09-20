@@ -1,29 +1,31 @@
+<!-- Bitacora
+03/08/2021 - Se parametrizan los datos e imagenes. Para ello se elimino el estilo background-image de la clase 'pict' en mainProductos.css
+18/09/2021 - Se cambia la ruta para que contemple el codigo de producto a mostrar.
+-->
 <main id="main">
     <div id="main-container">
-
-        <% let productsQuant = 15; for (i=0; i<productsQuant; i++){ %>
-        <div class="item <%= (Math.random()>0.6 & Math.random()>0.4 )? "large" : "" %> >">
-            <div class="cell">
-                <a href="/producto" target="_self">
-                    <div class="pict" style="background-image: url(images/sport/run-update-2021-500x356-2.webp);">
-                    </div>
-                </a>
-                <div class="producto-ficha">
-                    <div class="description">Producto de ejemplo cualquiera</div>
-                    <div class="description-bottom">
-                        <img class="icon" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="background-image: url(images/logos/logo_nike_principal.png);">
-                        <div class="icon-info">
-                            <div class="precio">$ 3.200,00</div>
-                            <a href="http://" target="_blank" rel="noopener noreferrer"><i
-                                    class="info fas fa-plus-circle"></i></a>
+        <% for (let i = 0 ; i < (products.length) ? products.length : 0 ; i++) { %>
+            <div class='item <%= (Math.random()>0.6 & Math.random()>0.4 ) ? "large" : "" %>'>
+                <div class="cell">
+                    <a href="/productos/detail/<%= products[i].id %>" target="_self">
+                        <!--<div class="pict" style="background-image: url(images/sport/run-update-2021-500x356-2.webp);"></div>-->
+                        <div class="pict" style="background-image: url(<%=misc.pathImages%><%=products[i].image%>);"></div>
+                    </a>
+                    <div class="producto-ficha">
+                        <div class="description"><%= products[i].desc %></div>
+                        <div class="description-bottom">
+                            <!--<img class="icon" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="background-image: url(images/logos/logo_nike_principal.png);">-->
+                            <img class="icon" src=<%=misc.pathLogos%><%= products[i].icon %>>
+                            <div class="icon-info">
+                                <div class="precio">$ <%= products[i].price %></div>
+                                <a href="http://" target="_blank" rel="noopener noreferrer">
+                                   <i class="info fas fa-plus-circle"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         <% } %>
-
-
     </div>
-
 </main>

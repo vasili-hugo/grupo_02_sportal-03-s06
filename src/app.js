@@ -1,21 +1,26 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var methodOverride = require("method-override");
+/* Bitacora
+10/09/2021 - Se agrego el componente 'Session'. Achtung!!! debe ser insertado el app.use(session(...)) antes del app.use(express.static(...))
+19/09/2021 - Se elimino la ruta '/producto' y el router 'productoRouter'. Se lo reemplaza por '/productos/detail'.
+*/
+
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const methodOverride = require("method-override");
+const session = require("express-session");
+const recordame = require('./middlewares/recordame.js');
 
 // routers
-var indexRouter = require('./routes/indexRouter.js');
-//var cargaProductoRouter = require ('./routes/cargaProductoRouter.js')
-var productosRouter = require('./routes/productosRouter.js');
-var productoRouter = require('./routes/productoRouter.js');
-var carritoRouter = require('./routes/carritoRouter.js');
-var loginRouter = require('./routes/loginRouter.js');
-var usersRouter = require('./routes/usersRouter.js');
-//var abmProductosRouter = require('./routes/abmProductosRouter.js');
+const indexRouter = require('./routes/indexRouter.js');
+const productosRouter = require('./routes/productosRouter.js');
+//const productoRouter = require('./routes/productoRouter.js');
+const carritoRouter = require('./routes/carritoRouter.js');
+const loginRouter = require('./routes/loginRouter.js');
+const usersRouter = require('./routes/usersRouter.js');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,24 +31,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(methodOverride("_method"));
+app.use(session({secret: "HugoLucianoSergio", resave: true, saveUninitialized: true}));
+app.use(recordame);
 app.use(express.static(path.join(__dirname, '../public')));
 
-// routers
-var indexRouter = require('./routes/indexRouter.js');
-//var cargaProductoRouter = require ('./routes/cargaProductoRouter.js')
-var productosRouter = require('./routes/productosRouter.js');
-var productoRouter = require('./routes/productoRouter.js');
-var carritoRouter = require('./routes/carritoRouter.js');
-var loginRouter = require('./routes/loginRouter.js');
-var usersRouter = require('./routes/usersRouter.js');
-//var abmProductosRouter = require('./routes/abmProductosRouter.js');
-
 // routes
-//app.use('/abmProductos', abmProductosRouter);
-//app.use('/cargaProducto', cargaProductoRouter);
 app.use('/productos', productosRouter);
-app.use('/producto', productoRouter); // Cuando se revise la vista de productos, cada producto debera se llamado por /productos/detail/:id desde productosRouter.detail
-                                      // luego eliminar esta ruta y su router (productoRouter.js)
+//app.use('/producto', productoRouter);
 app.use('/carrito', carritoRouter);
 app.use('/register', usersRouter);
 app.use('/login', loginRouter);

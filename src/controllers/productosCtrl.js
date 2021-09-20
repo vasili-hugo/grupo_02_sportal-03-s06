@@ -1,222 +1,253 @@
 // Productos
 
-// In / Out File System
-const rwdJson = require("./rwd-json.js");
-
-// JSON path
-const productsJson = "../../data/products.json";
-
-/* JSON Layout
-id          : Codigo de producto (X)
-brand       : Marca (tabla)
-heading     : Rubro (tabla)
-model       : Modelo (X)
-descripcion : Descripcion (X)
-price       : Precio (N.DD)
-age         : Edad (tabla)
-sex         : Sexo (tabla)
-color       : Color (tabla)
-icon        : Icono de marca (.jpg)
-image       : Imagen principal (.jpg)
-leftImage   : Imagen izquierda (.jpg)
-rightImage  : Imagen derecha (.jpg)
-upperImage  : Imagen superior (.jpg)
-lowerImage  : Imagen inferior (.jpg)
+/* Bitacora
+17/09/2021 - Se reemplazo todo el codigo que contemplaba lectura y escritura del JSON por el modelo.
+19/09/2021 - Este modulo incorpora los metodos del controlador productoCtrl.js, quedando este ultimo obsoleto.
 */
 
+// Funcionalidades del Modelo
+const Productos = require("../models/Productos.js")
+
+// Validaciones
+const {validationResult} = require("express-validator");
+
 // Opciones del Select
-const brands = {
-  adidas: "Adidas",
-  asics: "Asics",
-  fila: "Fila",
-  lotto: "Lotto",
-  mizuno: "Mizuno",
-  newBalance: "New Balance",
-  nike: "Nike",
-  puma: "Puma",
-  reebok: "Reebok",
-  topper: "Topper",
-  underArmour: "Under Armour"
-};
-
-const colors = {
-  amarillo: "Amarillo",
-  azul: "Azul",
-  blanco: "Blanco",
-  gris: "Gris",
-  marron: "Marrón",
-  negro: "Negro",
-  rojo: "Rojo",
-  verde: "Verde"
-};
-
-const sex = {
-  femenino: "Femenino",
-  masculino: "Masculino",
-  unisex: "Unisex"
-};
-
-const ages = {
-  adultos: "Adultos",
-  ninos: "Niños"
-};
-
-const headings = {
-  agua: "Agua",
-  basicos: "Básicos",
-  calzado: "Calzado",
-  carga: "Carga",
-  electro: "Electro",
-  equipo: "Equipo",
-  portatiles: "Portátiles",
-  tech: "Tech"
-};
-
-const misc = {
-  imageExt: ".jpg, .png, .bmp",
-  pathLogos: "/images/logos/",
-  pathImages: "/images/sport/"
-};
+const config = require("./config.js");
 
 // Controller
 const controller = {
-  // Muestra todos los productos para los clientes
-  retrive:
-    function(req, res) {
-      res.render("productos");
+  // Muestra los datos de un producto
+  readOne:
+    function (req, res) {
+      let producto = Productos.oneRecord(req);
+      let misc = config.misc;
+      let others = similars (req, 4);
+      res.render("producto", {producto, misc, others});
     }
   ,
-  // Muestra todos los productos para administrarlos
-  abmList:
+  // Muestra todos los productos correspondientes a ese rubro
+  readAll:
     function (req, res) {
-      products = rwdJson.readJSON(productsJson);
-      if (products == undefined) {
-        products = [];
+      let products = [];
+      let misc = config.misc;
+      let heading = req.params.id;
+      switch (heading) {
+        case "listar":
+          // Muestra todos los productos para el administrador
+          products = Productos.allRecords();
+          res.render("listarProductos", {products, misc});
+          break;
+        case "crear":
+          // Muestra el formulario para crear un nuevo producto
+          let errors = [];
+          let prodList = [];
+          // Inicializo los valores por defecto de la session de productos
+          if (req.session.edit) {delete req.session.edit};
+          if (!req.session.create) {
+            req.session.icon = ""
+            req.session.image = ""
+            req.session.leftImage = "";
+            req.session.rightImage = "";
+            req.session.upperImage = "";
+            req.session.lowerImage = "";
+            req.session.create = "";
+          }
+          let brands = config.brands;
+          let colors = config.colors;
+          let sex = config.sex;
+          let ages = config.ages;
+          let headings = config.headings;
+          prodList = {...req.session};
+          res.render("crearProducto", {brands, colors, sex, ages, headings, misc, prodList, errors});
+          break;
+        case "saldos":
+        case "ofertas":
+        case "novedades":
+          res.render("listarProductos", {products, misc});
+          break;
+        default:
+          products = Productos.headingRecords(heading);
+          res.render("productos", {products, misc});
       }
-      res.render("listarProductos", {products});
-    }
-  ,
-  // Muestra el formulario para crear un nuevo producto
-  abmCreate:
-    function (req, res) {
-      res.render("crearProducto", {brands, colors, sex, ages, headings, misc});
     }
   ,
   // Crea un nuevo producto
   abmInsert:
     function (req, res) {
-      let exists = false;
-      let product = [];
-      let products = rwdJson.readJSON(productsJson);
-      if (products) {
-        exists = products.some( function (item) {
-          return (item.id == req.body.id);
-        });
+      // Resguarda los datos del input file porque no se pueden pasar por 'value'.
+      // Si se ingreso algun archivo de images, este esta contenido en el objeto 'req.files', creado por via 'multer'.
+      // Como solo hay un archivo por input file, el req.files solo contiene un elemento en el array denominado segun el valor del atributo 'name'.
+      if (req.files.icon) {req.session.icon = req.files.icon[0].filename};
+      if (req.files.image) {req.session.image = req.files.image[0].filename};
+      if (req.files.leftImage) {req.session.leftImage = req.files.leftImage[0].filename};
+      if (req.files.rightImage) {req.session.rightImage = req.files.rightImage[0].filename};
+      if (req.files.upperImage) {req.session.upperImage = req.files.upperImage[0].filename};
+      if (req.files.lowerImage) {req.session.lowerImage = req.files.lowerImage[0].filename};
+      // Errores detectados por el middleware de validacion
+      let errors = validationResult(req);
+      let showErrors = false;
+      if (errors.isEmpty()) {
+        errors = {};
       } else {
-        products = [];
+        errors = errors.mapped();
+        showErrors = true;
       }
-      if (exists) {
-        res.send("El producto código " + req.body.id + " existe");
+      // Verifico que se hayan ingresado los campos de imagenes que son obligatorios
+      if (!req.session.icon) {
+        errors["icon"] = {msg: "Campo obligatorio"};
+        showErrors = true;
+      }
+      if (!req.session.image) {
+        errors["image"] = {msg: "Campo obligatorio"};
+        showErrors = true;
+      }
+      // Muestro errores o grabo el producto
+      if (showErrors) {
+        let product = req.body;
+        product.icon = req.session.icon;
+        product.image = req.session.image;
+        product.leftImage = req.session.leftImage;
+        product.rightImage = req.session.rightImage;
+        product.upperImage = req.session.upperImage;
+        product.lowerImage = req.session.lowerImage;
+        let brands = config.brands;
+        let colors = config.colors;
+        let sex = config.sex;
+        let ages = config.ages;
+        let headings = config.headings;
+        let misc = config.misc;
+        res.render("crearProducto", {brands, colors, sex, ages, headings, misc, errors, prodList: product});
       } else {
-        let newItem = {
-          id: req.body.id,
-          brand: req.body.brand,
-          heading: req.body.heading,
-          model: req.body.model,
-          desc: req.body.desc,
-          price: req.body.price,
-          age: req.body.age,
-          sex: req.body.sex,
-          color: req.body.color,
-          icon: req.body.icon,
-          image: req.body.image,
-          leftImage: req.body.leftImage,
-          rightImage: req.body.rightImage,
-          upperImage: req.body.upperImage,
-          lowerImage: req.body.lowerImage
+        if (Productos.insertRecord(req)) {
+          res.send(Productos.errMsg);
+        } else {
+          delete req.session.create;
+          res.redirect("/productos/listar");
         }
-        products.push(newItem);
-        rwdJson.writeJSON(productsJson, products, false);
-        res.redirect("/productos/listar");
       }
     }
   ,
   // Muestra un producto para editarlo
   abmEdit:
     function (req, res) {
-      let product = [];
-      let products = rwdJson.readJSON(productsJson);
-      if (products) {
-        product = products.find( function (item) {
-          return (item.id == req.params.id);
-        });
-        if (product) {
-          product.icon = (product.icon == "" ? "NoImagen.jpg" : product.icon);
-          product.image = (product.image == "" ? "NoImagen.jpg" : product.image);
-          product.leftImage = (product.leftImage == "" ? "NoImagen.jpg" : product.leftImage);
-          product.rightImage = (product.rightImage == "" ? "NoImagen.jpg" : product.rightImage);
-          product.upperImage = (product.upperImage == "" ? "NoImagen.jpg" : product.upperImage);
-          product.lowerImage = (product.lowerImage == "" ? "NoImagen.jpg" : product.lowerImage);
-          res.render("editarProducto",{prodList: product, brands, colors, sex, ages, headings, misc});
-        } else {
-          res.send("El producto código " + req.params.id + " no existe");
-        }
+      let errors = [];
+      if (req.session.create) {delete req.session.create};
+      let [status, product] = Productos.readRecord(req)
+      if (status) {
+        res.send(Productos.errMsg);
       } else {
-        res.send("El JSON de productos no existe");
+        let brands = config.brands;
+        let colors = config.colors;
+        let sex = config.sex;
+        let ages = config.ages;
+        let headings = config.headings;
+        let misc = config.misc;
+        res.render("editarProducto",{brands, colors, sex, ages, headings, misc, errors, prodList: product});
       }
     }
   ,
   // Actualiza un producto
   abmUpdate:
     function (req, res) {
-      let product = [];
-      let products = rwdJson.readJSON(productsJson);
-      if (products) {
-        products = products.map( function (item) {
-          if (item.id == req.params.id) {
-            item.brand = req.body.brand;
-            item.heading = req.body.heading;
-            item.model = req.body.model;
-            item.desc = req.body.desc;
-            item.price = req.body.price;
-            item.age = req.body.age;
-            item.sex = req.body.sex;
-            item.color = req.body.color;
-            item.icon = (req.body.icon == "" ? item.icon : req.body.icon);
-            item.image = (req.body.image == "" ? item.image : req.body.image);
-            item.leftImage = (req.body.leftImage == "" ? item.leftImage : req.body.leftImage);
-            item.rightImage = (req.body.rightImage == "" ? item.rightImage : req.body.rightImage);
-            item.upperImage = (req.body.upperImage == "" ? item.upperImage : req.body.upperImage);
-            item.lowerImage = (req.body.lowerImage == "" ? item.lowerImage : req.body.lowerImage);
-          }
-          return item;
-        });
-        rwdJson.writeJSON(productsJson, products, false);
-        res.redirect("/productos/listar");
+      // Resguarda los datos del input file porque no se pueden pasar por 'value'.
+      // Si se ingreso algun archivo de images, este esta contenido en el objeto 'req.files', creado por via 'multer'.
+      // Como solo hay un archivo por input file, el req.files solo contiene un elemento en el array denominado segun el valor del atributo 'name'.
+      if (req.files.icon) {req.session.icon = req.files.icon[0].filename};
+      if (req.files.image) {req.session.image = req.files.image[0].filename};
+      if (req.files.leftImage) {req.session.leftImage = req.files.leftImage[0].filename};
+      if (req.files.rightImage) {req.session.rightImage = req.files.rightImage[0].filename};
+      if (req.files.upperImage) {req.session.upperImage = req.files.upperImage[0].filename};
+      if (req.files.lowerImage) {req.session.lowerImage = req.files.lowerImage[0].filename};
+      // Errores detectados por el middleware de validacion
+      let errors = validationResult(req);
+      let showErrors = false;
+      if (errors.isEmpty()) {
+        errors = {};
       } else {
-        res.send("El JSON de productos no existe");
+        errors = errors.mapped();
+        showErrors = true;
+      }
+      // Verifico que se hayan ingresado los campos de imagenes que son obligatorios
+      if (!req.session.icon) {
+        errors["icon"] = {msg: "Campo obligatorio"};
+        showErrors = true;
+      }
+      if (!req.session.image) {
+        errors["image"] = {msg: "Campo obligatorio"};
+        showErrors = true;
+      }
+      // Muestro errores o grabo el producto
+      if (showErrors) {
+        let product = req.body;
+        product.id = req.params.id;
+        product.icon = req.session.icon;
+        product.image = req.session.image;
+        product.leftImage = req.session.leftImage;
+        product.rightImage = req.session.rightImage;
+        product.upperImage = req.session.upperImage;
+        product.lowerImage = req.session.lowerImage;
+        let brands = config.brands;
+        let colors = config.colors;
+        let sex = config.sex;
+        let ages = config.ages;
+        let headings = config.headings;
+        let misc = config.misc;
+        res.render("editarProducto",{brands, colors, sex, ages, headings, misc, errors, prodList: product});
+      } else {
+        if (Productos.updateRecord(req)) {
+          res.send(Productos.errMsg);
+        } else {
+          delete req.session.edit;
+          res.redirect("/productos/listar");
+        }
       }
     }
   ,
   // Elimina un producto
   abmDelete:
     function (req, res) {
-      let product = [];
-      let products = rwdJson.readJSON(productsJson);
-      if (products) {
-        let newProducts = products.filter( function (item) {
-          return (item.id != req.params.id);
-        });
-        if (newProducts.length > 0) {
-          rwdJson.writeJSON(productsJson, newProducts, false);
-        } else {
-          rwdJson.deleteJSON(productsJson);
-        }
-        res.redirect("/productos/listar");
+      if (Productos.deleteRecord(req)) {
+        res.send(Productos.errMsg);
       } else {
-        res.send("El JSON de productos no existe");
+        res.redirect("/productos/listar");       
+      }
+   }
+};
+
+// Obtiene hasta un maximo de 'maxItems' productos para ser mostrados como similares.
+// Si se tienen mas de 'maxItems', los productos se seleccionan aleatoriamente.
+function similars (req, maxItems) {
+  let others = [];
+  let productos = Productos.allRecords();
+  if (productos) {
+    let producto = Productos.oneRecord(req);
+    if (producto) {
+      let family = producto.family;
+      let newProducts = productos.filter (function (item) {
+        return (item.family == family && item.id != req.params.id);
+      });
+      if (newProducts) {
+        if (newProducts.length > 0) {
+          if (newProducts.length > maxItems) {
+            let idxs = [];
+            let idx = 0;
+            let i = 0;
+            do {
+              idx = (Math.random() * (newProducts.length - 1)).toFixed(0);
+              if (!idxs.includes(idx)) {
+                idxs.push(idx);
+                others.push(newProducts[idx]);
+                i++;
+              }
+            } while (i < maxItems);
+          } else {
+            others = newProducts;
+          }
+        }
       }
     }
-}; 
+  }
+  return others;
+}
 
 module.exports = controller;
