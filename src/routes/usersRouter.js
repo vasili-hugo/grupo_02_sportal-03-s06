@@ -5,8 +5,23 @@ const rwdJson = require("../models/rwd-json.js");
 // JSON path
 const usersJson = "../../data/users.json";
 
+//Requisitos para las validaciones 
 const { body } = require ('express-validator');
 const authUsuario = require('../middlewares/authUsuario.js');
+const multer = require ('multer');
+const path = require('path');
+
+//Configuraciones de multer
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb (null, './public/images/avatars');
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}_img${path.extname(file.originalname)}`);
+    }
+});
+
+const uploadFile = multer ({ storage });
 
 const validation = [
     body ('usuario').notEmpty().withMessage('Debes ingresar tu correo electrónico').bail()
@@ -31,11 +46,24 @@ const validation = [
     body ('celular').isInt().withMessage('Debes ingresar tu número de celular.'),
     body ('direccion').notEmpty().withMessage('Debes ingresar tu dirección.'),
     body ('cp').isInt().withMessage('Debes ingresar tu código postal.'),
-    body ('localidad').notEmpty().withMessage('Debes ingresar tu localidad.')
+    body ('localidad').notEmpty().withMessage('Debes ingresar tu localidad.'),
+    body ('avatar').custom( (value, { req }) => {
+        let file = req.file;
+        if (file == undefined){
+            throw new Error('Tenes que subir una foto de perfil');
+        } else {
+            let extentions = ['.jpeg', '.jpg', '.png', '.gif'];
+            let fileExtention = path.extname(file.originalname);
+            if (!extentions.includes(fileExtention)) {
+                throw new Error(`Las extensiones permitidas son ${extentions.join(', ')}`);
+            }
+        }
+        return true;
+    })
 ]
 
 /* GET users listing. */
-router.post("/", validation, controller.store); // Crea un nuevo usuario
+router.post("/", uploadFile.single('avatar'), validation, controller.store); // Crea un nuevo usuario
 router.get("/", authUsuario, controller.create); // Muestra formulario de Registro
 
 module.exports = router;

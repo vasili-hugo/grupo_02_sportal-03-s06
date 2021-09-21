@@ -20,6 +20,7 @@ celular   : Celular (N)
 direccion : Direccion (X)
 cp        : Codigo Postal (X)
 localidad : Localidad (X)
+avatar    : Foto de perfil (X)
 */
 
 // Controller
@@ -50,7 +51,8 @@ const controller = {
           celular: req.body.celular,
           direccion: req.body.direccion,
           cp: req.body.cp,
-          localidad: req.body.localidad
+          localidad: req.body.localidad,
+          avatar: req.file.filename
         }
         let usuarios = rwdJson.readJSON(usersJson);
         if (!usuarios) {usuarios = []};
