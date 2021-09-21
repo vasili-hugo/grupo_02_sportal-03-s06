@@ -41,8 +41,8 @@ const controller = {
         let usuarios = rwdJson.readJSON(usersJson);
         let usuarioEncontrado = usuarios.find (user => user.usuario == req.body.usuario);
         req.session.usuarioLogueado = usuarioEncontrado;
-        if (req.body.recordam != undefined) {
-          res.cookies('recordame', usuarioEncontrado.email);
+        if (req.body.recordame != undefined) {
+          res.cookie('recordame', usuarioEncontrado.email, {maxAge: 1000 * 60 * 60 * 60 * 24});
         }
         res.redirect ('/home');
       }

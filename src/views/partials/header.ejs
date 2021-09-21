@@ -10,9 +10,15 @@
             <div id="header-banner"></div>
             <div id="header-circle"></div>
             
-            <a id="header-login" href="/login">Login
-                <i class="far fa-user-circle"></i>
-            </a>
+            <% if (locals.logueado) { %>
+                <a id="header-login" href="/profile">Profile
+                    <i class="far fa-user-circle"></i>
+                </a>
+            <% } else { %>
+                <a id="header-login" href="/login">Login
+                    <i class="far fa-user-circle"></i>
+                </a>
+            <% } %>
 
             <div id="header-search-fill"></div>
 

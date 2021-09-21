@@ -11,6 +11,7 @@ const logger = require('morgan');
 const methodOverride = require("method-override");
 const session = require("express-session");
 const recordame = require('./middlewares/recordame.js');
+const usuarioLogueado = require('./middlewares/usuarioLogueado.js');
 
 // routers
 const indexRouter = require('./routes/indexRouter.js');
@@ -33,6 +34,7 @@ app.use(cookieParser());
 app.use(methodOverride("_method"));
 app.use(session({secret: "HugoLucianoSergio", resave: true, saveUninitialized: true}));
 app.use(recordame);
+app.use(usuarioLogueado);
 app.use(express.static(path.join(__dirname, '../public')));
 
 // routes
