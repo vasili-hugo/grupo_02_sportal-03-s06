@@ -16,7 +16,6 @@ const usuarioLogueado = require('./middlewares/usuarioLogueado.js');
 // routers
 const indexRouter = require('./routes/indexRouter.js');
 const productosRouter = require('./routes/productosRouter.js');
-//const productoRouter = require('./routes/productoRouter.js');
 const carritoRouter = require('./routes/carritoRouter.js');
 const loginRouter = require('./routes/loginRouter.js');
 const usersRouter = require('./routes/usersRouter.js');
@@ -39,7 +38,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // routes
 app.use('/productos', productosRouter);
-//app.use('/producto', productoRouter);
 app.use('/carrito', carritoRouter);
 app.use('/register', usersRouter);
 app.use('/login', loginRouter);

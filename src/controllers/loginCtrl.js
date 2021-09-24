@@ -18,6 +18,7 @@ dni       : DNI (N)
 celular   : Celular (N)
 direccion : Direccion (X)
 localidad : Localidad (X)
+avatar    : Foto de perfil (X)
 */
 
 // Controller

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var controller = require("../controllers/usersCtrl.js");
 const rwdJson = require("../models/rwd-json.js");
+const funcs = require("./functions.js");
 // JSON path
 const usersJson = "../../data/users.json";
 
@@ -27,8 +28,8 @@ const validation = [
     body ('usuario').notEmpty().withMessage('Debes ingresar tu correo electrónico').bail()
     .isEmail().withMessage('Debes ingresar un e-mail válido.').bail()
     .custom(value => {
-        if (rwdJson.findUserByEmail(value, usersJson)) {
-            throw new Error ('El correo que intenta registrar ya esta en uso.')
+        if (funcs.findUserByEmail(value, usersJson)) {
+            throw new Error ('El correo que intenta registrar ya está en uso.')
         }
         return true;
     }),
@@ -50,7 +51,7 @@ const validation = [
     body ('avatar').custom( (value, { req }) => {
         let file = req.file;
         if (file == undefined){
-            throw new Error('Tenes que subir una foto de perfil');
+            throw new Error('Tenes que subir una imagen de perfil');
         } else {
             let extentions = ['.jpeg', '.jpg', '.png', '.gif'];
             let fileExtention = path.extname(file.originalname);
