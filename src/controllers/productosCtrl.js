@@ -21,6 +21,8 @@ const controller = {
     function (req, res) {
       let producto = Productos.oneRecord(req);
       let misc = config.misc;
+      misc.heading = producto.heading;
+      misc.model = producto.model;
       let others = similars (req, 4);
       res.render("producto", {producto, misc, others});
     }
@@ -66,6 +68,7 @@ const controller = {
           res.render("listarProductos", {products, misc});
           break;
         default:
+          misc.heading = heading;
           products = Productos.headingRecords(heading);
           res.render("productos", {products, misc});
       }

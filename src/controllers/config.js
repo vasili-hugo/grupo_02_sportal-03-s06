@@ -52,6 +52,7 @@ const config = {
   misc: {
     imageExt: ".jpg, .png, .bmp",
     pathImages: "/images/products/",
+    pathAvatar: "/images/avatars/",
     defaultImage: "default.jpg"
   }
 }

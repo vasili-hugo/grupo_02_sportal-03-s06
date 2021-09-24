@@ -4,16 +4,17 @@ var controller = require("../controllers/loginCtrl.js");
 const rwdJson = require("../models/rwd-json.js");
 const bcrypt = require ('bcryptjs');
 const authUsuario = require ('../middlewares/authUsuario.js');
+const funcs = require("./functions.js");
 // JSON path
 const usersJson = "../../data/users.json";
 
 const { body } = require ('express-validator');
 
 const validations = [
-    body ('usuario').notEmpty().withMessage('Debes ingresar el correo electronico.').bail()
+    body ('usuario').notEmpty().withMessage('Debes ingresar el correo electrónico.').bail()
     .custom( value  => {
-        if (!findUserByEmail(value, usersJson)){
-            throw new Error ('El correo ingresado no esta registrado.')
+        if (!funcs.findUserByEmail(value, usersJson)){
+            throw new Error ('El correo ingresado no está registrado.')
         }
         return true;
     }),
@@ -22,7 +23,7 @@ const validations = [
         let usuarios = rwdJson.readJSON(usersJson);
         let usuarioEncontrado = usuarios.find (user => user.usuario == req.body.usuario)
         if (!bcrypt.compareSync(value, usuarioEncontrado.password)) {
-            throw new Error ('La contraseña es invalida.');
+            throw new Error ('La contraseña es inválida.');
         }
         return true;
     })
@@ -32,13 +33,5 @@ const validations = [
 router.get("/", authUsuario, controller.create);                     // Muestra formulario de Login, si el usuario esta logueado lo redirige al home
 router.post("/", validations, controller.store);                     // Verifica credenciales del usuario
 router.post("/restore", validations, controller.restore);            // Envia e-mail a la direccion informada para cambio de contraseña
-
-function findUserByEmail (value, usersJson) {
-    let usuarios = rwdJson.readJSON(usersJson);
-    let usuario = usuarios.find (function(item) {
-        return item.usuario == value;
-    });
-    return (usuario);
-}
 
 module.exports = router;
