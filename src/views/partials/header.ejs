@@ -10,10 +10,17 @@
             <div id="header-banner"></div>
             <div id="header-circle"></div>
             
+            
             <% if (locals.logueado) { %>
-                <a id="header-login" href="/profile">Profile
-                    <i class="far fa-user-circle"></i>
-                </a>
+                <p id="header-login" onclick="openPanel()" ><%= locals.nombre%>
+                    <i class="far fa-user-circle" ></i>
+                    <div id="userPanel">
+                     <ul>
+                         <li>Ver carrito</li>
+                         <li><a <%= "href=/profile/"+locals.usuario %>>Editar perfil</a></li>
+                         <li>Logout </li>
+                    </div>
+                </p>
             <% } else { %>
                 <a id="header-login" href="/login">Login
                     <i class="far fa-user-circle"></i>
@@ -46,7 +53,18 @@
 
             <a id="header-sandwich" href="" target="_self"><i class="fas fa-bars"></i></a>
 
-
+            <script>
+                function openPanel(){
+                    
+                    let x = document.getElementById("userPanel");
+                    if (x.style.display === "block"){
+                        x.style.display = "none";
+                    } else {
+                        x.style.display = "block"
+                        setTimeout(function(){x.style.display= "none";} , 8000)
+                    }
+                }
+            </script>
 
 
         </header>

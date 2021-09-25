@@ -26,21 +26,20 @@ MAIN
   width: 100%;
   margin: 10px;
   border-radius: 20px;
-  border: 2px black solid;
 }
 
 .row {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(220, 220, 220);
+  background-color: #FFFFFF;
 }
 
 .prod-data {
   margin: 11px;
   padding: 10px;
   border-radius: 20px;
-  border: 2px black solid;
-  background-color: rgb(220,220,220);
+  border: 2px #FFFFFF solid;
+  background-color: #FFFFFF;
 }
 
 .id-prod-value, .marca-value, .rubro-value, .modelo-value, .descripcion-value {

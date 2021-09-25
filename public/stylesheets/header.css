@@ -56,6 +56,33 @@
     color: black;
 }
 
+#userPanel {
+    list-style-position: inside;
+    grid-row: 2 / span 4;
+    grid-column: 6 / span 3;
+    background-color: #000;
+    padding:10px;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-weight: 700;
+    font-size: 0.9em;
+    line-height: 2em;
+    align-self: center;
+    text-align: start;
+    display: none;
+    z-index: 4;
+}
+
+#userPanel a:link, #userPanel a:visited, #userPanel a:active {
+    text-decoration: none;
+    color: #ffffff;
+}
+#userPanel li a:hover {
+    text-decoration: none;
+    color: #950000;
+}
+
 #header-search-fill{
     grid-row: 2 / span 2;
     grid-column: 2 / span 1;

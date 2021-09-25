@@ -37,6 +37,7 @@ app.use(usuarioLogueado);
 app.use(express.static(path.join(__dirname, '../public')));
 
 // routes
+app.use('/profile', usersRouter);
 app.use('/productos', productosRouter);
 app.use('/carrito', carritoRouter);
 app.use('/register', usersRouter);

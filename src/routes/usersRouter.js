@@ -63,8 +63,51 @@ const validation = [
     })
 ]
 
+const validationEdit = [
+    body ('usuario')
+    .notEmpty().withMessage('Debes ingresar tu correo electrónico').bail()
+    .isEmail()
+    .withMessage('Debes ingresar un e-mail válido.'),
+    body ('password')
+    .notEmpty().bail()
+    .isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres.').bail()
+    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i")
+    .withMessage('La contraseña no cumple alguno de las sugerencias requeridas.'),
+    body ('checkPassword')
+    .notEmpty().withMessage('Debes completar nuevamente tu contraseña.').bail()
+    .custom( (value, {req}) => {
+        if (value != req.body.password) {
+            throw new Error('Las contraseñas no coinciden.');
+        }
+        return true;
+    }),
+    body ('nombre').notEmpty().withMessage('Debes ingresar tu nombre.').bail(),
+    body ('apellido').notEmpty().withMessage('Debes ingresar tu apellido.').bail(),
+    body ('dni').isInt().withMessage('Debes ingresar tu DNI.').bail(),
+    body ('celular').isInt().withMessage('Debes ingresar tu número de celular.').bail(),
+    body ('direccion').notEmpty().withMessage('Debes ingresar tu dirección.').bail(),
+    body ('cp').isInt().withMessage('Debes ingresar tu código postal.').bail(),
+    body ('localidad').notEmpty().withMessage('Debes ingresar tu localidad.').bail(),
+    body ('avatar').custom( (value, { req }) => {
+        let file = req.file;
+        if (file == undefined){
+            throw new Error('Tenes que subir una imagen de perfil');
+        } else {
+            let extentions = ['.jpeg', '.jpg', '.png', '.gif'];
+            let fileExtention = path.extname(file.originalname);
+            if (!extentions.includes(fileExtention)) {
+                throw new Error(`Las extensiones permitidas son ${extentions.join(', ')}`);
+            }
+        }
+        return true;
+    }).bail()
+]
+
 /* GET users listing. */
 router.post("/", uploadFile.single('avatar'), validation, controller.store); // Crea un nuevo usuario
-router.get("/", authUsuario, controller.create); // Muestra formulario de Registro
+router.get("/", authUsuario.authUsuario, controller.create); // Muestra formulario de Registro
+router.post("/:id", authUsuario.testUsuario, uploadFile.single('avatar'), validationEdit, controller.editStore); // edita usuario 
+router.get("/:id", authUsuario.testUsuario, controller.edit);//muestra formulario edicion usuario
+
 
 module.exports = router;
