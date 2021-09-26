@@ -134,7 +134,8 @@
 
                 <div class="form-register-check-loc">
                     <div class="form-register-check-bar-top">
-                        <label for="avatar">Foto de perfil <input class="input-register" id="<%= locals.errors && errors.avatar ? 'invalid' : 'null' %>" type="file" value="<%= locals.oldFile ? oldFile.originalname : null %>" name="avatar" id="avatar" accept="<%= misc.imageExt %>"></label>
+                        <label for="avatar">Foto de perfil<%= (locals.oldData && oldData.avatar ? " (" + oldData.avatar.originalname + ")" : ' ')%>
+                            <input class="input-register" id="<%= locals.errors && errors.avatar ? 'invalid' : 'null' %>" type="file" value="<%= locals.oldFile ? oldFile.originalname : null %>" name="avatar" id="avatar" accept="<%= misc.imageExt %>"></label>
                         <% if (locals.errors && errors.avatar) { %>
                             <div class="error-text">
                                 <%= errors.avatar.msg %>
