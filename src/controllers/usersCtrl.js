@@ -4,9 +4,8 @@
 const rwdJson = require("../models/rwd-json.js");
 
 //Requisitos de registracion
-const {
-  validationResult
-} = require('express-validator');
+const {validationResult} = require('express-validator');
+const config = require("../controllers/config.js");
 const bcrypt = require('bcryptjs');
 
 // JSON path
@@ -30,7 +29,7 @@ avatar    : Foto de perfil (X)
 const controller = {
   // Muestra formulario de Registro
   create: function (req, res) {
-    res.render("register");
+    res.render("register", {misc: config.misc});
   },
   // Crea un nuevo usuario
   store: function (req, res) {
@@ -38,6 +37,7 @@ const controller = {
     if (validacionDeErrores.errors.length > 0) {
       return res.render('register', {
         errors: validacionDeErrores.mapped(),
+        misc: config.misc,
         oldData: req.body
       })
     } else {
@@ -59,27 +59,6 @@ const controller = {
       };
       usuarios.push(newItem);
       rwdJson.writeJSON(usersJson, usuarios);
-      /* let usuarios = [];
-      let usuario = req.body.usuario;
-      usuarios = rwdJson.readJSON(usersJson);
-      let itemUsuario;
-      if (usuarios != undefined) {
-        itemUsuario = usuarios.find(function (item) {
-          return (usuario == item.usuario);
-        });
-      } 
-      if (itemUsuario == null) {
-        if (req.body.password == req.body.checkPassword) {
-          }
-          if (usuarios == undefined) {
-            let usuarios = [];
-            usuarios.push(newItem);
-            rwdJson.writeJSON(usersJson, usuarios, false);
-          } else {
-            usuarios.push(newItem);
-            rwdJson.writeJSON(usersJson, usuarios, false);
-          }
-        }*/
       res.redirect("/login");
     }
   },
@@ -108,7 +87,6 @@ const controller = {
         usuario: req.body
       })
     } else {
-      console.log('passed');
       let newItem = {
         usuario: req.body.usuario,
         password: bcrypt.hashSync(req.body.password, 10),
@@ -131,7 +109,6 @@ const controller = {
       res.redirect("/home")
     }
   }
-
 }
 
 module.exports = controller;

@@ -29,11 +29,10 @@ const validations = [
     })
 ]
 
-
-
 /* GET login page. */
-router.get("/", authUsuario.authUsuario, controller.create);                     // Muestra formulario de Login, si el usuario esta logueado lo redirige al home
+router.get("/", authUsuario.authUsuario, controller.create);         // Muestra formulario de Login, si el usuario esta logueado lo redirige al home
 router.post("/", validations, controller.store);                     // Verifica credenciales del usuario
 router.post("/restore", validations, controller.restore);            // Envia e-mail a la direccion informada para cambio de contraseña
+router.get("/logout", controller.logout);                            // Logoff usuario
 
 module.exports = router;

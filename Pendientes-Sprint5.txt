@@ -3,15 +3,15 @@ Sprint 5
 Resumen de Entregables:
 
 Formulario de Registro:
-- Hecho. Falta incluir lo visto en este modulo.
+Hecho - Falta incluir lo visto en este modulo.
 
 Formulario de Login:
-- Hecho. Falta incluir lo visto en este modulo.
+Hecho - Falta incluir lo visto en este modulo.
 
 Rutas de Huespedes y Usuarios:
-- No login. Puede acceder a todo el sitio pero no dispone de perfil.
-- Login como usuario. Puede acceder a todo el sitio y a su perfil.
-- Login como Administrador. Puede acceder a todo el sitio, a su perfil y a crear/editar productos mediante link en el navbar.
+Hecho - No login. Puede acceder a todo el sitio pero no dispone de perfil.
+Hecho - Login como usuario. Puede acceder a todo el sitio y a su perfil.
+Hecho - Login como Administrador. Puede acceder a todo el sitio, a su perfil y a crear/editar productos mediante link en el navbar.
 
 Estas son, a mi criterio, las tareas pendientes de completar ademas de las necesarias para cumplimentar los requerimiento de este Sprint:
 
@@ -19,8 +19,8 @@ Vista Index:
 - Cambiar las imagenes de los diferentes rubros para que concuerden con lo que se desea mostrar.
 Hecho - Ver que debe buscarse segun lo detallado en la barra de busqueda.
 Hecho - Crear los links en la barra de navegacion.
-- El Login debe cambiar al avatar del usuario y reemplazar texto por "Login" por "Logout".
-- Agregar en el navbar el acceso al formulario de listado de productos para crear/editar si el usuario es Administrador.
+Hecho - El Login debe cambiar al avatar del usuario y reemplazar texto por "Login" por "Logout".
+Hecho - Agregar en el navbar el acceso al formulario de listado de productos para crear/editar si el usuario es Administrador.
 - Asignar links a los iconos de la barra del footer.
 - Falta agregar la imagen y el link al rubro 'Tech'.
 
@@ -40,17 +40,17 @@ Vista Carrito:
 - Criterio para seleccionar las imagenes en "Otros productos similares".
 
 Vista Login:
-- Incorporar Express-Validator, cookies y encriptado.
-- Agregar checkbox a "Recordame".
+Hecho - Incorporar Express-Validator, cookies y encriptado.
+Hecho - Agregar checkbox a "Recordame".
 
 Vista Register:
-- Incorporar Multer, Express-Validator, cookies y encriptado.
-- Agregar avatar del usuario y vista del perfil de usuario. Pueden fusionarse.
+Hecho - Incorporar Multer, Express-Validator, cookies y encriptado.
+Hecho - Agregar avatar del usuario y vista del perfil de usuario. Pueden fusionarse.
 
 Vistas Internas
 Vista listar Productos:
 Hecho - Aprovechar todo el viewport disponible.
-- Solo puede acceder un usuario Administrador.
+Hecho - Solo puede acceder un usuario Administrador.
 
 Vista Edicion de Productos:
 Hecho - Incorporar Multer y Express-Validator.

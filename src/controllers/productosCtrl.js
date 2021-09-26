@@ -23,6 +23,7 @@ const controller = {
       let misc = config.misc;
       misc.heading = producto.heading;
       misc.model = producto.model;
+      misc.desc = producto.desc;
       let others = similars (req, 4);
       res.render("producto", {producto, misc, others});
     }
@@ -36,8 +37,16 @@ const controller = {
       switch (heading) {
         case "listar":
           // Muestra todos los productos para el administrador
-          products = Productos.allRecords();
-          res.render("listarProductos", {products, misc});
+          if (req.session.usuarioLogueado) {
+            if (req.session.usuarioLogueado.isAdmin) {
+              products = Productos.allRecords();
+              res.render("listarProductos", {products, misc});
+            } else {
+              res.send("Para utilizar esta opción debe tener permisos de administrador.");
+            }
+          } else {
+            res.send("Para utilizar esta opción debe tener permisos de administrador.");
+          }
           break;
         case "crear":
           // Muestra el formulario para crear un nuevo producto
@@ -71,6 +80,7 @@ const controller = {
           misc.heading = heading;
           products = Productos.headingRecords(heading);
           res.render("productos", {products, misc});
+          console.log(misc)
       }
     }
   ,

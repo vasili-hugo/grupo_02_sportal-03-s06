@@ -136,7 +136,7 @@ main {
 
 .codigo {
   grid-area: gi-codigo;
-  margin: 20px;
+  margin: 20px 20px 20px 10px;
   color: #950000;
   font-size: 14px;
   font-weight: bold;
@@ -153,8 +153,13 @@ main {
 
 .icon {
   grid-area: gi-marca;
-  text-align: center;
-  width: 8em;
+  align-self: flex-start;
+  width: 5em;
+  justify-self: center;
+}
+
+.basura{
+  justify-self: center;
 }
 
 .counter {
@@ -164,22 +169,23 @@ main {
   font-size: 14;
   font-weight: bold;
   text-align: center;
-  width: 60px;
+  width: 80px;
   height: 40px;
-  border: 2px solid black;
   padding: 5px;
   border-radius: 8px;
   color: #950000;
   background-color: #b0b0b0;
+  margin-left: 10px;
 }
 
 .upcount {
-  width: 50%;
-  height: auto;
+  width: 20px;
+  height: 20px;
   font-size: 18px;
   font-weight: bolder;
-  margin-left: 5px;
-  transition: background-color 1s;
+  margin:auto;
+  margin-left: 3px;
+  transition: background-color 0.2s;
 }
 
 .upcount:hover {
@@ -191,12 +197,13 @@ main {
 }
 
 .dncount {
-  width: 50%;
-  height: auto;
+  width: 20px;
+  height: 20px;
   font-size: 18px;
   font-weight: bolder;
-  margin-right: 5px;
-  transition: background-color 1s;
+  margin:auto;
+  margin-right: 3px;
+  transition: background-color 0.2s;
 }
 
 .dncount:hover {
@@ -214,6 +221,7 @@ main {
   border-radius: 50%;
   padding-top: 2px;
   padding-left: 8px;
+  margin-left: 10px;
 }
 
 .fa-trash {

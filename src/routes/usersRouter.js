@@ -3,6 +3,8 @@ var router = express.Router();
 var controller = require("../controllers/usersCtrl.js");
 const rwdJson = require("../models/rwd-json.js");
 const funcs = require("./functions.js");
+const config = require("../controllers/config.js");
+
 // JSON path
 const usersJson = "../../data/users.json";
 
@@ -15,10 +17,19 @@ const path = require('path');
 //Configuraciones de multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb (null, './public/images/avatars');
+        //cb (null, './public/images/avatars');
+        cb (null, path.join(__dirname, "../../public/images/avatars"));
     },
     filename: (req, file, cb) => {
-        cb(null, `${Date.now()}_img${path.extname(file.originalname)}`);
+        if (req.session.usuarioLogueado) {
+            if (file.originalname == req.session.usuarioLogueado.avatar) {
+                cb(null, file.originalname);
+            } else {
+                cb(null, `${Date.now()}_img${path.extname(file.originalname)}`);
+            }
+        } else {
+            cb(null, `${Date.now()}_img${path.extname(file.originalname)}`); 
+        }
     }
 });
 
@@ -53,7 +64,8 @@ const validation = [
         if (file == undefined){
             throw new Error('Tenes que subir una imagen de perfil');
         } else {
-            let extentions = ['.jpeg', '.jpg', '.png', '.gif'];
+            //let extentions = ['.jpeg', '.jpg', '.png', '.gif'];
+            let extentions = config.misc.imageExt.split(",");
             let fileExtention = path.extname(file.originalname);
             if (!extentions.includes(fileExtention)) {
                 throw new Error(`Las extensiones permitidas son ${extentions.join(', ')}`);
@@ -93,7 +105,8 @@ const validationEdit = [
         if (file == undefined){
             throw new Error('Tenes que subir una imagen de perfil');
         } else {
-            let extentions = ['.jpeg', '.jpg', '.png', '.gif'];
+            //let extentions = ['.jpeg', '.jpg', '.png', '.gif'];
+            let extentions = config.misc.imageExt.split(",");
             let fileExtention = path.extname(file.originalname);
             if (!extentions.includes(fileExtention)) {
                 throw new Error(`Las extensiones permitidas son ${extentions.join(', ')}`);
@@ -104,10 +117,9 @@ const validationEdit = [
 ]
 
 /* GET users listing. */
-router.post("/", uploadFile.single('avatar'), validation, controller.store); // Crea un nuevo usuario
-router.get("/", authUsuario.authUsuario, controller.create); // Muestra formulario de Registro
-router.post("/:id", authUsuario.testUsuario, uploadFile.single('avatar'), validationEdit, controller.editStore); // edita usuario 
-router.get("/:id", authUsuario.testUsuario, controller.edit);//muestra formulario edicion usuario
-
+router.post("/", uploadFile.single('avatar'), validation, controller.store);                                     // Crea un nuevo usuario
+router.get("/", authUsuario.authUsuario, controller.create);                                                     // Muestra formulario de Registro
+router.post("/:id", authUsuario.testUsuario, uploadFile.single('avatar'), validationEdit, controller.editStore); // Edita usuario 
+router.get("/:id", authUsuario.testUsuario, controller.edit);                                                    // Muestra formulario edicion usuario
 
 module.exports = router;

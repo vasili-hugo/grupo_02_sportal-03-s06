@@ -47,24 +47,6 @@ const controller = {
         }
         res.redirect ('/home');
       }
-      /* let usuario = null;
-      let usuarios = rwdJson.readJSON(usersJson);
-      if (usuarios) {
-        usuario = usuarios.find(function (item){
-          return (item.usuario == req.body.usuario);
-        })
-        if (usuario) {
-          if (usuario.password == req.body.password) {
-            res.send("Usuario logeado como " + req.body.usuario);
-          } else {
-            res.send("Usuario o contraseña inválidos");
-          }
-        } else {
-          res.send("Usuario inexistente");
-        }
-      } else {
-        res.send("Usuario inexistente");
-      } */
     }
   ,
   // Envia e-mail a la direccion informada para cambio de contraseña
@@ -80,12 +62,13 @@ const controller = {
         res.send("Se ha enviado un e-mail a la dirección " + req.body.usuario);
       }
     }
-      /* if (req.body.usuario == "") {
-        res.send("Debe ingresar un e-mail");
-      } else {
-        res.send("Se ha enviado un e-mail a la dirección " + req.body.usuario);
-      }
-    } */
+  ,
+  // Logoff usuario
+  logout:
+    function (req, res) {
+      delete req.session.usuarioLogueado;
+      res.redirect("/home");
+    }
 }; 
 
 module.exports = controller;

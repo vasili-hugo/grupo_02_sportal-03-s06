@@ -3,7 +3,11 @@ const controller = {
   
   retrive:
     function(req, res) {
-      res.render("carrito");
+      if (req.session.usuarioLogueado) {
+        res.render("carrito");
+      } else {
+        res.send("Para acceder al carrito debe estar logueado.");
+      }
     }
 }; 
 
