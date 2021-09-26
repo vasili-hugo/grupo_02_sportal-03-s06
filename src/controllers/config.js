@@ -51,7 +51,8 @@ const config = {
   // Valores varios
   misc: {
     imageExt: ".jpg, .png, .bmp",
-    pathImages: "/images/products/",
+    pathImages: "/images/select200/",
+    pathLogos: "/images/logos/",
     pathAvatar: "/images/avatars/",
     defaultImage: "default.jpg"
   }
