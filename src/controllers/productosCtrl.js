@@ -36,8 +36,16 @@ const controller = {
       switch (heading) {
         case "listar":
           // Muestra todos los productos para el administrador
-          products = Productos.allRecords();
-          res.render("listarProductos", {products, misc});
+          if (req.session.usuarioLogueado) {
+            if (req.session.usuarioLogueado.isAdmin) {
+              products = Productos.allRecords();
+              res.render("listarProductos", {products, misc});
+            } else {
+              res.send("Para utilizar esta opción debe tener permisos de administrador.");
+            }
+          } else {
+            res.send("Para utilizar esta opción debe tener permisos de administrador.");
+          }
           break;
         case "crear":
           // Muestra el formulario para crear un nuevo producto

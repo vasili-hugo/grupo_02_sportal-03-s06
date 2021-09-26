@@ -13,12 +13,19 @@
             
             <% if (locals.logueado) { %>
                 <p id="header-login" onclick="openPanel()" ><%= locals.nombre%>
-                    <i class="far fa-user-circle" ></i>
+                    <% if (locals.avatar) { %>
+                        <img src="/images/avatars/<%= locals.avatar %>" height=50>
+                    <% } else { %>
+                        <i class="far fa-user-circle" ></i>
+                    <% } %>
                     <div id="userPanel">
                      <ul>
-                         <li>Ver carrito</li>
-                         <li><a <%= "href=/profile/"+locals.usuario %>>Editar perfil</a></li>
-                         <li>Logout </li>
+                        <% if (locals.isAdmin) { %>
+                            <li><a href="/productos/listar">Uso interno</a></li>
+                        <% } %>
+                        <li><a href="/carrito">Ver carrito</a></li>
+                        <li><a href="/profile/<%= locals.usuario %>">Editar perfil</a></li>
+                        <li><a href="/login/logout">Logout</a></li>
                     </div>
                 </p>
             <% } else { %>
