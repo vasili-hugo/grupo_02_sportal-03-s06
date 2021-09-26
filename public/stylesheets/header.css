@@ -18,7 +18,7 @@
     grid-column: 1 / span 8;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(../images/sport/run.jpg);
     background-size: cover;
-    background-position:center;
+    background-position: center;
     background-position-y: 30%;
     z-index: -2;
     border-bottom: 2px solid white;
@@ -33,17 +33,40 @@
     background-size: 70%;
     background-color: #950000;
     border-radius: 0 0 50% 50%;
+    cursor: pointer;
+    position: relative;
+}
+.circle-link{
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 1000;
 }
 
 #header-login {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: center;
+    justify-content: end;
     text-decoration: none;
     grid-row: 1 / span 1;
     grid-column: 5 / span 3;
     color: white;
     font-size: 20px;
-    align-self: center;
-    text-align: end;
+    font-weight: 600;
     z-index: 4;
+    cursor: pointer;
+}
+
+#profile-avatar-header {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-left: 10px;
 }
 
 #header-login a:link,
@@ -61,7 +84,7 @@
     grid-row: 2 / span 4;
     grid-column: 6 / span 3;
     background-color: #000;
-    padding:10px;
+    padding: 10px;
     width: 100%;
     height: 100%;
     color: white;
@@ -74,16 +97,19 @@
     z-index: 4;
 }
 
-#userPanel a:link, #userPanel a:visited, #userPanel a:active {
+#userPanel a:link,
+#userPanel a:visited,
+#userPanel a:active {
     text-decoration: none;
     color: #ffffff;
 }
+
 #userPanel li a:hover {
     text-decoration: none;
     color: #950000;
 }
 
-#header-search-fill{
+#header-search-fill {
     grid-row: 2 / span 2;
     grid-column: 2 / span 1;
     width: 100%;
@@ -117,8 +143,9 @@
     z-index: 2;
     align-self: center;
     text-align: center;
-  }
-#header-menu{
+}
+
+#header-menu {
     grid-row: 3 / span 1;
     grid-column: 5 / span 3;
     align-self: start;
@@ -126,15 +153,15 @@
     display: none;
 }
 
-#header-menu ul{
-    list-style-type:none;
+#header-menu ul {
+    list-style-type: none;
 }
 
-.header-menu li{
+.header-menu li {
     float: left;
 }
 
-.header-menu a{
+.header-menu a {
     display: block;
     color: white;
     text-decoration: none;
@@ -157,24 +184,26 @@
 #header-sandwich {
     grid-row: 3 / span 1;
     grid-column: 7 / span 1;
-    text-align: end ;
+    text-align: end;
     color: rgba(255, 255, 255, 0.8);
     font-size: 1.7em;
     display: block;
 }
 
-@media (min-width: 600px){
+@media (min-width: 600px) {
     #header-search-box {
         grid-column: 3 / span 2;
     }
+
     #header-glass {
         grid-column: 4 / span 1;
     }
 
     #header-sandwich {
-        display:none;
+        display: none;
     }
-    #header-menu{
+
+    #header-menu {
         display: block;
     }
 }

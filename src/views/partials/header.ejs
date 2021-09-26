@@ -8,13 +8,13 @@
         <header id="header">
             <div id="header-upper"></div>
             <div id="header-banner"></div>
-            <div id="header-circle"></div>
+            <div id="header-circle"><a href="/" ><span class="circle-link"></span></a></div>
             
             
             <% if (locals.logueado) { %>
                 <p id="header-login" onclick="openPanel()" ><%= locals.nombre%>
                     <% if (locals.avatar) { %>
-                        <img src="/images/avatars/<%= locals.avatar %>" height=50>
+                        <img id="profile-avatar-header" src="/images/avatars/<%= locals.avatar %>" height=50>
                     <% } else { %>
                         <i class="far fa-user-circle" ></i>
                     <% } %>

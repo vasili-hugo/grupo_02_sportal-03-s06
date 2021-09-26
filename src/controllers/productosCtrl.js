@@ -23,6 +23,7 @@ const controller = {
       let misc = config.misc;
       misc.heading = producto.heading;
       misc.model = producto.model;
+      misc.desc = producto.desc;
       let others = similars (req, 4);
       res.render("producto", {producto, misc, others});
     }
@@ -79,6 +80,7 @@ const controller = {
           misc.heading = heading;
           products = Productos.headingRecords(heading);
           res.render("productos", {products, misc});
+          console.log(misc)
       }
     }
   ,

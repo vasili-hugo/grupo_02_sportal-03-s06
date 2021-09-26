@@ -29,16 +29,19 @@ avatar    : Foto de perfil (X)
 const controller = {
   // Muestra formulario de Registro
   create: function (req, res) {
+    delete req.session.avatar
     res.render("register", {misc: config.misc});
   },
   // Crea un nuevo usuario
   store: function (req, res) {
     let validacionDeErrores = validationResult(req);
+    let product = req.body;
+        product.avatar = req.session.avatar;
     if (validacionDeErrores.errors.length > 0) {
       return res.render('register', {
         errors: validacionDeErrores.mapped(),
         misc: config.misc,
-        oldData: req.body
+        oldData: product
       })
     } else {
       let newItem = {

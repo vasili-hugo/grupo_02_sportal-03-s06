@@ -61,17 +61,23 @@ const validation = [
     body ('localidad').notEmpty().withMessage('Debes ingresar tu localidad.'),
     body ('avatar').custom( (value, { req }) => {
         let file = req.file;
-        if (file == undefined){
-            throw new Error('Tenes que subir una imagen de perfil');
+        if(req.session.avatar) {
+            req.file = req.session.avatar;
+            return true;
         } else {
-            //let extentions = ['.jpeg', '.jpg', '.png', '.gif'];
-            let extentions = config.misc.imageExt.split(",");
-            let fileExtention = path.extname(file.originalname);
-            if (!extentions.includes(fileExtention)) {
-                throw new Error(`Las extensiones permitidas son ${extentions.join(', ')}`);
+            if (file == undefined){
+                throw new Error('Tenes que subir una imagen de perfil');
+            } else {
+                //let extentions = ['.jpeg', '.jpg', '.png', '.gif'];
+                let extentions = config.misc.imageExt.split(",");
+                let fileExtention = path.extname(file.originalname);
+                if (!extentions.includes(fileExtention)) {
+                    throw new Error(`Las extensiones permitidas son ${extentions.join(', ')}`);
+                }
             }
+            req.session.avatar = file;
+            return true;
         }
-        return true;
     })
 ]
 

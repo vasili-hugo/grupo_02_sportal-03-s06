@@ -6,7 +6,7 @@
 <body>
     <header>
         <div class="header-bar">
-          <div class="header-circle"></div>
+          <div class="header-circle"><a href="/" ><span class="circle-link"></span></a></div>
             <div class="header-title"><h3>Edición de Productos - ID: <%= prodList.id %></h3></div>
         </div>
     </header>
@@ -112,7 +112,7 @@
                 <label class="labels label-icon" for="icon">Archivo de Marca (icono)<%= " (" + ((prodList.icon) ? prodList.icon : misc.defaultImage) + ")" %></label>
                 <input class="inputs input-icon" type="file" name="icon" id="icon" accept="<%= misc.imageExt %>" value="<%= (prodList.icon) ? prodList.icon : misc.defaultImage %>">
                 <label class="errmsg"><%= ((errors.icon) ? errors.icon.msg : "") %></label>
-                <img class="image-icon" src="<%= misc.pathImages %><%= (prodList.icon) ? prodList.icon : misc.defaultImage %>">
+                <img class="image-icon" src="<%= misc.pathLogos %><%= (prodList.icon) ? prodList.icon : misc.defaultImage %>">
 
                 <label class="labels label-image" for="image">Archivo de Imagen Principal<%= " (" + ((prodList.image) ? prodList.image : misc.defaultImage) + ")" %></label>
                 <input class="inputs input-image" type="file" name="image" id="image" accept="<%= misc.imageExt %>" value="<%= (prodList.image) ? prodList.image : misc.defaultImage %>">

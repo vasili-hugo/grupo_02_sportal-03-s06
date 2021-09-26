@@ -50,8 +50,9 @@ const config = {
   ,
   // Valores varios
   misc: {
-    imageExt: ".jpeg,.jpg,.png,.bmp", // No dejar espacio entre extensiones
-    pathImages: "/images/products/",
+    imageExt: ".jpg,.png,.bmp", // no poner espacios
+    pathImages: "/images/select200/",
+    pathLogos: "/images/logos/",
     pathAvatar: "/images/avatars/",
     defaultImage: "default.jpg"
   }
