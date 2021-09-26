@@ -37,7 +37,6 @@ var uploadMany = upload.fields ([
   {name: "rightImage", maxCount: 1},
   {name: "upperImage", maxCount: 1},
   {name: "lowerImage", maxCount: 1}
-  ]
-);
+]);
 
 module.exports = uploadMany;
