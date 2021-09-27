@@ -54,6 +54,9 @@ Vistas Internas
 Vista listar Productos:
 Hecho - Aprovechar todo el viewport disponible.
 Hecho - Solo puede acceder un usuario Administrador.
+- Agregar botones de editar y borrar en el listado
+- Agregar confirmacion de borrado
+- En la vista de editar agregar next y before
 
 Vista Edicion de Productos:
 Hecho - Incorporar Multer y Express-Validator.
