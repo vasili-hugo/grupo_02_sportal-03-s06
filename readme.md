@@ -38,12 +38,19 @@ Es diseñador gráfico con años de experiencia profesional. Actualmente dirige 
 - registro    -> register.ejs<br>
 
 **VISTAS QUE CONFORMAN LA EDICION Y/O CREACION DE PRODUCTOS**
-- listado     -> listarProductos.ejs
-- edición     -> editarProducto.ejs
-- creación    -> crearProducto.ejs
+
+- listado     -> listarProductos.ejs<br>
+- edición     -> editarProducto.ejs<br>
+- creación    -> crearProducto.ejs<br>
+
+**OTRAS VISTAS QUE CONFORMAN EL PROYECTO**
+
+- perfil      -> userProfile.ejs<br>
+- errores     -> error.ejs<br>
+- /partials   -> Carpeta con las vistas parciales para formar las vistas principales.<br>
 
 Para su ejecución local se debe clonar el proyecto desde https://github.com/vasili-hugo/grupo_02_sportal-02.git. Luego instale sus dependencias con npm install.<br>
-Para este sprint 4 se definieron las BD JSON de usuarios y productos, y las vistas, routers y controllers que los administran.<br>
+Para este sprint 5 se efectuaron los ABM/CRUD de las BD JSON de usuarios y productos, las vistas, routers y controllers que los administran.<br>
 Para correr el proyecto abra una consola y ejecute [node | nodemon] bin\www.<br>
 Desde el browser (Google Chrome, Mozilla Firefox o Microsoft Edge) url http://localhost:3000.<br>
 La pagina de edición/creación de productos no tiene destinado (por el momento) un link desde donde pueda ser vista. Para poder verla url http://localhost:3000/productos/listar.
