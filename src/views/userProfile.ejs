@@ -13,7 +13,7 @@
     </header>
     <main>
         <div class="form-register">
-            <form  <%= "action=/profile/"+usuario.usuario %> method="POST" enctype="multipart/form-data">
+            <form action="/profile/<%= usuario.usuario %>" method="POST" enctype="multipart/form-data">
                 <div class="form-register-check-top">
                     <div class="form-register-check-bar-user">
                         <label for="usuario">e-mail<input class="disabled input-register" id="<%= locals.errors && errors.usuario ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.usuario : usuario.usuario %>" type="text" name="usuario" id="usuario" readonly></label>
