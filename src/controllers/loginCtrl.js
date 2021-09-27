@@ -19,6 +19,9 @@ celular   : Celular (N)
 direccion : Direccion (X)
 localidad : Localidad (X)
 avatar    : Foto de perfil (X)
+isAdmin   : true/false
+active    : true/false
+uuid      : uuid (formato especifico)
 */
 
 // Controller

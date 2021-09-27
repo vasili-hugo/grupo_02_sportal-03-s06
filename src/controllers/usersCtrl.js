@@ -22,6 +22,9 @@ direccion : Direccion (X)
 cp        : Codigo Postal (X)
 localidad : Localidad (X)
 avatar    : Foto de perfil (X)
+isAdmin   : true/false
+active    : true/false
+uuid      : uuid (formato especifico)
 */
 
 // Controller

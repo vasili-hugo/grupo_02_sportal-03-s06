@@ -15,6 +15,9 @@ Hecho - Login como Administrador. Puede acceder a todo el sitio, a su perfil y a
 
 Estas son, a mi criterio, las tareas pendientes de completar ademas de las necesarias para cumplimentar los requerimiento de este Sprint:
 
+Todas las vistas:
+- Formulario generico para presentar mensajes de error de forma mas elegante.
+
 Vista Index:
 - Cambiar las imagenes de los diferentes rubros para que concuerden con lo que se desea mostrar.
 Hecho - Ver que debe buscarse segun lo detallado en la barra de busqueda.
