@@ -37,7 +37,6 @@ header {
     left: 0;
     z-index: 110;
     border-top-left-radius: 80px;
-    /* border-bottom-right-radius: 80px; */
 }
 .header-circle {
     position: relative;
@@ -84,7 +83,6 @@ main {
 main input::-webkit-outer-spin-button, main input::-webkit-inner-spin-button{
     -webkit-appearance: none;
     margin: 0;
-
 }
 /*firefox*/
 main input[type=number]{
@@ -101,9 +99,6 @@ main input[type=number]{
 }
 .form-register {
     padding: 17px;
-    /* border-right: 2px solid black;
-    border-bottom: 2px solid black;
-    border-left: 2px solid black; */
     background-color: white;
     margin-top: -78px;
     max-width: 400px;
@@ -145,7 +140,6 @@ main input[type=number]{
     margin-right: 6px;
 }
 #form-avatar{
-
     display: flex;
     flex-direction: row;
     padding: 0;
@@ -154,20 +148,18 @@ main input[type=number]{
     line-height: 2em;
 }
 .form-register-check-bar-top {
-    
     display: flex;
     margin: 10px;
     flex-direction: column;
-
 }
 
 #avatar-img{
     width:50px;
-    height:50px;
     background-color: #AAA;
     position: relative;
-    top:0;
-    right:0
+    border-radius: 20%;
+    top: -10px;
+    right: 70px;
 }
 .form-register-check i {
     margin-left: 10px;
@@ -179,7 +171,6 @@ main input[type=number]{
     flex-direction: column;
 }
 .form-register form label {
-
     color: #950000;
 }
 .input-register {
@@ -228,8 +219,6 @@ main input[type=number]{
 #invalid {
     background-color: pink;
 }
-
-
 /*
 ========================================================================================================================
 MEDIA

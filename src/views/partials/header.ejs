@@ -10,7 +10,6 @@
             <div id="header-banner"></div>
             <div id="header-circle"><a href="/" ><span class="circle-link"></span></a></div>
             
-            
             <% if (locals.logueado) { %>
                 <p id="header-login" onclick="openPanel()" ><%= locals.nombre%>
                     <% if (locals.avatar) { %>
@@ -37,14 +36,13 @@
             <div id="header-search-fill"></div>
 
             <div id="header-search-box">
-                <form action="/search" method="GET">
-                    <input class="header-search-input" type="text" name="search-string"
-                        placeholder="Ingrese su búsqueda" autocomplete="false">
+                <form action="/productos/search" method="GET">
+                    <input class="header-search-input" type="search" name="searchString" placeholder="Ingrese su búsqueda" autocomplete="false">
                 </form>
-
             </div>
 
             <i id="header-glass" class="fas fa-search"></i>
+            
             <nav id="header-menu">
                 <ul class="header-menu">
                     <li><a href="/productos/basicos">Básicos</a></li>
@@ -71,6 +69,5 @@
                     }
                 }
             </script>
-
 
         </header>

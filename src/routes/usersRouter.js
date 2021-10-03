@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var controller = require("../controllers/usersCtrl.js");
-const rwdJson = require("../models/rwd-json.js");
 const funcs = require("./functions.js");
 const config = require("../controllers/config.js");
 
@@ -70,7 +69,7 @@ const validation = [
             } else {
                 //let extentions = ['.jpeg', '.jpg', '.png', '.gif'];
                 let extentions = config.misc.imageExt.split(",");
-                let fileExtention = path.extname(file.originalname);
+                let fileExtention = path.extname(file.originalname).toLowerCase();
                 if (!extentions.includes(fileExtention)) {
                     throw new Error(`Las extensiones permitidas son ${extentions.join(', ')}`);
                 }
@@ -106,26 +105,28 @@ const validationEdit = [
     body ('direccion').notEmpty().withMessage('Debes ingresar tu dirección.').bail(),
     body ('cp').isInt().withMessage('Debes ingresar tu código postal.').bail(),
     body ('localidad').notEmpty().withMessage('Debes ingresar tu localidad.').bail(),
-    body ('avatar').custom( (value, { req }) => {
+    body ('avatar').custom((value, { req }) => {
         let file = req.file;
         if (file == undefined){
             throw new Error('Tenes que subir una imagen de perfil');
         } else {
             //let extentions = ['.jpeg', '.jpg', '.png', '.gif'];
             let extentions = config.misc.imageExt.split(",");
-            let fileExtention = path.extname(file.originalname);
+            let fileExtention = path.extname(file.originalname).toLowerCase();
             if (!extentions.includes(fileExtention)) {
                 throw new Error(`Las extensiones permitidas son ${extentions.join(', ')}`);
             }
         }
         return true;
-    }).bail()
+    })
 ]
 
 /* GET users listing. */
 router.post("/", uploadFile.single('avatar'), validation, controller.store);                                     // Crea un nuevo usuario
 router.get("/", authUsuario.authUsuario, controller.create);                                                     // Muestra formulario de Registro
-router.post("/:id", authUsuario.testUsuario, uploadFile.single('avatar'), validationEdit, controller.editStore); // Edita usuario 
+router.post("/:id", uploadFile.single('avatar'), validationEdit, controller.editStore);                          // Edita usuario
 router.get("/:id", authUsuario.testUsuario, controller.edit);                                                    // Muestra formulario edicion usuario
+router.get("/confirm/:token", controller.confirm);                                                               // Confirma registro de usuario
+router.get("/newPass/:token", controller.newPass);                                                               // Confirma blanqueo de contraseña
 
 module.exports = router;

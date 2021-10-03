@@ -28,6 +28,17 @@ const controller = {
       res.render("producto", {producto, misc, others});
     }
   ,
+  search:
+    function (req, res) {
+      let products = [];
+      let misc = config.misc;
+      products = Productos.allRecords();
+      let result = products.filter(elem => {
+        return (elem.model.search(req.query.searchString) >= 0);
+      })
+      res.render("productos", {products: result, misc});
+    }
+  ,
   // Muestra todos los productos correspondientes a ese rubro
   readAll:
     function (req, res) {
@@ -74,13 +85,12 @@ const controller = {
         case "saldos":
         case "ofertas":
         case "novedades":
-          res.render("listarProductos", {products, misc});
+          res.render("productos", {products, misc});
           break;
         default:
           misc.heading = heading;
           products = Productos.headingRecords(heading);
           res.render("productos", {products, misc});
-          console.log(misc)
       }
     }
   ,

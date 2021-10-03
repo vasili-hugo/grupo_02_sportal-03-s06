@@ -50,11 +50,12 @@ const config = {
   ,
   // Valores varios
   misc: {
-    imageExt: ".jpg,.png,.bmp", // no poner espacios
+    imageExt: ".jpeg,.jpg,.png,.bmp", // no poner espacios y minusculas
     pathImages: "/images/select200/",
     pathLogos: "/images/logos/",
     pathAvatar: "/images/avatars/",
-    defaultImage: "default.jpg"
+    defaultImage: "default.jpg",
+    urlSite: "localhost:3000"
   }
 }
 
