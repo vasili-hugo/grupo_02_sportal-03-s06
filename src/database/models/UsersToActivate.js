@@ -46,7 +46,7 @@ module.exports = function (sequelize, dataTypes) {
     }
 
     let config = {
-        tableName: 'users',
+        tableName: 'users_to_activate',
         timestamps: false
     }
 

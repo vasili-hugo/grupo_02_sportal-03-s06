@@ -9,7 +9,7 @@ const {validationResult} = require('express-validator');
 const config = require("../controllers/config.js");
 const bcrypt = require('bcryptjs');
 const {getToken, getTokenData} = require("../functions/jwt.js");
-const {configSMTP, getTemplate} = require("../functions/mailer.js");
+const {configSMTP, getTemplateNewUser} = require("../functions/mailer.js");
 const uuid = require("uuid");
 
 // JSON path
@@ -57,8 +57,13 @@ const controller = {
         oldData: product
       })
     } else {
-      let newItem = {
-        usuario: req.body.usuario,
+      //let usuarios = db.Users.findAll();
+      //if (!usuarios) {usuarios = []};
+      // Codigo para generar un token version 4 RFC4122
+      let uuidStr = uuid.v4();
+      // Guardar el uuidStr y el estado del usuario para su posterior verificacion
+      db.UsersToActivate.create({
+        email: req.body.usuario,
         password: bcrypt.hashSync(req.body.password, 10),
         first_name: req.body.nombre,
         last_name: req.body.apellido,
@@ -68,45 +73,39 @@ const controller = {
         zipcode: req.body.cp,
         city: req.body.localidad,
         avatar: req.file.filename,
-        isAdmin: false,
-        active: false,
-        uuid: null
-      }
-      //let usuarios = db.Users.findAll();
-      //if (!usuarios) {usuarios = []};
-      // Codigo para generar un token version 4 RFC4122
-      let uuidStr = uuid.v4();
-      // Guardar el uuidStr y el estado del usuario para su posterior verificacion
-      newItem.uuid = uuidStr;
-      db.UsersToActivate.create(newItem);
+        uuid: uuidStr
+      });
       // Obtiene token
-      const email = newItem.usuario;
-      const {nombre, apellido} = newItem;
-      const token = getToken({email, uuidStr});
+      const {usuario, nombre, apellido} = req.body;
+      const token = getToken({usuario, uuidStr});
       // Envia mail para activar
       // Parametros del protocolo SMTP
       let transporter = configSMTP();
       // Procesa el envio
       let adminAccount = transporter.options.auth.user;
       let info = await transporter.sendMail({
-        from: "'Sportal Admin' <" + adminAccount + ">",   // sender address
-        to: email,                                        // list of receivers (separados por comas)
-        subject: "Activación de Cuenta Personal",         // Subject line
-        //text: "Esta es una prueba",                     // plain text body
-        html: getTemplateNewUser(nombre, apellido, token) // HTML text body
+        from: "'Sportal Admin' <" + adminAccount + ">",         // sender address
+        to: usuario,                                            // list of receivers (separados por comas)
+        subject: "Activación de Cuenta Personal",               // Subject line
+        //text: "Esta es una prueba",                           // plain text body
+        html: getTemplateNewUser(nombre, apellido, token)       // HTML text body
       });
       if (info) {
         //rwdJson.writeJSON(usersJson, usuarios);
-        res.send("Se ha enviado un correo a " + email);
+        res.send("Se ha enviado un correo a " + usuario);
       } else {
-        res.send("No se ha podido enviar un correo a " + email);
+        res.send("No se ha podido enviar un correo a " + usuario);
       }
     }
   }
   ,
   //edita el usuario activo
   edit: function (req, res) {
-    let usuario = {};
+    db.Users.findByPk(req.params.id)
+      .then(usuario => {
+        res.render ("userProfile", {usuario})
+      });
+    /* let usuario = {};
     let usuarios = db.Users.findAll();
     if (usuarios) {
       for (let i=0; i< usuarios.length; i++){
@@ -115,7 +114,7 @@ const controller = {
         }
       }
     }
-    res.render("userProfile", {usuario});
+    res.render("userProfile", {usuario}); */
   }
   ,
   // actualiza datos del usuario
@@ -128,31 +127,30 @@ const controller = {
         usuario: req.body
       })
     } else {
-      let usuarios = db.Users.findAll();
-      let usuarioActualizado;
-      if (usuarios) {
-        for (let i=0; i< usuarios.length; i++){
-          if (usuarios[i].usuario == req.params.id){
-            usuarioActualizado = {
-              password: bcrypt.hashSync(req.body.password, 10),
-              nombre: req.body.nombre,
-              apellido: req.body.apellido,
-              dni: req.body.dni,
-              celular: req.body.celular,
-              direccion: req.body.direccion,
-              cp: req.body.cp,
-              localidad: req.body.localidad,
-              avatar: req.file.filename,
-              isAdmin: 0,
-              active: true
-            }
+      db.Users.findByPk(req.params.id).then(usuario => {
+        if(usuario){
+          let usuarioActualizado = {
+            password: bcrypt.hashSync(req.body.password, 10),
+            first_name: req.body.nombre,
+            last_name: req.body.apellido,
+            dni: req.body.dni,
+            cell_phone: req.body.celular,
+            address: req.body.direccion,
+            zipcode: req.body.cp,
+            city: req.body.localidad,
+            avatar: req.file.filename,
+            isAdmin: 0,
+            active: 1
           }
+          db.Users.update(usuarioActualizado, {where: {id:req.params.id}})
+            .then(function() {
+              delete req.session.usuarioLogueado;
+              res.redirect("/login");
+            });
+        } else {
+          res.send("No hay usuarios en la BD.");
         }
-        db.Users.update(usuarioActualizado, {where: {id:req.params.id}});
-        res.redirect("/login");
-      } else {
-        res.send("No hay usuarios en la BD.");
-      }
+      });
     }
   }
   ,
@@ -163,7 +161,26 @@ const controller = {
     if (dataToken) {
       const email = dataToken.data.email;
       const uuidStr = dataToken.data.uuidStr;
-      let usuarios = rwdJson.readJSON(usersJson);
+      db.UsersToActivate.findOne({
+        where: { email: email}
+      }).then (usuario => {
+        if(usuario) {
+          if (usuario.active) {
+            res.send("El usuario '" + email + "' ya está activo.");
+          } else {
+            if (uuidStr == usuario.uuid) {
+              db.Users.create(usuario).then(function() {
+                res.redirect("/login");
+              })
+            } else {
+              res.send("Error de autenticación.");
+            }
+          }  
+        } else {
+          res.send("El usuario '" + email + "' no existe.");
+        } 
+      })
+      /* let usuarios = rwdJson.readJSON(usersJson);
       if (usuarios) {
         // Comparamos los uuids.
         const usuario = usuarios.find(function (item) {
@@ -191,7 +208,7 @@ const controller = {
         }
       } else {
         res.send("No hay usuarios en la BD.");
-      }
+      } */
     } else {
       res.send("No se pudo verificar el token recibido del usuario.");
     }
