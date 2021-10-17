@@ -221,7 +221,26 @@ const controller = {
     if (dataToken) {
       const email = dataToken.data.email;
       const uuidStr = dataToken.data.uuidStr;
-      let usuarios = rwdJson.readJSON(usersJson);
+      db.Users.findOne({
+        where: { email: email}
+      }).then (usuario => {
+        if(usuario) {
+          if (usuario.active) {
+            res.send("El usuario '" + email + "' ya está activo.");
+          } else {
+            if (uuidStr == usuario.uuid) {
+              db.Users.create(usuario).then(function() {
+                res.redirect("/login");
+              })
+            } else {
+              res.send("Error de autenticación.");
+            }
+          }  
+        } else {
+          res.send("El usuario '" + email + "' no existe.");
+        } 
+      })
+      /* let usuarios = rwdJson.readJSON(usersJson);
       if (usuarios) {
         // Comparamos los uuids.
         const usuario = usuarios.find(function (item) {
@@ -242,7 +261,7 @@ const controller = {
         }
       } else {
         res.send("El usuario '" + email + "' no existe.");
-      }
+      } */
     } else {
       res.send("No se pudo verificar el token recibido del usuario.");
     }
