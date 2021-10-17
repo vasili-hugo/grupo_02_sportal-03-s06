@@ -23,7 +23,7 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.INTEGER
         },
         cell_phone: {
-            type: dataTypes.DOBLE
+            type: dataTypes.INTEGER
         },
         address: {
             type: dataTypes.STRING
@@ -48,6 +48,13 @@ module.exports = function (sequelize, dataTypes) {
     }
 
     let Users = sequelize.define(alias, cols, config);
+
+    /* Users.associate = function (models) {
+        Users.belongsTo(models.Cart, {
+            as: 'usuario',
+            foreignKey: 'usuario_id'
+        }) 
+    } */
 
     return Users;
 }

@@ -6,6 +6,7 @@ const config = require("../controllers/config.js");
 
 // JSON path
 const usersJson = "../../data/users.json";
+const db = require ('../database/models')
 
 //Requisitos para las validaciones 
 const { body } = require ('express-validator');
@@ -38,9 +39,17 @@ const validation = [
     body ('usuario').notEmpty().withMessage('Debes ingresar tu correo electrónico').bail()
     .isEmail().withMessage('Debes ingresar un e-mail válido.').bail()
     .custom(value => {
-        if (funcs.findUserByEmail(value, usersJson)) {
+        /* if (funcs.findUserByEmail(value, usersJson)) {
             throw new Error ('El correo que intenta registrar ya está en uso.')
-        }
+        } */
+        db.Users.findOne({
+            where: {
+                usuario: value
+            }
+        })
+            .then((resultado) => {
+                throw new Error ('El correo que intenta registrar ya está en uso.')
+        });
         return true;
     }),
     body ('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres.').bail().matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i").withMessage('La contraseña no cumple alguno de las sugerencias requeridas.'),

@@ -57,7 +57,7 @@ const controller = {
           if (usuarioEncontrado) {
             req.session.usuarioLogueado = usuarioEncontrado;
             if (req.body.recordame) {
-              res.cookie('recordame', usuarioEncontrado.email, {maxAge: 1000 * 60 * 60 * 60 * 24});
+              res.cookie('recordame', usuarioEncontrado.id, {maxAge: 1000 * 60 * 60 * 60 * 24});
             }
           }
         }

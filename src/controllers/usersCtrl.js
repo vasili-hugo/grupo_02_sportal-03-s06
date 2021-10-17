@@ -1,7 +1,8 @@
 // Usuarios
 
 // In / Out File System
-const rwdJson = require("../models/rwd-json.js");
+//const rwdJson = require("../models/rwd-json.js");
+const db = require ('../database/models')
 
 //Requisitos de registracion
 const {validationResult} = require('express-validator');
@@ -59,24 +60,25 @@ const controller = {
       let newItem = {
         usuario: req.body.usuario,
         password: bcrypt.hashSync(req.body.password, 10),
-        nombre: req.body.nombre,
-        apellido: req.body.apellido,
+        first_name: req.body.nombre,
+        last_name: req.body.apellido,
         dni: req.body.dni,
-        celular: req.body.celular,
-        direccion: req.body.direccion,
-        cp: req.body.cp,
-        localidad: req.body.localidad,
+        cell_phone: req.body.celular,
+        address: req.body.direccion,
+        zipcode: req.body.cp,
+        city: req.body.localidad,
         avatar: req.file.filename,
         isAdmin: false,
         active: false,
+        uuid: null
       }
-      let usuarios = rwdJson.readJSON(usersJson);
-      if (!usuarios) {usuarios = []};
+      //let usuarios = db.Users.findAll();
+      //if (!usuarios) {usuarios = []};
       // Codigo para generar un token version 4 RFC4122
       let uuidStr = uuid.v4();
       // Guardar el uuidStr y el estado del usuario para su posterior verificacion
       newItem.uuid = uuidStr;
-      usuarios.push(newItem);
+      db.UsersToActivate.create(newItem);
       // Obtiene token
       const email = newItem.usuario;
       const {nombre, apellido} = newItem;
@@ -94,7 +96,7 @@ const controller = {
         html: getTemplateNewUser(nombre, apellido, token) // HTML text body
       });
       if (info) {
-        rwdJson.writeJSON(usersJson, usuarios);
+        //rwdJson.writeJSON(usersJson, usuarios);
         res.send("Se ha enviado un correo a " + email);
       } else {
         res.send("No se ha podido enviar un correo a " + email);
@@ -105,7 +107,7 @@ const controller = {
   //edita el usuario activo
   edit: function (req, res) {
     let usuario = {};
-    let usuarios = rwdJson.readJSON(usersJson);
+    let usuarios = db.Users.findAll();
     if (usuarios) {
       for (let i=0; i< usuarios.length; i++){
         if (usuarios[i].usuario == req.params.id){
@@ -126,24 +128,27 @@ const controller = {
         usuario: req.body
       })
     } else {
-      let usuarios = rwdJson.readJSON(usersJson);
+      let usuarios = db.Users.findAll();
+      let usuarioActualizado;
       if (usuarios) {
         for (let i=0; i< usuarios.length; i++){
           if (usuarios[i].usuario == req.params.id){
-            usuarios[i].password = bcrypt.hashSync(req.body.password, 10);
-            usuarios[i].nombre = req.body.nombre;
-            usuarios[i].apellido = req.body.apellido;
-            usuarios[i].dni = req.body.dni;
-            usuarios[i].celular = req.body.celular;
-            usuarios[i].direccion = req.body.direccion;
-            usuarios[i].cp = req.body.cp;
-            usuarios[i].localidad = req.body.localidad;
-            usuarios[i].avatar = req.file.filename;
-            usuarios[i].isAdmin = false;
-            usuarios[i].active = true;
+            usuarioActualizado = {
+              password: bcrypt.hashSync(req.body.password, 10),
+              nombre: req.body.nombre,
+              apellido: req.body.apellido,
+              dni: req.body.dni,
+              celular: req.body.celular,
+              direccion: req.body.direccion,
+              cp: req.body.cp,
+              localidad: req.body.localidad,
+              avatar: req.file.filename,
+              isAdmin: 0,
+              active: true
+            }
           }
         }
-        rwdJson.writeJSON(usersJson, usuarios);
+        db.Users.update(usuarioActualizado, {where: {id:req.params.id}});
         res.redirect("/login");
       } else {
         res.send("No hay usuarios en la BD.");
