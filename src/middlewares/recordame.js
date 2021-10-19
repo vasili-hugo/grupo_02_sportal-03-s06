@@ -1,13 +1,13 @@
-const rwdJson = require("../models/rwd-json.js");
-const usersJson = "../../data/users.json";
+//const rwdJson = require("../models/rwd-json.js");
+//const usersJson = "../../data/users.json";
+const db = require ('../database/models');
 
 function recordame (req, res, next) {
-    let usuarios = rwdJson.readJSON(usersJson);
-    if (usuarios) {
-        let usuarioEncontrado = usuarios.find (user => user.usuario == req.cookies.recordame);
-        if (usuarioEncontrado != undefined) {
-            req.session.usuarioLogueado = usuarioEncontrado;
-        }
+    if(req.cookies.recordame) {
+        db.Users.findByPk(req.cookies.recordame)
+            .then(usuario => {
+                req.session.usuarioLogueado = usuario;
+            });
     }
     next();
 }
