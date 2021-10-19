@@ -142,7 +142,7 @@ const controller = {
             isAdmin: 0,
             active: 1
           }
-          db.Users.update(usuarioActualizado, {where: {id:req.params.id}})
+          db.Users.update(usuarioActualizado, {where: {id: usuario.id}})
             .then(function() {
               delete req.session.usuarioLogueado;
               res.redirect("/login");

@@ -46,6 +46,7 @@ const controller = {
     function(req, res) {
       let validacionDeErrores = validationResult(req);
       if (validacionDeErrores.errors.length > 0) {
+        console.log (validacionDeErrores.mapped())
         return res.render ('login', { 
           errors: validacionDeErrores.mapped(),
           oldData: req.body

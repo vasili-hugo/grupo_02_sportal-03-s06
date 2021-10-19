@@ -37,7 +37,7 @@ module.exports = function (sequelize, dataTypes) {
         avatar: {
             type: dataTypes.STRING
         },
-        isAdmin: {
+        is_admin: {
             type: dataTypes.INTEGER
         }
     }
@@ -48,13 +48,6 @@ module.exports = function (sequelize, dataTypes) {
     }
 
     let Users = sequelize.define(alias, cols, config);
-
-    /* Users.associate = function (models) {
-        Users.belongsTo(models.Cart, {
-            as: 'usuario',
-            foreignKey: 'usuario_id'
-        }) 
-    } */
 
     return Users;
 }

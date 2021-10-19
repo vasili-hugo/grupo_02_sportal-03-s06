@@ -37,7 +37,7 @@ module.exports = function (sequelize, dataTypes) {
         avatar: {
             type: dataTypes.STRING
         },
-        isAdmin: {
+        is_admin: {
             type: dataTypes.INTEGER
         },
         uuid: {
