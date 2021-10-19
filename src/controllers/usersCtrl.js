@@ -115,8 +115,7 @@ const controller = {
       }
     }
     res.render("userProfile", {usuario}); */
-  }
-  ,
+  },
   // actualiza datos del usuario
   editStore: function (req, res) {
     let validacionDeErrores = validationResult(req);
