@@ -244,7 +244,7 @@ CREATE TABLE `shopping_cart` (
   `id` varchar(100) NOT NULL,
   `product_id` int unsigned NOT NULL,
   `user_id` int unsigned NOT NULL,
-  `quantity` int DEFAULT NULL,
+  `quantity` int unsigned DEFAULT NULL,
   `price` decimal(9,2) NOT NULL DEFAULT '0.00',
   `billed` int unsigned NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -287,6 +287,7 @@ CREATE TABLE `users` (
   `city` varchar(255) NOT NULL,
   `avatar` varchar(255) NOT NULL,
   `is_admin` int unsigned NOT NULL DEFAULT '0',
+  `uuid` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -351,4 +352,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-19 21:43:06
+-- Dump completed on 2021-10-20 12:02:37
