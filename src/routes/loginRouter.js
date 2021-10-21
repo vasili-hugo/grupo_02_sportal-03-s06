@@ -1,17 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var controller = require("../controllers/loginCtrl.js");
-const rwdJson = require("../models/rwd-json.js");
-const bcrypt = require ('bcryptjs');
+const validations = require ('../middlewares/validations.js')
 const authUsuario = require ('../middlewares/authUsuario.js');
-const funcs = require("./functions.js");
+//const rwdJson = require("../models/rwd-json.js");
+//const bcrypt = require ('bcryptjs');
+//const funcs = require("./functions.js");
 
 // JSON path
-const usersJson = "../../data/users.json";
+//const usersJson = "../../data/users.json";
 
-const { body } = require ('express-validator');
+//const { body } = require ('express-validator');
 
-const validations = [
+/* const validations = [
     body ('usuario').notEmpty().withMessage('Debes ingresar el correo electrónico.').bail()
     .custom( value  => {
         if (!funcs.findUserByEmail(value, usersJson)){
@@ -28,11 +29,11 @@ const validations = [
         }
         return true;
     })
-]
+] */
 
 /* GET login page. */
 router.get("/", authUsuario.authUsuario, controller.create);         // Muestra formulario de Login, si el usuario esta logueado lo redirige al home
-router.post("/", validations, controller.store);                     // Verifica credenciales del usuario
+router.post("/", validations.login, controller.store);               // Verifica credenciales del usuario
 router.post("/restore", controller.restore);                         // Envia e-mail a la direccion informada para cambio de contraseña
 router.get("/logout", controller.logout);                            // Logoff usuario
 

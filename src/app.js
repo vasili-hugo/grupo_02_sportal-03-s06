@@ -19,6 +19,7 @@ const productosRouter = require('./routes/productosRouter.js');
 const carritoRouter = require('./routes/carritoRouter.js');
 const loginRouter = require('./routes/loginRouter.js');
 const usersRouter = require('./routes/usersRouter.js');
+const testRouter = require('./routes/testRouter.js');
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/index', indexRouter);
 app.use('/home', indexRouter);
+app.use('/db_test', testRouter);
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler

@@ -1,20 +1,22 @@
 var express = require('express');
 var router = express.Router();
 var controller = require("../controllers/usersCtrl.js");
-const funcs = require("./functions.js");
-const config = require("../controllers/config.js");
+//const funcs = require("./functions.js");
+//const config = require("../controllers/config.js");
 
 // JSON path
-const usersJson = "../../data/users.json";
+//const usersJson = "../../data/users.json";
+//const db = require ('../database/models')
 
 //Requisitos para las validaciones 
-const { body } = require ('express-validator');
+const validation = require ('../middlewares/validations.js');
 const authUsuario = require('../middlewares/authUsuario.js');
-const multer = require ('multer');
-const path = require('path');
+//const { body } = require ('express-validator');
+//const multer = require ('multer');
+//const path = require('path');
 
 //Configuraciones de multer
-const storage = multer.diskStorage({
+/* const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         //cb (null, './public/images/avatars');
         cb (null, path.join(__dirname, "../../public/images/avatars"));
@@ -27,20 +29,28 @@ const storage = multer.diskStorage({
                 cb(null, `${Date.now()}_img${path.extname(file.originalname)}`);
             }
         } else {
-            cb(null, `${Date.now()}_img${path.extname(file.originalname)}`); 
+            cb(null, `${Date.now()}_img${path.extname(file.originalname)}`);
         }
     }
-});
+}); */
 
-const uploadFile = multer ({ storage });
+//const uploadFile = multer ({ storage });
 
-const validation = [
+/* const validation = [
     body ('usuario').notEmpty().withMessage('Debes ingresar tu correo electrónico').bail()
     .isEmail().withMessage('Debes ingresar un e-mail válido.').bail()
     .custom(value => {
-        if (funcs.findUserByEmail(value, usersJson)) {
-            throw new Error ('El correo que intenta registrar ya está en uso.')
-        }
+        //if (funcs.findUserByEmail(value, usersJson)) {
+            //throw new Error ('El correo que intenta registrar ya está en uso.')
+        //} 
+        db.Users.findOne({
+            where: {
+                usuario: value
+            }
+        })
+            .then((resultado) => {
+                throw new Error ('El correo que intenta registrar ya está en uso.')
+        });
         return true;
     }),
     body ('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres.').bail().matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i").withMessage('La contraseña no cumple alguno de las sugerencias requeridas.'),
@@ -78,9 +88,9 @@ const validation = [
             return true;
         }
     })
-]
+] */
 
-const validationEdit = [
+/* const validationEdit = [
     body ('usuario')
     .notEmpty().withMessage('Debes ingresar tu correo electrónico').bail()
     .isEmail()
@@ -119,12 +129,12 @@ const validationEdit = [
         }
         return true;
     })
-]
+] */
 
 /* GET users listing. */
-router.post("/", uploadFile.single('avatar'), validation, controller.store);                                     // Crea un nuevo usuario
+router.post("/", validation.uploadFile.single('avatar'), validation.register, controller.store);                                     // Crea un nuevo usuario
 router.get("/", authUsuario.authUsuario, controller.create);                                                     // Muestra formulario de Registro
-router.post("/:id", uploadFile.single('avatar'), validationEdit, controller.editStore);                          // Edita usuario
+router.post("/:id", validation.uploadFile.single('avatar'), validation.edit, controller.editStore);                          // Edita usuario
 router.get("/:id", authUsuario.testUsuario, controller.edit);                                                    // Muestra formulario edicion usuario
 router.get("/confirm/:token", controller.confirm);                                                               // Confirma registro de usuario
 router.get("/newPass/:token", controller.newPass);                                                               // Confirma blanqueo de contraseña

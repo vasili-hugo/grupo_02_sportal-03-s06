@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-  let alias = 'Brand';
+  let alias = 'Misc';
   let cols = {
     id: {
       type: dataTypes.BIGINT(10).UNSIGNED,
@@ -7,33 +7,27 @@ module.exports = (sequelize, dataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    desc: {
+    key: {
       type: dataTypes.STRING(255),
       autoNull: false
     },
-    icon: {
-        type: dataTypes.STRING(255),
-        allowNull: false
+    value: {
+      type: dataTypes.STRING(255),
+      autoNull: false
     },
     created_at: dataTypes.DATE,
     updated_at: dataTypes.DATE
   }
 
   let config = {
-    tableName: "brands",
+    tableName: "misc",
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
     deletedAt: false
   }
 
-  const Brand = sequelize.define(alias, cols, config); 
+  const Misc = sequelize.define(alias, cols, config); 
 
-  Brand.associate = function (models) {
-    Brand.hasMany(models.Product, {
-      as: "Product",
-      foreignKey: 'brand_id'
-    });
-  }
-  return Brand;
+  return Misc;
 }

@@ -46,6 +46,7 @@ const controller = {
     function(req, res) {
       let validacionDeErrores = validationResult(req);
       if (validacionDeErrores.errors.length > 0) {
+        console.log (validacionDeErrores.mapped())
         return res.render ('login', { 
           errors: validacionDeErrores.mapped(),
           oldData: req.body
@@ -57,7 +58,7 @@ const controller = {
           if (usuarioEncontrado) {
             req.session.usuarioLogueado = usuarioEncontrado;
             if (req.body.recordame) {
-              res.cookie('recordame', usuarioEncontrado.email, {maxAge: 1000 * 60 * 60 * 60 * 24});
+              res.cookie('recordame', usuarioEncontrado.id, {maxAge: 1000 * 60 * 60 * 60 * 24});
             }
           }
         }
