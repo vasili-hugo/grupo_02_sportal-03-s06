@@ -2,41 +2,28 @@
     <div class='product-items'>
         <div class="product-images">
         <div class="product-image-angles">
-            <!--<img class="image" src="images/sport/run-update-2021-500x356-2.webp">-->
-            <img class="image" src="<%= misc.pathImages %><%= (producto.leftImage) ? producto.leftImage : misc.defaultImage %>">
-            <!--<img class="image" src="images/sport/run-update-2021-500x356-2.webp">-->
-            <img class="image" src="<%= misc.pathImages %><%= (producto.rightImage) ? producto.rightImage : misc.defaultImage %>">
-            <!--<img class="image" src="images/sport/run-update-2021-500x356-2.webp">-->
-            <img class="image" src="<%= misc.pathImages %><%= (producto.upperImage) ? producto.upperImage : misc.defaultImage %>">
-            <!--<img class="image" src="images/sport/run-update-2021-500x356-2.webp">-->
-            <img class="image" src="<%= misc.pathImages %><%= (producto.lowerImage) ? producto.leftImage : misc.defaultImage %>">
+            <img class="image" src="<%= misc.pathImages %><%= (producto.left_image) ? producto.left_image : misc.defaultImage %>">
+            <img class="image" src="<%= misc.pathImages %><%= (producto.right_image) ? producto.right_image : misc.defaultImage %>">
+            <img class="image" src="<%= misc.pathImages %><%= (producto.upper_image) ? producto.upper_image : misc.defaultImage %>">
+            <img class="image" src="<%= misc.pathImages %><%= (producto.lower_image) ? producto.left_image : misc.defaultImage %>">
         </div> 
         <div class='principal-image'>
-            <!--<img class="image" src="images/sport/run-update-2021-500x356-2.webp">-->
             <img class="image" src="<%= misc.pathImages %><%= (producto.image) ? producto.image : misc.defaultImage %>">
         </div>
         </div>
         <div class='product-description'>
             <div class='desc-title'>
-                <!--<img src="/images/logos/logoadidas.png">-->
-                <img src="<%= misc.pathLogos %><%= (producto.icon) ? producto.icon : misc.defaultImage %>">
-                <!--<h3>Nombre producto</h3>-->
+                <img src="<%= misc.pathLogos %><%= (producto.brands.icon) ? producto.brands.icon : misc.defaultImage %>">
                 <h3><%= producto.model %></h3>
-                <!--<div class="product-desc-price">$8000</div>-->
                 <div class="product-desc-price">$<%= producto.price %></div>
             </div>
-            <!--<div class="description-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia placeat exercitationem aliquid deleniti ut 
-                nisi dolorum dicta ea maiores dolorem error reiciendis accusamus inventore fugiat architecto suscipit vero, 
-                porro aperiam?
-            </div>-->
             <div class="description-text"><%= producto.desc %></div>
             <form action="/#" method="GET" class="description-options">
                 <div>
                     <label class="option-title" for="sexo">Sexo</label>
                     <input type="radio" name="sexo" id="sexo" value="M"><label for="sexo"> M</label>
                     <input type="radio" name="sexo" id="sexo" value='F'><label for="sexo"> F</label>
-                </div>&nbsp;&nbsp;
+                </div>
                 <div>
                     <label class="option-title" for='edad'>Edad</label>
                     <input type="radio" name="edad" id="edad" value="adulto"><label for="edad"> Adulto</label>
@@ -65,7 +52,6 @@
             <h3>Otros productos similares</h3>
             <div class='similar-products-1line'>
                 <div class="image-left">
-                    <!--img src="images/sport/run-update-2021-500x356-2.webp">-->
                     <% if (others[0]) { %>
                         <a href="/productos/detail/<%= others[0].id %>">
                             <img src="<%= misc.pathImages %><%= (others[0].image) ? others[0].image : misc.defaultImage %>">
@@ -73,7 +59,6 @@
                     <% } %>
                 </div>
                 <div>
-                    <!--<img src="images/sport/run-update-2021-500x356-2.webp">-->
                     <% if (others[1]) { %>
                         <a href="/productos/detail/<%= others[1].id %>">
                             <img src="<%= misc.pathImages %><%= (others[1].image) ? others[1].image : misc.defaultImage %>">
@@ -83,7 +68,6 @@
             </div>
             <div class='similar-products-2line'>
                 <div class="image-left">
-                    <!--<img src="images/sport/run-update-2021-500x356-2.webp">-->
                     <% if (others[2]) { %>
                         <a href="/productos/detail/<%= others[2].id %>">
                             <img src="<%= misc.pathImages %><%= (others[2].image) ? others[2].image : misc.defaultImage %>">
@@ -91,7 +75,6 @@
                     <% } %>
                 </div>
                 <div>
-                    <!--<img src="images/sport/run-update-2021-500x356-2.webp">-->
                     <% if (others[3]) { %>
                         <a href="/productos/detail/<%= others[3].id %>">
                             <img src="<%= misc.pathImages %><%= (others[3].image) ? others[3].image : misc.defaultImage %>">

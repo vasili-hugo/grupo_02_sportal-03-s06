@@ -1,35 +1,35 @@
 module.exports = (sequelize, dataTypes) => {
-  let alias = 'Sex';
+  let alias = 'Age';
   let cols = {
     id: {
       type: dataTypes.BIGINT(10).UNSIGNED,
-      allowNull: false,
+      autoNull: false,
       primaryKey: true,
       autoIncrement: true
     },
     desc: {
       type: dataTypes.STRING(255),
-      allowNull: false
+      autoNull: false
     },
     created_at: dataTypes.DATE,
     updated_at: dataTypes.DATE
   }
 
   let config = {
-    tableName: "sex",
+    tableName: "ages",
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
     deletedAt: false
   }
 
-  const Sex = sequelize.define(alias, cols, config); 
+  const Age = sequelize.define(alias, cols, config); 
 
-  Sex.associate = function (models) {
-    Sex.hasMany(models.Product, {
+  Age.associate = function (models) {
+    Age.hasMany(models.Product, {
       as: "Product",
-      foreignKey: 'sex_id'
+      foreignKey: 'age_id'
     });
   }
-  return Sex;
+  return Age;
 }
