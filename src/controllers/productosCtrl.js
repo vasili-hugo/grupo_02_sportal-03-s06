@@ -5,7 +5,7 @@
 19/09/2021 - Este modulo incorpora los metodos del controlador productoCtrl.js, quedando este ultimo obsoleto.
 19/10/2021 - Reemplazo de JSON por Sequelize.
 */
-const path = require('path');
+
 const db = require('../database/models');
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
@@ -61,17 +61,18 @@ const controller = {
           res.render("producto", {producto, misc, others});
         })
         .catch(function(errmsg) {
-          res.send("Error en [db.Product.findAll]: " + errmsg);       
+          res.send("[01] Error en [db.Product.findAll]: " + errmsg);       
         });
       })
       .catch(function(errmsg) {
-        res.send("Error en [db.Product.findByPk]: " + errmsg);
+        res.send("[02] Error en [db.Product.findByPk]: " + errmsg);
       });
     }
   ,
   search:
     function (req, res) {
       let misc = config.misc;
+      misc.heading = "Búsqueda";
       db.Product.findAll({
         include: ["ages", "brands", "colors", "families", "headings", "sex"],
         where: {model: {[Op.like]: "%" + req.query.searchString + "%"}}
@@ -81,7 +82,7 @@ const controller = {
         res.render("productos", {products, misc});
       })
       .catch(function(errmsg) {
-        res.send("Error en [db.Product.findAll]: " + errmsg);
+        res.send("[03] Error en [db.Product.findAll]: " + errmsg);
       });
     }
   ,
@@ -102,7 +103,7 @@ const controller = {
               if (!products) {products = []}
               res.render("listarProductos", {products, misc});
             }).catch(function(errmsg) {
-              res.send("Error en [db.Product.findAll]: " + errmsg);
+              res.send("[04] Error en [db.Product.findAll]: " + errmsg);
             });
           }
           break;
@@ -133,7 +134,7 @@ const controller = {
               res.render("crearProducto", {brands, colors, sex, ages, headings, families, misc, prodList, errors});
             })
             .catch(function(errmsg) {
-              res.send("Error en [db.*.findAll]: " + errmsg);
+              res.send("[05] Error en [db.*.findAll]: " + errmsg);
             });
           }
           break;
@@ -143,7 +144,14 @@ const controller = {
           res.render("productos", {products, misc});
           break;
         default:
-          misc.heading = heading;
+          //misc.heading = heading;
+          db.Heading.findByPk(heading)
+          .then(function(oneHeading) {
+            misc.heading = oneHeading.desc;  
+          })
+          .catch(function(errmsg) {
+            res.send("[06] Error en [db.Product.findByPk]: " + errmsg);
+          });
           db.Product.findAll({
             include: ["ages", "brands", "colors", "families", "headings", "sex"],
             where: {heading_id: heading}
@@ -152,7 +160,7 @@ const controller = {
             if (!products) {products = []}
             res.render("productos", {products, misc});
           }).catch(function(errmsg) {
-            res.send("Error en [db.Product.findAll]: " + errmsg);
+            res.send("[07] Error en [db.Product.findAll]: " + errmsg);
           });
       }
     }
@@ -213,7 +221,7 @@ const controller = {
             res.render("crearProducto", {brands, colors, sex, ages, headings, families, misc, errors, prodList: product});
           })
           .catch(function(errmsg) {
-            res.send("Error en [db.*.findAll]: " + errmsg);
+            res.send("[08] Error en [db.*.findAll]: " + errmsg);
           });
         } else {
           db.Product.create({
@@ -239,7 +247,7 @@ const controller = {
             res.redirect("/productos/listar");
           })
           .catch(function(errmsg) {
-            res.send("Error en [db.Product.create]: " + errmsg);          
+            res.send("[09] Error en [db.Product.create]: " + errmsg);          
           });
         }
       }
@@ -264,7 +272,7 @@ const controller = {
           res.render("editarProducto", {brands, colors, sex, ages, headings, families, misc, errors, prodList: product});
         })
         .catch(function(errmsg) {
-          res.send("Error en [db.Product.findByPk]: " + errmsg);
+          res.send("[10] Error en [db.Product.findByPk]: " + errmsg);
         });
       }
     }
@@ -326,7 +334,7 @@ const controller = {
             res.render("editarProducto", {brands, colors, sex, ages, headings, families, misc, errors, prodList: product});
           })
           .catch(function(errmsg) {
-            res.send("Error en [db.Product.findByPk]: " + errmsg);
+            res.send("[11] Error en [db.Product.findByPk]: " + errmsg);
           });
         } else {
           db.Product.update({
@@ -352,7 +360,7 @@ const controller = {
             res.redirect("/productos/listar");
           })
           .catch(function(errmsg) {
-            res.send("Error en [db.Product.update]: " + errmsg);          
+            res.send("[12] Error en [db.Product.update]: " + errmsg);          
           });
         }
       }
@@ -366,7 +374,7 @@ const controller = {
         res.redirect("/productos/listar");          
       })
       .catch(function(errmsg) {
-        res.send("Error en [db.Product.destroy]: " + errmsg);        
+        res.send("[13] Error en [db.Product.destroy]: " + errmsg);        
       });
    }
 };
@@ -404,7 +412,7 @@ function similars (req, family, maxItems) {
     return others;
   })
   .catch(function(errmsg) {
-    res.send("Error en [db.Product.findAll]: " + errmsg);       
+    res.send("[14] Error en [db.Product.findAll]: " + errmsg);       
   });
 }
 
@@ -440,8 +448,8 @@ function hasAdminRights () {
   db.Age.findAll()
   .then(function(records) {
     if (!records) {records = []}
-    //console.log("==================================================")
-    //console.log(records)
+    console.log("==================================================")
+    console.log(records)
     return records;
   })
   .catch(function(errmsg) {
