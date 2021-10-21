@@ -1,7 +1,7 @@
 module.exports = {
   "development": {
     "username": "root",
-    "password": "vwkdl106",
+    "password": "",
     "database": "sportal_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
