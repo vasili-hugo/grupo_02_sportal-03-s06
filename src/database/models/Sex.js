@@ -11,10 +11,6 @@ module.exports = (sequelize, dataTypes) => {
       type: dataTypes.STRING(255),
       allowNull: false
     },
-    desc_short: {
-      type: dataTypes.STRING(100),
-      allowNull: false
-    },
     created_at: dataTypes.DATE,
     updated_at: dataTypes.DATE
   }
