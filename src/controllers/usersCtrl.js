@@ -2,7 +2,7 @@
 
 // In / Out File System
 //const rwdJson = require("../models/rwd-json.js");
-const db = require ('../database/models')
+const db = require ('../database/models');
 
 //Requisitos de registracion
 const {validationResult} = require('express-validator');
@@ -13,7 +13,7 @@ const {configSMTP, getTemplateNewUser} = require("../functions/mailer.js");
 const uuid = require("uuid");
 
 // JSON path
-const usersJson = "../../data/users.json";
+//const usersJson = "../../data/users.json";
 
 /* JSON Layout
 usuario   : e-mail (X)
@@ -73,7 +73,10 @@ const controller = {
         zipcode: req.body.cp,
         city: req.body.localidad,
         avatar: req.file.filename,
-        uuid: uuidStr
+        is_admin: false,
+        uuid: uuidStr,
+        created_at: Date.now(),
+        updated_at: Date.now()
       });
       // Obtiene token
       const {usuario, nombre, apellido} = req.body;

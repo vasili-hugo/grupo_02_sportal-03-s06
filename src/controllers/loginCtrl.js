@@ -1,7 +1,8 @@
 // Login
 
 // In / Out File System
-const rwdJson = require("../models/rwd-json.js");
+//const rwdJson = require("../models/rwd-json.js");
+const db = require ('../database/models');
 
 //Requisitos de registracion
 const { validationResult } = require ('express-validator');
@@ -52,7 +53,16 @@ const controller = {
           oldData: req.body
         })
       } else {
-        let usuarios = rwdJson.readJSON(usersJson);
+        db.Users.findOne({
+          where: {email: req.body.usuario}
+        }).then(usuario => {
+        req.session.usuarioLogueado = usuario;
+          if (req.body.recordame) {
+            res.cookie('recordame', usuario.id, {maxAge: 1000 * 60 * 60 * 60 * 24});
+          }
+        res.redirect ('/home');
+        });
+        /* let usuarios = rwdJson.readJSON(usersJson);
         if (usuarios) {
           let usuarioEncontrado = usuarios.find (user => user.usuario == req.body.usuario);
           if (usuarioEncontrado) {
@@ -61,8 +71,8 @@ const controller = {
               res.cookie('recordame', usuarioEncontrado.id, {maxAge: 1000 * 60 * 60 * 60 * 24});
             }
           }
-        }
-        res.redirect ('/home');
+        } */
+        
       }
     }
   ,
@@ -76,13 +86,9 @@ const controller = {
           oldData: req.body
         });
       } else {
-        // Actualizo el usuario
-        const email = req.body.usuario;        
-        let usuarios = rwdJson.readJSON(usersJson);
-        if (usuarios) {
-          let usuario = usuarios.find (function (elem) {
-            return elem.usuario == email;
-          });
+        db.Users.findOne({
+          where: {email: req.body.usuario}
+        }).then(usuario => {
           if (usuario) {
             // Codigo para generar un token version 4 RFC4122
             let uuidStr = uuid.v4();
@@ -92,13 +98,14 @@ const controller = {
             // Obtiene token
             const nombre = usuario.nombre;
             const apellido = usuario.apellido;
+            const email = usuario.email;
             const token = getToken({email, uuidStr});
             // Envia mail para activar
             // Parametros del protocolo SMTP
             let transporter = configSMTP();
             // Procesa el envio
             let adminAccount = transporter.options.auth.user;
-            let info = await transporter.sendMail({
+            let info = transporter.sendMail({
               from: "'Sportal Admin' <" + adminAccount + ">",   // sender address
               to: email,                                        // list of receivers (separados por comas)
               subject: "Activación de Cuenta Personal",         // Subject line
@@ -122,9 +129,9 @@ const controller = {
           } else {
             res.send("El usuario '" + email + "' no existe.");
           }
-        } else {
-          res.send("No hay usuarios en la BD.");
-        }
+        }).catch(error => {
+          res.send(error)
+        })
       }
     }
 ,

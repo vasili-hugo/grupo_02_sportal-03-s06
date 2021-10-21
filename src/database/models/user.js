@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-  let alias = 'User';
+  let alias = 'Users';
   let cols = {
     id: {
       type: dataTypes.BIGINT(10).UNSIGNED,
@@ -51,10 +51,6 @@ module.exports = (sequelize, dataTypes) => {
     },
     is_admin: {
       type: dataTypes.BOOLEAN,
-      allowNull: false
-    },
-    uuid: {
-      type: dataTypes.STRING(255),
       allowNull: false
     },
     created_at: dataTypes.DATE,
