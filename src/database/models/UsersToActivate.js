@@ -62,7 +62,7 @@ module.exports = (sequelize, dataTypes) => {
     }
   
     let config = {
-      tableName: "users",
+      tableName: "users_to_activate",
       timestamps: true,
       createdAt: 'created_at',
       updatedAt: 'updated_at',
@@ -70,15 +70,6 @@ module.exports = (sequelize, dataTypes) => {
     }
   
     const User = sequelize.define(alias, cols, config); 
-  
-    User.associate = function (models) {
-      User.belongsToMany(models.Product, {
-        as: "User_ShoppingCart",
-        through: 'shopping_cart',
-        foreignKey: 'user_id',
-        otherKey: 'product_id',
-        timestamps: true
-      });
-    }
+
     return User;
   }

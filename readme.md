@@ -55,13 +55,20 @@ Para correr el proyecto abra una consola y ejecute [node | nodemon] bin\www.<br>
 Desde el browser (Google Chrome, Mozilla Firefox o Microsoft Edge) url http://localhost:3000.<br>
 La pagina de edición/creación de productos no tiene destinado (por el momento) un link desde donde pueda ser vista. Para poder verla url http://localhost:3000/productos/listar.
 
+Para el sprint 6 se efectuó el reemplazo de los archivos de datos en formato JSON por el uso de bases de datos.<br>
+En particular se utiliza el motor de base de datos MySQL a través del ORM Sequelize.<br>
+Clonar el proyecto y previamente instalar la base de datos.<br>
+Para la importación de la BD se debe tener instalado cualquier cliente que permita manipular una BD (tipo MySQL). Sugerimos DBeaver o MySQL Workbench.<br>
+Para comenzar, crear el schema con el nombre 'sportal' y a continuación importar las tablas y datos mediante el archivo sportal_DB.sql.<br>
+El archivo sportal_db.xml dispone el Diagrama Entidad Relación en formato XML. Sugerimos el producto draw.io para poder visualizarlo.
+
 **REFERENCIAS CONSULTADAS PARA EL PROYECTO**
 
 - [SoloDeportes](https://www.solodeportes.com.ar/) 
 - [OpenSports](https://www.opensports.com.ar/) 
 - [Adidas](https://www.adidas.com.ar/) 
 - [Nike](https://www.nike.com/ar/) 
-- [Puma](https://us.puma.com/) 
+- [Puma](https://us.puma.com/)
 - [Asics](https://www.asics.com/es/es-es/) 
 - [Rebook](https://www.reebok.com/us) 
 
