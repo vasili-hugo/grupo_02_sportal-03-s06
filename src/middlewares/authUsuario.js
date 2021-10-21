@@ -9,7 +9,7 @@ const userFunctions = {
     //Verifica que el request sea del usuario logueado
     testUsuario: function (req, res, next) {
         if (req.session.usuarioLogueado) {
-            if (req.params.id == req.session.usuarioLogueado.usuario) {
+            if (req.params.id == req.session.usuarioLogueado.id) {
                 next();
             } else {
                 res.redirect('/home');

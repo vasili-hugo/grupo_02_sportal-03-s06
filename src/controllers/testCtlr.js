@@ -14,12 +14,12 @@ const test = {
     function(req, res){
       db.Product.findAll({
         include: ["ages", "brands", "colors", "families", "headings", "sex"]
+        //,attributes: ['brand_id']
       })
       .then(function (products) {
-        if (!products) {products = []}
+        
         res.render('test', {products}); 
         //return products;
-        console.log(products)
       }).catch(function (errmsg) {
         console.log("eerrror:" + errmsg);
         //errmsg.send("Error en [db.Products.findAll]:" + errmsg);
