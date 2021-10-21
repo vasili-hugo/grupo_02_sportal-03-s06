@@ -17,9 +17,9 @@
               <div class="spacer"></div>
 
               <div class="step-down">
-                <label class="labels label-codigo" for="id">Código de Producto</label>
-                <input class="inputs input-codigo" type="text" name="id" id="id" value="<%= prodList.id %>">
-                <label class="errmsg"><%= ((errors.id) ? errors.id.msg : "") %></label>
+                <label class="labels label-codigo" for="code">Código de Producto</label>
+                <input class="inputs input-codigo" type="text" name="code" id="code" value="<%= prodList.code %>">
+                <label class="errmsg"><%= ((errors.code) ? errors.code.msg : "") %></label>
               </div>
               
               <div class="step-aside">
@@ -27,9 +27,8 @@
                   <label class="labels label-marca" for="marca">Marca</label>
                   <select class="selects marca-options" name="brand" id="marca">
                     <option value="" selected>Seleccione una opción</option>
-                    <% let keys = Object.keys(brands); %>
-                    <% for (let i = 0 ; i < keys.length ; i++) { %>
-                      <option value="<%= keys[i] %>" <%= (prodList.brand == keys[i]) ? "selected" : "" %>><%= brands[keys[i]] %></option>
+                    <% for (let i = 0 ; i < brands.length ; i++) { %>
+                      <option value="<%= brands[i].id %>" <%= (prodList.brand_id == brands[i].id) ? "selected" : "" %>><%= brands[i].desc %></option>
                     <% } %>
                   </select>
                   <div class="errmsg"><%= ((errors.brand) ? errors.brand.msg : "") %></div>
@@ -39,9 +38,8 @@
                   <label class="labels label-rubro" for="marca">Rubro</label>
                   <select class="selects rubro-options" name="heading" id="rubro">
                     <option value="" selected>Seleccione una opción</option>
-                    <% keys = Object.keys(headings); %>
-                    <% for (let i = 0 ; i < keys.length ; i++) { %>
-                      <option value="<%= keys[i] %>" <%= (prodList.heading == keys[i]) ? "selected" : "" %>><%= headings[keys[i]] %></option>
+                    <% for (let i = 0 ; i < headings.length ; i++) { %>
+                      <option value="<%= headings[i].id %>" <%= (prodList.heading_id == headings[i].id) ? "selected" : "" %>><%= headings[i].desc %></option>
                     <% } %>
                   </select>
                   <div class="errmsg"><%= ((errors.heading) ? errors.heading.msg : "") %></div>
@@ -57,8 +55,14 @@
 
                 <div class="step-down-half">
                   <label class="labels label-familia" for="familia">Familia de Producto</label>
-                  <input class="inputs input-familia" type="text" name="family" id="familia" value="<%= prodList.family %>">
-                  <div class="errmsg"><%= ((errors.family) ? errors.family.msg : "") %></div>
+                  <select class="selects family-options" name="family" id="familia">
+                    <option value="" selected>Seleccione una opción</option>
+                    <% for (let i = 0 ; i < families.length ; i++) { %>
+                      <option value="<%= families[i].id %>" <%= (prodList.family_id == families[i].id) ? "selected" : "" %>><%= families[i].desc %></option>
+                    <% } %>
+                  </select>
+                  <label class="errmsg"><%= ((errors.family) ? errors.family.msg : "") %></label>
+
                 </div>
               </div>
 
@@ -79,9 +83,8 @@
                   <label class="labels label-edad" for="edad">Edad</label>
                   <select class="selects edad-options" name="age">
                     <option value="" selected>Seleccione una opción</option>
-                    <% keys = Object.keys(ages); %>
-                    <% for (let i = 0 ; i < keys.length ; i++) { %>
-                      <option value="<%= keys[i] %>" <%= (prodList.age == keys[i]) ? "selected" : "" %>><%= ages[keys[i]] %></option>
+                    <% for (let i = 0 ; i < ages.length ; i++) { %>
+                      <option value="<%= ages[i].id %>" <%= (prodList.age_id == ages[i].id) ? "selected" : "" %>><%= ages[i].desc %></option>
                     <% } %>
                   </select>
                   <div class="errmsg"><%= ((errors.age) ? errors.age.msg : "") %></div>
@@ -93,9 +96,8 @@
                   <label class="labels label-sexo" for="sexo">Sexo</label>
                   <select class="selects sexo-options" name="sex">
                     <option value="" selected>Seleccione una opción</option>
-                    <% keys = Object.keys(sex); %>
-                    <% for (let i = 0 ; i < keys.length ; i++) { %>
-                      <option value="<%= keys[i] %>" <%= (prodList.sex == keys[i]) ? "selected" : "" %>><%= sex[keys[i]] %></option>
+                    <% for (let i = 0 ; i < sex.length ; i++) { %>
+                      <option value="<%= sex[i].id %>" <%= (prodList.sex_id == sex[i].id) ? "selected" : "" %>><%= sex[i].desc %></option>
                     <% } %>
                   </select>
                   <div class="errmsg"><%= ((errors.sex) ? errors.sex.msg : "") %></div>
@@ -105,10 +107,8 @@
                   <label class="labels label-color" for="color">Color</label>
                   <select class="selects color-options" name="color">
                     <option value="" selected>Seleccione una opción</option>
-                    <% keys = Object.keys(colors); %>
-                    <% values = Object.values(colors); %>
-                    <% for (let i = 0 ; i < keys.length ; i++) { %>
-                      <option value="<%= keys[i] %>" <%= (prodList.color == keys[i]) ? "selected" : "" %>><%= colors[keys[i]] %></option>
+                    <% for (let i = 0 ; i < colors.length ; i++) { %>
+                      <option value="<%= colors[i].id %>" <%= (prodList.color_id == colors[i].id) ? "selected" : "" %>><%= colors[i].desc %></option>
                     <% } %>
                   </select>
                   <div class="errmsg"><%= ((errors.color) ? errors.color.msg : "") %></div>
@@ -116,12 +116,6 @@
               </div>
 
               <div class="images">
-                <div class="step-down">
-                  <label class="labels label-icon" for="icon">Archivo de Marca (icono)<%= " (" + ((prodList.icon) ? prodList.icon : misc.defaultImage) + ")" %></label>
-                  <input class="inputs input-icon" type="file" name="icon" id="icon" accept="<%= misc.imageExt %>">
-                  <div class="errmsg"><%= ((errors.icon) ? errors.icon.msg : "") %></div>
-                </div>
-
                 <div class="step-down">
                   <label class="labels label-image" for="image">Archivo de Imagen Principal<%= " (" + ((prodList.image) ? prodList.image : misc.defaultImage) + ")" %></label>
                   <input class="inputs input-image" type="file" name="image" id="image" accept="<%= misc.imageExt %>">

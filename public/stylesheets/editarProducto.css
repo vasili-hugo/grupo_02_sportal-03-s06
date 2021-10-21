@@ -170,14 +170,21 @@ main {
   width: 210px;
 }
 
+.label-inactive {
+  margin: 20px 0px 0px -95px;
+  width: 100px;
+}
+
+.input-inactive {
+  margin: -15px 0px 0px 0px;
+  width: 15px;
+}
+
 .grid-image {
   display: grid;
   grid-template-columns: 460px 1fr;
-  grid-template-rows: repeat(18, 25px);
+  grid-template-rows: repeat(15, 25px);
   grid-template-areas:
-    "label1 img1"
-    "input1 img1"
-    "error1 img1"
     "label2 img2"
     "input2 img2"
     "error2 img2"
@@ -197,22 +204,6 @@ main {
   align-items: center;
   gap: 5px 5px;
   margin-top: 10px;
-}
-
-.label-icon {
-  grid-area: label1;
-}
-
-.input-icon {
-  grid-area: input1;
-}
-
-.image-icon {
-  grid-area: img1;
-  border-radius: 10px;
-  border: 1px solid black;
-  max-width: 100px;
-  max-height: 75px;
 }
 
 .label-image {
