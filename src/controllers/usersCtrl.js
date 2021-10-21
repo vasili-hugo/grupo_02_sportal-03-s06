@@ -62,7 +62,7 @@ const controller = {
       // Codigo para generar un token version 4 RFC4122
       //let uuidStr = uuid.v4();
       // Guardar el uuidStr y el estado del usuario para su posterior verificacion
-      db.UsersToActivate.create({
+      db.Users.create({
         email: req.body.usuario,
         password: bcrypt.hashSync(req.body.password, 10),
         first_name: req.body.nombre,
@@ -74,11 +74,10 @@ const controller = {
         city: req.body.localidad,
         avatar: req.file.filename,
         is_admin: false,
-        uuid: uuidStr,
         created_at: Date.now(),
         updated_at: Date.now()
       });
-      res.redirect('/home');
+      res.redirect('/login');
       // Obtiene token
       //const {usuario, nombre, apellido} = req.body;
       //const token = getToken({usuario, uuidStr});
@@ -142,8 +141,9 @@ const controller = {
             zipcode: req.body.cp,
             city: req.body.localidad,
             avatar: req.file.filename,
-            isAdmin: 0,
-            active: 1
+            isAdmin: false,
+            active: true,
+            updated_at: Date.now()
           }
           db.Users.update(usuarioActualizado, {where: {id: usuario.id}})
             .then(function() {
