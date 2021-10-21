@@ -60,7 +60,7 @@ const controller = {
       //let usuarios = db.Users.findAll();
       //if (!usuarios) {usuarios = []};
       // Codigo para generar un token version 4 RFC4122
-      let uuidStr = uuid.v4();
+      //let uuidStr = uuid.v4();
       // Guardar el uuidStr y el estado del usuario para su posterior verificacion
       db.UsersToActivate.create({
         email: req.body.usuario,
@@ -78,27 +78,28 @@ const controller = {
         created_at: Date.now(),
         updated_at: Date.now()
       });
+      res.redirect('/home');
       // Obtiene token
-      const {usuario, nombre, apellido} = req.body;
-      const token = getToken({usuario, uuidStr});
+      //const {usuario, nombre, apellido} = req.body;
+      //const token = getToken({usuario, uuidStr});
       // Envia mail para activar
       // Parametros del protocolo SMTP
-      let transporter = configSMTP();
+      //let transporter = configSMTP();
       // Procesa el envio
-      let adminAccount = transporter.options.auth.user;
-      let info = await transporter.sendMail({
-        from: "'Sportal Admin' <" + adminAccount + ">",         // sender address
-        to: usuario,                                            // list of receivers (separados por comas)
-        subject: "Activación de Cuenta Personal",               // Subject line
-        //text: "Esta es una prueba",                           // plain text body
-        html: getTemplateNewUser(nombre, apellido, token)       // HTML text body
-      });
-      if (info) {
-        //rwdJson.writeJSON(usersJson, usuarios);
-        res.send("Se ha enviado un correo a " + usuario);
-      } else {
-        res.send("No se ha podido enviar un correo a " + usuario);
-      }
+      //let adminAccount = transporter.options.auth.user;
+      //let info = await transporter.sendMail({
+      //  from: "'Sportal Admin' <" + adminAccount + ">",         // sender address
+      //  to: usuario,                                            // list of receivers (separados por comas)
+      //  subject: "Activación de Cuenta Personal",               // Subject line
+      //  //text: "Esta es una prueba",                           // plain text body
+      //  html: getTemplateNewUser(nombre, apellido, token)       // HTML text body
+      //});
+      //if (info) {
+      //  //rwdJson.writeJSON(usersJson, usuarios);
+      //  res.send("Se ha enviado un correo a " + usuario);
+      //} else {
+      //  res.send("No se ha podido enviar un correo a " + usuario);
+      //}
     }
   }
   ,

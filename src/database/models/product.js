@@ -117,13 +117,13 @@ module.exports = (sequelize, dataTypes) => {
       foreignKey: 'color_id'
     });
 
-    /* Product.belongsToMany(models.User, {
+    Product.belongsToMany(models.User, {
       as: "Product_ShoppingCart",
       through: 'shopping_cart',
       foreignKey: 'product_id',
       otherKey: 'user_id',
       timestamps: true
-    }); */
+    });
   }
   return Product;
 }
