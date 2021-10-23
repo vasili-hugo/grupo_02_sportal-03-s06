@@ -31,5 +31,6 @@ module.exports = (sequelize, dataTypes) => {
       foreignKey: 'age_id'
     });
   }
+  
   return Age;
 }

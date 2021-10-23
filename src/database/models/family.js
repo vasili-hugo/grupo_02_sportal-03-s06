@@ -31,5 +31,6 @@ module.exports = (sequelize, dataTypes) => {
       foreignKey: 'family_id'
     });
   }
+  
   return Family;
 }
