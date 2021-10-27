@@ -1,4 +1,4 @@
-// renombrar archivo como sonfig.js y cargar credenciales de la db
+// renombrar archivo como config.js y cargar credenciales de la db
 
 module.exports = {
   "development": {
