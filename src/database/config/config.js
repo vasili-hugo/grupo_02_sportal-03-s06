@@ -1,6 +1,6 @@
 module.exports = {
   "development": {
-    "username": "",
+    "username": "root",
     "password": "",
     "database": "sportal_db",
     "host": "127.0.0.1",
