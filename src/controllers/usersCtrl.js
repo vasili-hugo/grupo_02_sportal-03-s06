@@ -90,8 +90,8 @@ const controller = {
   }
   ,
   //edita el usuario activo
-  edit: function (req, res) {
-    db.User.findOne({where: {email: req.params.email}})
+  edit: function (req, res) { 
+    db.User.findOne({where: {email: req.params.id}})
     .then(function(usuario) {
       let editUser = {
         usuario: usuario.email,
@@ -107,6 +107,7 @@ const controller = {
       res.render("userProfile", {usuario: editUser, oldData: editUser, errors: ""});  
     })
     .catch(function(errmsg) {
+      console.log(errmsg)
       res.send(errmsg);
     });
   }
