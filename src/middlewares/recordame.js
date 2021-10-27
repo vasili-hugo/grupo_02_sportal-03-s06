@@ -1,13 +1,14 @@
-//const rwdJson = require("../models/rwd-json.js");
-//const usersJson = "../../data/users.json";
 const db = require ('../database/models');
 
 function recordame (req, res, next) {
     if(req.cookies.recordame) {
-        db.Users.findByPk(req.cookies.recordame)
-            .then(usuario => {
-                req.session.usuarioLogueado = usuario;
-            });
+        db.User.findByPk(req.cookies.recordame)
+        .then(usuario => {
+            req.session.usuarioLogueado = usuario;
+        })
+        .catch(function(errmsg) {
+            throw new Error('Error db.User.findByPk: ' + errmsg);
+        });
     }
     next();
 }

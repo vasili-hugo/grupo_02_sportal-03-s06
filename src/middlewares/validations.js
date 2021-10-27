@@ -1,7 +1,6 @@
 const db = require ('../database/models');
 const { body } = require ('express-validator');
 const bcrypt = require ('bcryptjs');
-const { promiseImpl } = require('ejs');
 const multer = require ('multer');
 const path = require('path');
 const config = require("../controllers/config.js");
@@ -9,7 +8,6 @@ const config = require("../controllers/config.js");
 //Configuraciones de multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        //cb (null, './public/images/avatars');
         cb (null, path.join(__dirname, "../../public/images/avatars"));
     },
     filename: (req, file, cb) => {
@@ -29,36 +27,53 @@ const validations = {
     login: [
         body ('usuario').notEmpty().withMessage('Debes ingresar el correo electrónico.').bail()
         .custom( value  => {
-            return db.Users.findOne({
+            return db.User.findOne({
                 where: {email: value}
             }).then(usuario => {
-                if (!usuario) {
+                if (usuario) {
+                    if (!usuario.active) {
+                        return Promise.reject("El usuario no está activo.")
+                    }
+                } else {
                     return Promise.reject ('El correo ingresado no está registrado.');
                 }
             })
+            .catch(function(errmsg) {
+                throw new Error(errmsg);
+            });
         }),
         body ('password').notEmpty().withMessage('Debes ingresar tu contraseña.').bail()
         .custom( (value, {req}) => {
-            return db.Users.findOne( {
+            return db.User.findOne( {
                 where: {email: req.body.usuario}
             }).then(usuario => {
-                if (!bcrypt.compareSync(value, usuario.password)) {
-                    return Promise.reject ('La contraseña es inválida.');
+                if (usuario) {
+                    if (!bcrypt.compareSync(value, usuario.password)) {
+                        return Promise.reject ('La contraseña es inválida.');
+                    }
+                } else {
+                    throw new Error('El correo ingresado no está registrado.');
                 }
             })
+            .catch(function(errmsg) {
+                throw new Error(errmsg);
+            });
         })
     ],
     register: [
         body ('usuario').notEmpty().withMessage('Debes ingresar tu correo electrónico').bail()
         .isEmail().withMessage('Debes ingresar un e-mail válido.').bail()
         .custom(value => {
-            return db.Users.findOne({
+            return db.User.findOne({
                 where: {email: value}
             }).then((resultado) => {
                 if (resultado) {
                     return Promise.reject('El correo que intenta registrar ya está en uso.');
                 }
             })
+            .catch(function(errmsg) {
+                throw new Error(errmsg);
+            });
         }),
         body ('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres.').bail().matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i").withMessage('La contraseña no cumple alguno de las sugerencias requeridas.'),
         body ('checkPassword').notEmpty().withMessage('Debes completar nuevamente tu contraseña.').bail()

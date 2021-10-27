@@ -287,6 +287,7 @@ CREATE TABLE `users` (
   `city` varchar(255) NOT NULL,
   `avatar` varchar(255) NOT NULL,
   `is_admin` int unsigned NOT NULL DEFAULT '0',
+  `active` int unsigned NOT NULL DEFAULT '0',
   `uuid` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '2021-10-21 16:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '2021-10-21 16:00:00',
@@ -304,52 +305,5 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `users_to_activate`
---
-
-DROP TABLE IF EXISTS `users_to_activate`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users_to_activate` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `dni` int unsigned NOT NULL,
-  `cell_phone` decimal(12,0) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `zipcode` varchar(8) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `avatar` varchar(255) NOT NULL,
-  `is_admin` int unsigned NOT NULL DEFAULT '0',
-  `uuid` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2021-10-21 16:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '2021-10-21 16:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users_to_activate`
---
-
-LOCK TABLES `users_to_activate` WRITE;
-/*!40000 ALTER TABLE `users_to_activate` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users_to_activate` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-10-21 17:39:36

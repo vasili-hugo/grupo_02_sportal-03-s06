@@ -51,7 +51,13 @@ module.exports = (sequelize, dataTypes) => {
     },
     is_admin: {
       type: dataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: false,
+      default: false
+    },
+    active: {
+      type: dataTypes.BOOLEAN,
+      allowNull: false,
+      default: false
     },
     uuid: {
       type: dataTypes.STRING(255),

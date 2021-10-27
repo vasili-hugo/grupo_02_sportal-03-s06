@@ -1,8 +1,7 @@
 // Login
 
-// In / Out File System
-//const rwdJson = require("../models/rwd-json.js");
-const db = require ('../database/models');
+// Database
+const db = require('../database/models');
 
 //Requisitos de registracion
 const { validationResult } = require ('express-validator');
@@ -10,30 +9,12 @@ const {getToken, getTokenData} = require("../functions/jwt.js");
 const {configSMTP, getTemplateNewPass} = require("../functions/mailer.js");
 const uuid = require("uuid");
 
-// JSON path
-const usersJson = "../../data/users.json";
-
-/* JSON Layout
-usuario   : e-mail (X)
-password  : Contraseña (X)
-nombre    : Nombres (X)
-apellido  : Apellidos (X)
-dni       : DNI (N)
-celular   : Celular (N)
-direccion : Direccion (X)
-localidad : Localidad (X)
-avatar    : Foto de perfil (X)
-isAdmin   : true/false
-active    : true/false
-uuid      : uuid (formato especifico)
-*/
-
 // Controller
 // Importante:
 // funcion Restore: Configurar los parametros del protocolo SMTP
-//                Configurar los datos de la cuenta autorizada a enviar mails.
-//                Configurar la ruta de confirmacion en la funcion 'getTemplate'.
-//                Esto debe hacerse en la funcion /src/functions/mailer.js
+//                  Configurar los datos de la cuenta autorizada a enviar mails.
+//                  Configurar la ruta de confirmacion en la funcion 'getTemplate'.
+//                  Esto debe hacerse en la funcion /src/functions/mailer.js
 
 const controller = {
   // Muestra formulario de Login
@@ -47,32 +28,24 @@ const controller = {
     function(req, res) {
       let validacionDeErrores = validationResult(req);
       if (validacionDeErrores.errors.length > 0) {
-        console.log (validacionDeErrores.mapped())
         return res.render ('login', { 
           errors: validacionDeErrores.mapped(),
           oldData: req.body
         })
       } else {
-        db.Users.findOne({
-          where: {email: req.body.usuario}
-        }).then(usuario => {
-        req.session.usuarioLogueado = usuario;
-          if (req.body.recordame) {
-            res.cookie('recordame', usuario.id, {maxAge: 1000 * 60 * 60 * 60 * 24});
-          }
-        res.redirect ('/home');
-        });
-        /* let usuarios = rwdJson.readJSON(usersJson);
-        if (usuarios) {
-          let usuarioEncontrado = usuarios.find (user => user.usuario == req.body.usuario);
+        db.User.findOne({where: {email: req.body.usuario}})
+        .then(function(usuarioEncontrado) {
           if (usuarioEncontrado) {
             req.session.usuarioLogueado = usuarioEncontrado;
             if (req.body.recordame) {
-              res.cookie('recordame', usuarioEncontrado.id, {maxAge: 1000 * 60 * 60 * 60 * 24});
+              res.cookie('recordame', usuarioEncontrado.email, {maxAge: 1000 * 60 * 60 * 60 * 24});
             }
           }
-        } */
-        
+          res.redirect ('/home');
+        })
+        .catch(function(errmsg) {
+          res.send(errmsg);
+        });
       }
     }
   ,
@@ -86,52 +59,43 @@ const controller = {
           oldData: req.body
         });
       } else {
-        db.Users.findOne({
-          where: {email: req.body.usuario}
-        }).then(usuario => {
+        // Actualizo el usuario
+        const email = req.body.usuario;
+        db.User.findOne({where: {email: email}})
+        .then(function(usuario) {
           if (usuario) {
             // Codigo para generar un token version 4 RFC4122
             let uuidStr = uuid.v4();
-            // Guardar el uuidStr y el estado del usuario para su posterior verificacion
-            usuario.active = false;
-            usuario.uuid = uuidStr;
             // Obtiene token
-            const nombre = usuario.nombre;
-            const apellido = usuario.apellido;
-            const email = usuario.email;
+            const nombre = usuario.first_name;
+            const apellido = usuario.last_name;
             const token = getToken({email, uuidStr});
             // Envia mail para activar
-            // Parametros del protocolo SMTP
-            let transporter = configSMTP();
-            // Procesa el envio
-            let adminAccount = transporter.options.auth.user;
-            let info = transporter.sendMail({
-              from: "'Sportal Admin' <" + adminAccount + ">",   // sender address
-              to: email,                                        // list of receivers (separados por comas)
-              subject: "Activación de Cuenta Personal",         // Subject line
-              //text: "Esta es una prueba",                     // plain text body
-              html: getTemplateNewPass(nombre, apellido, token) // HTML text body
-            });
+            let info = correo(email, nombre, apellido, token);
             if (info) {
               // Guarda el uuidStr y el estado del usuario para su posterior verificacion
-              let newUsers = usuarios.map(function(elem) {
-                if (elem.usuario == email) {
-                  elem.active = false;
-                  elem.uuid = uuidStr;
-                }
-                return elem;
+              db.User.update({
+                active: false,
+                uuid: uuidStr
+                },
+                {where: {email: email}
+              })
+              .then(function() {
+                res.send("Se ha enviado un correo a " + email);                
+              })
+              .catch(function(errmsg) {
+                res.send(errmsg);
               });
-              rwdJson.writeJSON(usersJson, newUsers);
-              res.send("Se ha enviado un correo a " + email);
             } else {
               res.send("No se ha podido enviar un correo a " + email);
             }
           } else {
             res.send("El usuario '" + email + "' no existe.");
           }
-        }).catch(error => {
-          res.send(error)
         })
+        .catch(function(errmsg) {
+          res.send(errmsg);
+        });
       }
     }
 ,
@@ -141,6 +105,21 @@ const controller = {
       delete req.session.usuarioLogueado;
       res.redirect("/home");
     }
-}; 
+};
+
+async function correo(email, nombre, apellido, token) {
+   // Parametros del protocolo SMTP
+  let transporter = configSMTP();
+  // Procesa el envio
+  let adminAccount = transporter.options.auth.user;
+  let info = await transporter.sendMail({
+    from: "'Sportal Admin' <" + adminAccount + ">",   // sender address
+    to: email,                                        // list of receivers (separados por comas)
+    subject: "Activación de Cuenta Personal",         // Subject line
+    //text: "Esta es una prueba",                     // plain text body
+    html: getTemplateNewPass(nombre, apellido, token) // HTML text body
+  });
+  return info;
+}
 
 module.exports = controller;

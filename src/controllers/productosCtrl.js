@@ -7,7 +7,6 @@
 */
 
 const db = require('../database/models');
-const sequelize = db.sequelize;
 const { Op } = require("sequelize");
 
 // Validaciones
@@ -35,7 +34,8 @@ const controller = {
         db.Product.findAll({
           where: {
             id: {[Op.ne]: req.params.id},
-            family_id: family
+            family_id: family,
+            inactive: false
           }
         })
         .then(function(newProducts) {
@@ -61,11 +61,11 @@ const controller = {
           res.render("producto", {producto, misc, others});
         })
         .catch(function(errmsg) {
-          res.send("[01] Error en [db.Product.findAll]: " + errmsg);       
+          res.send(errmsg);       
         });
       })
       .catch(function(errmsg) {
-        res.send("[02] Error en [db.Product.findByPk]: " + errmsg);
+        res.send(errmsg);
       });
     }
   ,
@@ -75,14 +75,17 @@ const controller = {
       misc.heading = "Búsqueda";
       db.Product.findAll({
         include: ["ages", "brands", "colors", "families", "headings", "sex"],
-        where: {model: {[Op.like]: "%" + req.query.searchString + "%"}}
+        where: {
+          model: {[Op.like]: "%" + req.query.searchString + "%"},
+          inactive: false
+        }
       })
       .then(function(products) {
         if (!products) {products = []}
         res.render("productos", {products, misc});
       })
       .catch(function(errmsg) {
-        res.send("[03] Error en [db.Product.findAll]: " + errmsg);
+        res.send(errmsg);
       });
     }
   ,
@@ -97,13 +100,14 @@ const controller = {
           // Muestra todos los productos para el administrador
           if (hasAdminRights) {
             db.Product.findAll({
-              include: ["ages", "brands", "colors", "families", "headings", "sex"]
+              include: ["ages", "brands", "colors", "families", "headings", "sex"],
+              where: {inactive: false}
             })
             .then(function(products) {
               if (!products) {products = []}
               res.render("listarProductos", {products, misc});
             }).catch(function(errmsg) {
-              res.send("[04] Error en [db.Product.findAll]: " + errmsg);
+              res.send(errmsg);
             });
           }
           break;
@@ -134,7 +138,7 @@ const controller = {
               res.render("crearProducto", {brands, colors, sex, ages, headings, families, misc, prodList, errors});
             })
             .catch(function(errmsg) {
-              res.send("[05] Error en [db.*.findAll]: " + errmsg);
+              res.send(errmsg);
             });
           }
           break;
@@ -150,17 +154,17 @@ const controller = {
             misc.heading = oneHeading.desc;  
           })
           .catch(function(errmsg) {
-            res.send("[06] Error en [db.Product.findByPk]: " + errmsg);
+            res.send(errmsg);
           });
           db.Product.findAll({
             include: ["ages", "brands", "colors", "families", "headings", "sex"],
-            where: {heading_id: heading}
+            where: {heading_id: heading, inactive: false}
           })
           .then(function(products) {
             if (!products) {products = []}
             res.render("productos", {products, misc});
           }).catch(function(errmsg) {
-            res.send("[07] Error en [db.Product.findAll]: " + errmsg);
+            res.send(errmsg);
           });
       }
     }
@@ -221,7 +225,7 @@ const controller = {
             res.render("crearProducto", {brands, colors, sex, ages, headings, families, misc, errors, prodList: product});
           })
           .catch(function(errmsg) {
-            res.send("[08] Error en [db.*.findAll]: " + errmsg);
+            res.send(errmsg);
           });
         } else {
           db.Product.create({
@@ -247,7 +251,7 @@ const controller = {
             res.redirect("/productos/listar");
           })
           .catch(function(errmsg) {
-            res.send("[09] Error en [db.Product.create]: " + errmsg);          
+            res.send(errmsg);          
           });
         }
       }
@@ -272,7 +276,7 @@ const controller = {
           res.render("editarProducto", {brands, colors, sex, ages, headings, families, misc, errors, prodList: product});
         })
         .catch(function(errmsg) {
-          res.send("[10] Error en [db.Product.findByPk]: " + errmsg);
+          res.send(errmsg);
         });
       }
     }
@@ -334,7 +338,7 @@ const controller = {
             res.render("editarProducto", {brands, colors, sex, ages, headings, families, misc, errors, prodList: product});
           })
           .catch(function(errmsg) {
-            res.send("[11] Error en [db.Product.findByPk]: " + errmsg);
+            res.send(errmsg);
           });
         } else {
           db.Product.update({
@@ -360,7 +364,7 @@ const controller = {
             res.redirect("/productos/listar");
           })
           .catch(function(errmsg) {
-            res.send("[12] Error en [db.Product.update]: " + errmsg);          
+            res.send(errmsg);          
           });
         }
       }
@@ -374,7 +378,7 @@ const controller = {
         res.redirect("/productos/listar");          
       })
       .catch(function(errmsg) {
-        res.send("[13] Error en [db.Product.destroy]: " + errmsg);        
+        res.send(errmsg);        
       });
    }
 };
@@ -412,7 +416,7 @@ function similars (req, family, maxItems) {
     return others;
   })
   .catch(function(errmsg) {
-    res.send("[14] Error en [db.Product.findAll]: " + errmsg);       
+    res.send(errmsg);       
   });
 }
 
@@ -427,34 +431,5 @@ function hasAdminRights () {
     res.send("Para utilizar esta opción debe tener permisos de administrador.");
   }
 }
-
-/*function getAllRecords() {
-  let productx = [];
-  db.Product.findAll({
-    include: ["ages", "brands", "colors", "families", "headings", "sex"]
-  })
-  .then(function(records) {
-    if (!records) {records = []}
-    //console.log(records)
-    productx = records;
-  })
-  .catch(function(errmsg) {
-    res.send("Error en [db.Product.findAll]: " + errmsg);
-  });
-  return productx;
-}*/
-
-/*function getAges() {
-  db.Age.findAll()
-  .then(function(records) {
-    if (!records) {records = []}
-    console.log("==================================================")
-    console.log(records)
-    return records;
-  })
-  .catch(function(errmsg) {
-    res.send("Error en [db.Ages.findAll]: " + errmsg);
-  });
-}*/
 
 module.exports = controller;

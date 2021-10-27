@@ -11,7 +11,7 @@
             <div id="header-circle"><a href="/" ><span class="circle-link"></span></a></div>
             
             <% if (locals.logueado) { %>
-                <p id="header-login" onclick="openPanel()" ><%= locals.nombre%>
+                <p id="header-login" onclick="openPanel()" ><%= locals.first_name%>
                     <% if (locals.avatar) { %>
                         <img id="profile-avatar-header" src="/images/avatars/<%= locals.avatar %>" height=50>
                     <% } else { %>
@@ -19,11 +19,11 @@
                     <% } %>
                     <div id="userPanel">
                      <ul>
-                        <% if (locals.isAdmin) { %>
+                        <% if (locals.is_admin) { %>
                             <li><a href="/productos/listar">Uso interno</a></li>
                         <% } %>
                         <li><a href="/carrito">Ver carrito</a></li>
-                        <li><a href="/profile/<%= locals.usuario %>">Editar perfil</a></li>
+                        <li><a href="/profile/<%= locals.email %>">Editar perfil</a></li>
                         <li><a href="/login/logout">Logout</a></li>
                     </div>
                 </p>
