@@ -96,13 +96,16 @@ STOP DOING
 ** Retrospectiva del Sprint #5 **
 
 START DOING
-- Definición temprana del "Roadmap" y de la fragmentación en tareas
+- Definición temprana del "Roadmap" y de la fragmentación en tareas.
+
+KEEP DOING
+- Buena onda del grupo y charlas divergentes.
 
 MORE OF
-- Reuniones de coordinación diarias
+- Reuniones de coordinación diarias.
 
 LESS OF
-- Bloques grandes de trabajo off git (La idea es implementar soluciones y hacer push)
+- Bloques grandes de trabajo off git (La idea es implementar soluciones y hacer push).
 
 STOP DOING
-- No modificar nombres de archivos o consensuarlo antes (tener en cuenta que windows no es case sensitive)
+- No modificar nombres de archivos o consensuarlo antes (tener en cuenta que windows no es case sensitive).
