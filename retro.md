@@ -92,3 +92,17 @@ LESS OF
 
 STOP DOING
 - Nada importante que comentar. El grupo se maneja muy bien por la reducción de los tiempos de incomunicación.
+
+** Retrospectiva del Sprint #5 **
+
+START DOING
+- Definición temprana del "Roadmap" y de la fragmentación en tareas
+
+MORE OF
+- Reuniones de coordinación diarias
+
+LESS OF
+- Bloques grandes de trabajo off git (La idea es implementar soluciones y hacer push)
+
+STOP DOING
+- No modificar nombres de archivos o consensuarlo antes (tener en cuenta que windows no es case sensitive)
