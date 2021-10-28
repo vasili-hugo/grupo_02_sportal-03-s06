@@ -47,3 +47,6 @@ Vista listar Productos:
 - Agregar botones de editar y borrar en el listado.
 - Agregar confirmacion de borrado.
 - En la vista de editar agregar next y before.
+
+Menu de Opciones
+- Intermitentemente se muestra el menú ocultando algunas opciones. Esto de debe a que los ítems en vez de encolumnarse se enfilan.
