@@ -4,9 +4,9 @@
 const db = require('../database/models');
 
 //Requisitos de registracion
-const { validationResult } = require ('express-validator');
-const {getToken, getTokenData} = require("../functions/jwt.js");
-const {configSMTP, getTemplateNewPass} = require("../functions/mailer.js");
+const {validationResult} = require ('express-validator');
+const {getToken} = require("../functions/jwt.js");
+const {correo} = require("../functions/mailer.js");
 const uuid = require("uuid");
 
 // Controller
@@ -106,20 +106,5 @@ const controller = {
       res.redirect("/home");
     }
 };
-
-async function correo(email, nombre, apellido, token) {
-   // Parametros del protocolo SMTP
-  let transporter = configSMTP();
-  // Procesa el envio
-  let adminAccount = transporter.options.auth.user;
-  let info = await transporter.sendMail({
-    from: "'Sportal Admin' <" + adminAccount + ">",   // sender address
-    to: email,                                        // list of receivers (separados por comas)
-    subject: "Activación de Cuenta Personal",         // Subject line
-    //text: "Esta es una prueba",                     // plain text body
-    html: getTemplateNewPass(nombre, apellido, token) // HTML text body
-  });
-  return info;
-}
 
 module.exports = controller;

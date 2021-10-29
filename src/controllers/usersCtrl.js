@@ -8,7 +8,7 @@ const {validationResult} = require('express-validator');
 const config = require("../controllers/config.js");
 const bcrypt = require('bcryptjs');
 const {getToken, getTokenData} = require("../functions/jwt.js");
-const {configSMTP, getTemplate, getTemplateNewUser} = require("../functions/mailer.js");
+const {correo} = require("../functions/mailer.js");
 const uuid = require("uuid");
 
 // Controller
@@ -90,7 +90,7 @@ const controller = {
   }
   ,
   //edita el usuario activo
-  edit: function (req, res) { 
+  edit: function (req, res) {
     db.User.findOne({where: {email: req.params.id}})
     .then(function(usuario) {
       let editUser = {
@@ -104,10 +104,10 @@ const controller = {
         localidad: usuario.city,
         avatar: usuario.avatar
       }
+      req.session.avatar = usuario.avatar;
       res.render("userProfile", {usuario: editUser, oldData: editUser, errors: ""});  
     })
     .catch(function(errmsg) {
-      console.log(errmsg)
       res.send(errmsg);
     });
   }
@@ -132,7 +132,7 @@ const controller = {
         address: req.body.direccion,
         zipcode: req.body.cp,
         city: req.body.localidad,
-        avatar: req.file.filename,
+        avatar: (req.file.filename ? req.file.filename : req.session.avatar ),
         is_admin: false,
         active: true
       },
@@ -221,21 +221,6 @@ const controller = {
       res.send("No se pudo verificar el token recibido del usuario.");
     }
   }
-}
-
-async function correo(email, nombre, apellido, token) {
-  // Parametros del protocolo SMTP
- let transporter = configSMTP();
- // Procesa el envio
- let adminAccount = transporter.options.auth.user;
- let info = await transporter.sendMail({
-   from: "'Sportal Admin' <" + adminAccount + ">",   // sender address
-   to: email,                                        // list of receivers (separados por comas)
-   subject: "Activación de Cuenta Personal",         // Subject line
-   //text: "Esta es una prueba",                     // plain text body
-   html: getTemplateNewUser(nombre, apellido, token) // HTML text body
- });
- return info;
 }
 
 module.exports = controller;

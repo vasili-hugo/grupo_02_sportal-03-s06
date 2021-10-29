@@ -272,6 +272,12 @@ const controller = {
         let families = db.Family.findAll({order: [["desc", "ASC"]]});
         Promise.all([product, brands, colors, sex, ages, headings, families])
         .then(function([product, brands, colors, sex, ages, headings, families]){
+          req.session.image = product.image;
+          req.session.leftImage = product.left_image;
+          req.session.rightImage = product.right_image;
+          req.session.upperImage = product.upper_image;
+          req.session.lowerImage = product.lower_image;
+          req.session.edit = "";
           let misc = config.misc;
           res.render("editarProducto", {brands, colors, sex, ages, headings, families, misc, errors, prodList: product});
         })
@@ -328,7 +334,7 @@ const controller = {
             product.age_id = req.body.age;
             product.sex_id = req.body.sex;
             product.color_id = req.body.color;
-            product.image = (req.session.image ? req.session.image : product.image);
+            product.image = req.session.image;
             product.left_image = req.session.leftImage;
             product.right_image = req.session.rightImage;
             product.upper_image = req.session.upperImage;

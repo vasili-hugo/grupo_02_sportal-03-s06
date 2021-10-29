@@ -1,6 +1,22 @@
 const nodemailer = require("nodemailer");
 const config = require("../controllers/config.js")
 
+
+async function correo(email, nombre, apellido, token) {
+  // Parametros del protocolo SMTP
+ let transporter = configSMTP();
+ // Procesa el envio
+ let adminAccount = transporter.options.auth.user;
+ let info = await transporter.sendMail({
+   from: "'Sportal Admin' <" + adminAccount + ">",   // sender address
+   to: email,                                        // list of receivers (separados por comas)
+   subject: "Activación de Cuenta Personal",         // Subject line
+   //text: "Esta es una prueba",                     // plain text body
+   html: getTemplateNewPass(nombre, apellido, token) // HTML text body
+ });
+ return info;
+}
+
 // create reusable transporter object using the default SMTP transport
 function configSMTP () {
   let transporter = nodemailer.createTransport({
@@ -58,4 +74,4 @@ function getTemplateNewPass (nombre, apellido, token) {
   `;
 }
 
-module.exports = {configSMTP, getTemplateNewUser, getTemplateNewPass};
+module.exports = {correo, configSMTP, getTemplateNewUser, getTemplateNewPass};
