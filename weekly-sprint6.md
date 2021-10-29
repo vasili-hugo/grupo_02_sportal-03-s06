@@ -50,3 +50,6 @@ Vista listar Productos:
 
 Menu de Opciones
 - Intermitentemente se muestra el menú ocultando algunas opciones. Esto de debe a que los ítems en vez de encolumnarse se enfilan.
+
+Editar producto
+- Menu para agregar marcas, logos y colores
