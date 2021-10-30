@@ -143,8 +143,15 @@ const controller = {
           }
           break;
         case "saldos":
+          misc.heading = "Saldos";
+          res.render("productos", {products, misc});
+          break;
         case "ofertas":
+          misc.heading = "Ofertas";
+          res.render("productos", {products, misc});
+          break;
         case "novedades":
+          misc.heading = "Novedades";
           res.render("productos", {products, misc});
           break;
         default:

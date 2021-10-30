@@ -38,7 +38,7 @@ const controller = {
           if (usuarioEncontrado) {
             req.session.usuarioLogueado = usuarioEncontrado;
             if (req.body.recordame) {
-              res.cookie('recordame', usuarioEncontrado.email, {maxAge: 1000 * 60 * 60 * 60 * 24});
+              res.cookie('recordame', usuarioEncontrado.id, {maxAge: 1000 * 60 * 60 * 60 * 24});
             }
           }
           res.redirect ('/home');
@@ -71,7 +71,7 @@ const controller = {
             const apellido = usuario.last_name;
             const token = getToken({email, uuidStr});
             // Envia mail para activar
-            let info = correo(email, nombre, apellido, token);
+            let info = correo(email, nombre, apellido, token, "NewPass");
             if (info) {
               // Guarda el uuidStr y el estado del usuario para su posterior verificacion
               db.User.update({

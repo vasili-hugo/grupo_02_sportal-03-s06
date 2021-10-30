@@ -60,7 +60,7 @@ const controller = {
       const apellido = req.body.apellido;
       const token = getToken({email, uuidStr});
       // Envia mail para activar
-      let info = correo(email, nombre, apellido, token);
+      let info = correo(email, nombre, apellido, token, "NewUser");
       if (info) {
         db.User.create({
           email: req.body.usuario,
