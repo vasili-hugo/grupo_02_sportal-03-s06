@@ -1,5 +1,5 @@
 window.onload = function () {
-  const validExt = ["jpeg", "jpg", "png", "bmp"];
+  const validExt = ["jpeg", "jpg", "png", "gif"];
   let form = document.querySelector("form");
   let marca = document.querySelector("#marca");
   let errores = false;
@@ -96,7 +96,7 @@ window.onload = function () {
     let image = document.querySelector("#image");
     errmsg = document.querySelector(".errmsg-image");
     if (image.value.length > 0) {
-      if (okImage(image.value)) {
+      if (okImage(image.value, validExt)) {
         //req.session.image = image.value;
         errmsg.innerHTML = "";
       } else {
@@ -111,7 +111,7 @@ window.onload = function () {
     image = document.querySelector("#image1");
     errmsg = document.querySelector(".errmsg-image1");
     if (image.value.length > 0) {
-      if (okImage(image.value)) {
+      if (okImage(image.value, validExt)) {
         //req.session.leftImage = image.value;
         errmsg.innerHTML = "";
       } else {
@@ -125,7 +125,7 @@ window.onload = function () {
     image = document.querySelector("#image2");
     errmsg = document.querySelector(".errmsg-image2");
     if (image.value.length > 0) {
-      if (okImage(image.value)) {
+      if (okImage(image.value, validExt)) {
         //req.session.rightImage = image.value;
         errmsg.innerHTML = "";
       } else {
@@ -139,7 +139,7 @@ window.onload = function () {
     image = document.querySelector("#image3");
     errmsg = document.querySelector(".errmsg-image3");
     if (image.value.length > 0) {
-      if (okImage(image.value)) {
+      if (okImage(image.value, validExt)) {
         //req.session.uuperImage = image.value;
         errmsg.innerHTML = "";
       } else {
@@ -153,7 +153,7 @@ window.onload = function () {
     image = document.querySelector("#image4");
     errmsg = document.querySelector(".errmsg-image4");
     if (image.value.length > 0) {
-      if (okImage(image.value)) {
+      if (okImage(image.value, validExt)) {
         //req.session.lowerImage = image.value;
         errmsg.innerHTML = "";
       } else {
@@ -190,13 +190,12 @@ function okNumeric (valor) {
   return true;
 }
 
-function okImage (valor) {
+function okImage (valor, extentions) {
   let ext = "";
-  const validExt = ["jpeg", "jpg", "png", "bmp"];
   for (let i = 0 ; i < valor.length ; i++) {
     let idx = valor.length - i - 1;
     if (valor[idx] == ".") {
-      return (validExt.includes(ext));
+      return (extentions.includes(ext));
     } else {
       ext = valor[idx].toLowerCase() + ext;
     }

@@ -3,7 +3,7 @@
 const config = {
   // Valores varios
   misc: {
-    imageExt: ".jpeg,.jpg,.png,.bmp", // no poner espacios y minusculas
+    imageExt: ".jpeg,.jpg,.png,.gif", // no poner espacios y minusculas
     pathImages: "/images/select200/",
     pathLogos: "/images/logos/",
     pathAvatar: "/images/avatars/",
