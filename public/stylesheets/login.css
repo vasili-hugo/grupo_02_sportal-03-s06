@@ -153,11 +153,11 @@ main {
 }
 .error-text {
     font-size: 11px;
-    margin-left: 15px;
-    margin-top: -15px;
+    margin-left: 5px;
+    margin-top: 10px;
     color: #950000;
 }
-#invalid {
+.invalid {
     background-color: pink;
 }
 /*

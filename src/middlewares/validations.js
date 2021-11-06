@@ -26,6 +26,7 @@ const storage = multer.diskStorage({
 const validations = {
     login: [
         body ('usuario').notEmpty().withMessage('Debes ingresar el correo electrónico.').bail()
+        .isEmail().withMessage('Debes ingresar un e-mail válido.').bail()
         .custom( value  => {
             return db.User.findOne({
                 where: {email: value}
@@ -52,7 +53,7 @@ const validations = {
                         return Promise.reject ('La contraseña es inválida.');
                     }
                 } else {
-                    throw new Error('El correo ingresado no está registrado.');
+                    return Promise.reject (' ');
                 }
             })
             .catch(function(errmsg) {

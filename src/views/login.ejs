@@ -11,26 +11,30 @@
     </header>
     <main>
         <div class="form-login">
-            <form action="/login" method="POST">
+            <form action="/login" method="POST" class='form'>
                 <div class="form-login-check">
                     <div class="form-login-check-bar">
-                        <label for="usuario">e-mail<input class="input-login" id="<%= locals.errors && errors.usuario ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.usuario : null %>" type="email" name="usuario" id="usuario"></label>
+                        <label for="usuario">e-mail<input class="input-login<%= locals.errors && errors.usuario ? ' invalid' : '' %>" value="<%= locals.oldData ? oldData.usuario : null %>" type="text" name="usuario" id='usuario'>
                         <% if (locals.errors && errors.usuario) { %>
                             <div class="error-text">
                                 <%= errors.usuario.msg %>
                             </div>
                         <% } %>
+                            <div class='error-msg-usuario error-text'></div>
+                        </label>
                     </div>
                 </div>
 
                 <div class="form-login-check">
                     <div class="form-login-check-bar">
-                        <label for="password">Contraseña<input class="input-login" id="<%= locals.errors && errors.password ? 'invalid' : 'null' %>" type="password" name="password" id="password"></label>
+                        <label for="password">Contraseña<input class="input-login<%= locals.errors && errors.password ? ' invalid' : '' %>" type="password" name="password" id='password'>
                         <% if (locals.errors && errors.password) { %>
                             <div class="error-text">
                                 <%= errors.password.msg %>
                             </div>
                         <% } %>
+                            <div class='error-msg-password error-text'></div>
+                        </label>
                     </div>
                     <div class="check-recordame">
                         <input type="checkbox" name="recordame" id="recordame"><label for="recordame">Recordarme</label>
@@ -50,5 +54,6 @@
             </div>
         </div>
     </main>
+    <script src='/js/loginValidations.js'></script>
 </body>
 </html>
