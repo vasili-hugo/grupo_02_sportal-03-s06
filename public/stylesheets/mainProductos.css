@@ -10,7 +10,7 @@
 #main-container {
     display: grid;
     grid-template-columns: repeat(2, calc(100vw / 2));
-    grid-template-rows: repeat(20, calc((100vw / 2) * 1.5));
+    grid-template-rows: repeat(21, calc((100vw / 2) * 1.5));
     background-color: #ddd;
     grid-gap: 1px;
     overflow-x: hidden;
@@ -83,7 +83,7 @@
 @media (min-width: 400px) {
     #main-container {
         grid-template-columns: repeat(2, calc(100vw / 2));
-        grid-template-rows: repeat(10, calc((100vw / 2) * 1.5));
+        grid-template-rows: repeat(21, calc((100vw / 2) * 1.5));
     }
 
     .pict,
@@ -98,8 +98,8 @@
 
 @media (min-width: 600px) {
     #main-container {
-        grid-template-columns: repeat(2, calc(100vw / 2));
-        grid-template-rows: repeat(10, calc((100vw / 2) * 1.5));
+        grid-template-columns: repeat(3, calc(100vw / 3));
+        grid-template-rows: repeat(14, calc((100vw / 3) * 1.5));
     }
 
     .pict,
@@ -114,7 +114,7 @@
 @media (min-width: 800px) {
     #main-container {
         grid-template-columns: repeat(3, calc(100vw / 3));
-        grid-template-rows: repeat(10, calc((100vw / 3) * 1.5));
+        grid-template-rows: repeat(14, calc((100vw / 3) * 1.5));
     }
 
     .pict,
@@ -127,10 +127,10 @@
     }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 900px) {
     #main-container {
         grid-template-columns: repeat(4, calc(100vw / 4));
-        grid-template-rows: repeat(10, calc((100vw / 4) * 1.5));
+        grid-template-rows: repeat(11, calc((100vw / 4) * 1.5));
     }
 
     .pict,
@@ -147,7 +147,7 @@
 @media (min-width: 1200px) {
     #main-container {
         grid-template-columns: repeat(5, calc(100vw / 5));
-        grid-template-rows: repeat(10, calc((100vw / 5) * 1.5));
+        grid-template-rows: repeat(9, calc((100vw / 5) * 1.5));
     }
 
     .pict,
@@ -163,7 +163,7 @@
 @media (min-width: 1400px) {
     #main-container {
         grid-template-columns: repeat(6, calc(100vw / 6));
-        grid-template-rows: repeat(10, calc((100vw / 6) * 1.5));
+        grid-template-rows: repeat(7, calc((100vw / 6) * 1.5));
     }
 
     .pict,
@@ -178,8 +178,8 @@
 }
 @media (min-width: 1600px) {
     #main-container {
-        grid-template-columns: repeat(9, calc(100vw / 9));
-        grid-template-rows: repeat(10, calc((100vw / 9) * 1.5));
+        grid-template-columns: repeat(7, calc(100vw / 7));
+        grid-template-rows: repeat(6, calc((100vw / 7) * 1.5));
     }
 
     .pict,
