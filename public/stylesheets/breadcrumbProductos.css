@@ -16,6 +16,7 @@
     color: #950000;
     font-weight: 400;
     text-decoration: none;
+    text-transform: capitalize;
 }
 
 #breadcrumb-link img {

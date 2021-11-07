@@ -21,29 +21,55 @@
             <form action="/#" method="GET" class="description-options">
                 <div>
                     <label class="option-title" for="sexo">Sexo</label>
-                    <input type="radio" name="sexo" id="sexo" value="M"><label for="sexo"> M</label>
-                    <input type="radio" name="sexo" id="sexo" value='F'><label for="sexo"> F</label>
+                    <input type="radio" class="hombre" name="sexo" id="sexo" value="M"><label for="sexo"> </label>
+                    <input type="radio" class="mujer" name="sexo" id="sexo" value='F'><label for="sexo"> </label>
                 </div>
                 <div>
                     <label class="option-title" for='edad'>Edad</label>
-                    <input type="radio" name="edad" id="edad" value="adulto"><label for="edad"> Adulto</label>
-                    <input type="radio" name="edad" id="edad" value="niño"><label for="edad"> Niño</label>
+                    <input type="radio" class="adulto" name="edad" id="edad" value="adulto"><label for="edad"> </label>
+                    <input type="radio" class="nino" name="edad" id="edad" value="niño"><label for="edad"> </label>
                 </div>
                 <div>
                     <label class="option-title" for="color">Color</label>
-                    <input type="radio" name="color" id="color" value="rojo"><label for="color"> Rojo</label>
-                    <input type="radio" name="color" id="color" value="azul"><label for="color"> Azul</label>
-                    <input type="radio" name="color" id="color" value="amarillo"><label for="color"> Amarillo</label>
-                    <input type="radio" name="color" id="color" value="verde"><label for="color"> Verde</label>
+                    <input type="radio" class="rojo" name="color" id="color" value="rojo"><label for="color"></label>
+                    <input type="radio" class="azul" name="color" id="color" value="azul"><label for="color"> </label>
+                    <input type="radio" class="amarillo" name="color" id="color" value="amarillo"><label for="color"> </label>
+                    <input type="radio" class="verde" name="color" id="color" value="verde"><label for="color"> </label>
+                </div>
+
+                <div id="div-talle">
+                    <label class="option-title" for="talle">Talle</label>
+                    <input type="radio" class="XS" name="talle" id="talle" value="XS"><label for="talle"></label>
+                    <input type="radio" class="S" name="talle" id="talle" value="S"><label for="talle"> </label>
+                    <input type="radio" class="M" name="talle" id="talle" value="M"><label for="talle"> </label>
+                    <input type="radio" class="L" name="talle" id="talle" value="L"><label for="talle"> </label>
+                    <input type="radio" class="XL" name="talle" id="talle" value="XL"><label for="talle"> </label>
+                    <input type="radio" class="XX" name="talle" id="talle" value="XL"><label for="talle"> </label>
+
+                    <label class="option-title" for="select-size">Tamaño</label>
+                    <select id="select-size" name="select-size">
+                        <option value="00" selected>--</option>
+                        <option value="35">35</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                        <option value="41">41</option>
+                        <option value="42">42</option>
+                        <option value="43">43</option>
+                        <option value="44">44</option>
+
+                    </select>
                 </div>
             </form>
             <div class='description-bottom'>
-                <div class="desc-socials">
+                <div id="desc-socials">
                     <i class="far fa-heart"></i>
                     <i class="fas fa-share-alt"></i>
                 </div>
                 <div class="desc-button">
-                    <input type="number" min='1' max="30" value="1">
+                    <input id="select-quantity" type="number" min='1' max="30" value="1">
                     <a href="/carrito"><i class="fas fa-check-circle"></i></a>
                 </div>
             </div>
