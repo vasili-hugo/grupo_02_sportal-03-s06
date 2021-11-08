@@ -190,12 +190,12 @@ function okNumeric (valor) {
   return true;
 }
 
-function okImage (valor, extentions) {
+function okImage (valor, extensions) {
   let ext = "";
   for (let i = 0 ; i < valor.length ; i++) {
     let idx = valor.length - i - 1;
     if (valor[idx] == ".") {
-      return (extentions.includes(ext));
+      return (extensions.includes(ext));
     } else {
       ext = valor[idx].toLowerCase() + ext;
     }

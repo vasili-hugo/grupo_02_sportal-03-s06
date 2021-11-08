@@ -103,6 +103,9 @@ const controller = {
   logout:
     function (req, res) {
       delete req.session.usuarioLogueado;
+      if (req.cookies.recordame) {
+        res.cookie('recordame', req.cookies.recordame, {maxAge: 0});
+      }
       res.redirect("/home");
     }
 };

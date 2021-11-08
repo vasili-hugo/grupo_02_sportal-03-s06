@@ -11,12 +11,12 @@ window.addEventListener('load', function() {
     
     form.addEventListener('submit', function(e) {
         let errores = false;
-
+        let inputValue = "";
         //Validando el input de usuario para que no este el campo en blanco y que sea formato email.
         let email = document.getElementById('usuario');
         let errmsg = document.querySelector(".error-msg-usuario");
         if(email.value.length > 0 ) {
-            let inputValue = email.value;
+            inputValue = email.value;
             if (expresiones.correo.test(inputValue)) {
                 errmsg.innerHTML = ' ';
                 email.classList.remove('invalid');

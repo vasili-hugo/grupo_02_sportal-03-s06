@@ -11,16 +11,16 @@ window.addEventListener ('load', function () {
         cp: /^[a-zA-Z0-9À-ÿ\s]{1,8}$/, // Letras y numeros de 1 a 8 digitos.
         direccion: /^[a-zA-Z0-9À-ÿ\s]{1,50}$/ // Letras y numeros.
     }
-    const validExt = ["jpeg", "jpg", "png", "gif", 'JPEG', 'JPG', 'PNG', 'GIF'];
+    const validExt = ["jpeg", "jpg", "png", "gif"];
 
     form.addEventListener('submit', function (e) {
         let errores = false;
-        
+        let inputValue = "";
         //Validando el input de usuario para que no este el campo en blanco y que sea formato email.
         let email = document.getElementById('usuario');
         let errmsgUsuario = document.querySelector(".error-msg-usuario");
         if(email.value.length > 0 ) {
-            let inputValue = email.value;
+            inputValue = email.value;
             if (expresiones.correo.test(inputValue)) {
                 errmsgUsuario.innerHTML = ' ';
                 email.classList.remove('invalid');
@@ -40,8 +40,8 @@ window.addEventListener ('load', function () {
         let pass = document.getElementById('password');
         let errmsgPass = document.querySelector(".error-msg-password");
         if(pass.value.length > 0 ) {
-            let inputPass = pass.value;
-            if (expresiones.password.test(inputPass)) {
+            inputValue = pass.value;
+            if (expresiones.password.test(inputValue)) {
                 errmsgPass.innerHTML = ' ';
                 pass.classList.remove('invalid');
             } else {
@@ -60,8 +60,8 @@ window.addEventListener ('load', function () {
         let pass2 = document.getElementById('password2');
         let errmsgPass2 = document.querySelector(".error-msg-password2");
         if(pass2.value.length > 0 ) {
-            let inputPass = pass2.value;
-            if (expresiones.password.test(inputPass)) {
+            inputValue = pass2.value;
+            if (expresiones.password.test(inputValue)) {
                 errmsgPass2.innerHTML = ' ';
                 pass2.classList.remove('invalid');
             } else {
@@ -79,7 +79,7 @@ window.addEventListener ('load', function () {
         let nombre = document.getElementById('nombre');
         let errmsgNombre = document.querySelector(".error-msg-nombre");
         if(nombre.value.length > 0){
-            let inputValue = nombre.value;
+            inputValue = nombre.value;
             if (expresiones.nombre.test(inputValue)){
                 errmsgNombre.innerHTML = ' ';
                 nombre.classList.remove('invalid');
@@ -98,7 +98,7 @@ window.addEventListener ('load', function () {
         let apellido = document.getElementById('apellido');
         let errmsgApellido = document.querySelector(".error-msg-apellido");
         if(apellido.value.length > 0){
-            let inputValue = apellido.value;
+            inputValue = apellido.value;
             if (expresiones.nombre.test(inputValue)){
                 errmsgApellido.innerHTML = ' ';
                 apellido.classList.remove('invalid');
@@ -117,7 +117,7 @@ window.addEventListener ('load', function () {
         let dni = document.getElementById('dni');
         let errmsgDni = document.querySelector(".error-msg-dni");
         if(dni.value.length > 0){
-            let inputValue = dni.value;
+            inputValue = dni.value;
             if (expresiones.dni.test(inputValue)){
                 errmsgDni.innerHTML = ' ';
                 dni.classList.remove('invalid');
@@ -136,7 +136,7 @@ window.addEventListener ('load', function () {
         let celular = document.getElementById('celular');
         let errmsgCelular = document.querySelector(".error-msg-celular");
         if(celular.value.length > 0){
-            let inputValue = celular.value;
+            inputValue = celular.value;
             if (expresiones.telefono.test(inputValue)){
                 errmsgCelular.innerHTML = ' ';
                 celular.classList.remove('invalid');
@@ -155,7 +155,7 @@ window.addEventListener ('load', function () {
         let direccion = document.getElementById('direccion');
         let errmsgDireccion = document.querySelector(".error-msg-direccion");
         if(direccion.value.length > 0){
-            let inputValue = direccion.value;
+            inputValue = direccion.value;
             if (expresiones.direccion.test(inputValue)){
                 errmsgDireccion.innerHTML = ' ';
                 direccion.classList.remove('invalid');
@@ -174,7 +174,7 @@ window.addEventListener ('load', function () {
         let localidad = document.getElementById('localidad');
         let errmsgLocalidad = document.querySelector(".error-msg-localidad");
         if(localidad.value.length > 0){
-            let inputValue = localidad.value;
+            inputValue = localidad.value;
             if (expresiones.direccion.test(inputValue)){
                 errmsgLocalidad.innerHTML = ' ';
                 localidad.classList.remove('invalid');
@@ -193,7 +193,7 @@ window.addEventListener ('load', function () {
         let cp = document.getElementById('cp');
         let errmsgCp = document.querySelector(".error-msg-cp");
         if(cp.value.length > 0){
-            let inputValue = cp.value;
+            inputValue = cp.value;
             if (expresiones.cp.test(inputValue)){
                 errmsgCp.innerHTML = ' ';
                 cp.classList.remove('invalid');
@@ -231,12 +231,12 @@ window.addEventListener ('load', function () {
     
 })
 
-function okImage (valor, extentions) {
+function okImage (valor, extensions) {
     let ext = "";
     for (let i = 0 ; i < valor.length ; i++) {
       let idx = valor.length - i - 1
       if (valor[idx] == ".") {
-        return (extentions.includes(ext));
+        return (extensions.includes(ext));
       } else {
         ext = valor[idx].toLowerCase() + ext;
       }
