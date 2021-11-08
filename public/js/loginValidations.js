@@ -11,12 +11,10 @@ window.addEventListener('load', function() {
     
     form.addEventListener('submit', function(e) {
         let errores = false;
-        let email = document.getElementById('usuario');
-        let pass = document.getElementById('password');
-        let errmsg = document.querySelector(".error-msg-usuario");
-        let errmsgpass = document.querySelector(".error-msg-password");
 
         //Validando el input de usuario para que no este el campo en blanco y que sea formato email.
+        let email = document.getElementById('usuario');
+        let errmsg = document.querySelector(".error-msg-usuario");
         if(email.value.length > 0 ) {
             let inputValue = email.value;
             if (expresiones.correo.test(inputValue)) {
@@ -35,6 +33,8 @@ window.addEventListener('load', function() {
         }
 
         //Validando el input de contraseña para que no este el campo en blanco.
+        let pass = document.getElementById('password');
+        let errmsgpass = document.querySelector(".error-msg-password");
         if(pass.value.length > 0 ) {
             errmsgpass.innerHTML = ' ';
             pass.classList.remove('invalid');

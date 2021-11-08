@@ -76,8 +76,11 @@ const validations = {
                 throw new Error(errmsg);
             });
         }),
-        body ('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres.').bail().matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i").withMessage('La contraseña no cumple alguno de las sugerencias requeridas.'),
-        body ('checkPassword').notEmpty().withMessage('Debes completar nuevamente tu contraseña.').bail()
+        body ('password').notEmpty().withMessage('Debes ingresar tu contraseña.').bail()
+        .isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres.').bail()
+        .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i")
+        .withMessage('La contraseña no cumple alguna de las sugerencias requeridas.'),
+        body('checkPassword').notEmpty().withMessage('Debes completar nuevamente tu contraseña.').bail()
         .custom( (value, {req}) => {
             if (value != req.body.password) {
                 throw new Error('Las contraseñas no coinciden.');

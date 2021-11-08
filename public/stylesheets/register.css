@@ -182,7 +182,7 @@ main {
     margin-top: 5px;
     color: #950000;
 }
-#invalid {
+.invalid {
     background-color: pink;
 }
 /*
