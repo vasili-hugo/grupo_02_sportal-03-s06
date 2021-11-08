@@ -28,10 +28,11 @@ const controller = {
       let qtys = [];
       // Productos y categorias
       let products = {};
-      products = db.Product.findAll(params)
+      products = db.Product.findAndCountAll(params)
       let headings = db.Heading.findAll({order: [["desc", "ASC"]]});
       Promise.all([products, headings])
       .then(function([products, headings]) {
+        console.log("Count: ",products)
         //Inicializo contadores
         headings.map(function (elem) {
           ids.push(elem.id);
@@ -41,7 +42,7 @@ const controller = {
         //Preparo armado del OL a devolver
         let result = {};
         let productArray = [];
-        products.map(function (elem) {
+        products.rows.map(function (elem) {
           // Arma el OL del producto
           let product = {
             id: elem.id,
@@ -69,7 +70,7 @@ const controller = {
           headingArray.push(countByCats);
         }
         // Completo el OL a devolver
-        result.count = products.length;
+        result.count = products.count;
         result.countByCategory = headingArray;
         result.products = productArray;
         result.status = 200;

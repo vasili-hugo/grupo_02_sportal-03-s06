@@ -40,11 +40,11 @@ const controller = {
         }
       }
       // Seleccion
-      db.User.findAll(params)
+      db.User.findAndCountAll(params)
       .then(function(records) {
         let result = {};
         let userArray = [];
-        records.map(function (elem) {
+        records.rows.map(function (elem) {
           let user = {
             id: elem.id,
             email: elem.email,
@@ -53,7 +53,7 @@ const controller = {
           }
           userArray.push(user);
         });
-        result.count = records.length;
+        result.count = records.count;
         result.users = userArray;
         result.status = 200;
         res.status(200).json(result);
