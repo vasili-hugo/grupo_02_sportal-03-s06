@@ -16,10 +16,11 @@
                     <div class="form-login-check-bar">
                         <label for="usuario">e-mail<input class="input-login<%= locals.errors && errors.usuario ? ' invalid' : '' %>" value="<%= locals.oldData ? oldData.usuario : null %>" type="text" name="usuario" id='usuario'>
                         <% if (locals.errors && errors.usuario) { %>
-                            <div class="error-text error-msg-usuario">
+                            <div class="error-text validator">
                                 <%= errors.usuario.msg %>
                             </div>
                         <% } %>
+                        <div class="error-text error-msg-usuario"></div>
                         </label>
                     </div>
                 </div>
@@ -28,10 +29,11 @@
                     <div class="form-login-check-bar">
                         <label for="password">Contraseña<input class="input-login<%= locals.errors && errors.password ? ' invalid' : '' %>" type="password" name="password" id='password'>
                         <% if (locals.errors && errors.password) { %>
-                            <div class="error-text error-msg-password">
+                            <div class="error-text validator">
                                 <%= errors.password.msg %>
                             </div>
                         <% } %>
+                        <div class="error-text error-msg-password"></div>
                         </label>
                     </div>
                     <div class="check-recordame">

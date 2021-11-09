@@ -225,8 +225,15 @@ window.addEventListener ('load', function () {
             errmsgAvatar.innerHTML = "Tenes que subir una imagen de perfil.";
             avatar.classList.add('invalid');
         }
-        
-        if(errores){ e.preventDefault() };
+        let inputValidator = document.querySelectorAll('.validator');
+        if(errores){
+            if (inputValidator.length > 0){
+                inputValidator.forEach(input => {
+                    input.innerHTML = ' ';
+                })
+            }
+            e.preventDefault();
+        };
     })
     
 })
