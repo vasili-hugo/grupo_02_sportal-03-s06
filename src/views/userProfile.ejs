@@ -16,34 +16,37 @@
             <form action="/profile/<%= usuario.usuario %>" method="POST" enctype="multipart/form-data">
                 <div class="form-register-check-top">
                     <div class="form-register-check-bar-user">
-                        <label for="usuario">e-mail<input class="disabled input-register" id="<%= locals.errors && errors.usuario ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.usuario : usuario.usuario %>" type="text" name="usuario" id="usuario" readonly></label>
+                        <label for="usuario">e-mail<input class="disabled input-register<%= locals.errors && errors.usuario ? ' invalid' : '' %>" value="<%= locals.oldData ? oldData.usuario : usuario.usuario %>" type="text" name="usuario" id="usuario" readonly></label>
                         <% if (locals.errors && errors.usuario) { %>
-                            <div class="error-text">
+                            <div class="error-text validator">
                                 <%= errors.usuario.msg %>
                             </div>
                         <% } %>
+                        <div class="error-text error-msg-usuario"></div>
                     </div>
                 </div> 
                 
                 <div class="form-register-check-divided">
                     <div class="form-register-check">
                         <div class="form-register-check-bar-top">
-                            <label for="password">Contraseña<input class="input-register" id="<%= locals.errors && errors.password ? 'invalid' : 'null' %>" type="password" name="password" id="password"></label>
+                            <label for="password">Contraseña<input class="input-register<%= locals.errors && errors.password ? ' invalid' : '' %>" type="password" name="password" id="password"></label>
                             <% if (locals.errors && errors.password) { %>
-                                <div class="error-text">
+                                <div class="error-text validator">
                                     <%= errors.password.msg %>
                                 </div>
                             <% } %>
+                            <div class="error-text error-msg-password"></div>
                         </div>
                     </div>
                     <div class="form-register-check">
                         <div class="form-register-check-bar">
-                            <label for="checkPassword">Repetir contraseña<input class="input-register" id="<%= locals.errors && errors.checkPassword ? 'invalid' : 'null' %>" type="password" name="checkPassword" id="checkPassword"></label>
+                            <label for="checkPassword">Repetir contraseña<input class="input-register<%= locals.errors && errors.checkPassword ? ' invalid' : '' %>" type="password" name="checkPassword" id="password2"></label>
                             <% if (locals.errors && errors.checkPassword) { %>
-                                <div class="error-text">
+                                <div class="error-text validator">
                                     <%= errors.checkPassword.msg %>
                                 </div>
                             <% } %>
+                            <div class="error-text error-msg-password2"></div>
                         </div>
                     </div>
                 </div>
@@ -57,20 +60,22 @@
                         <div class="form-register-check-bar-top">
                             <label for="nombre">Nombre<input class="input-register" id="<%= locals.errors && errors.nombre ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.nombre : usuario.nombre %>" type="text" name="nombre" id="nombre"></label>
                             <% if (locals.errors && errors.nombre) { %>
-                                <div class="error-text">
+                                <div class="error-text validator">
                                     <%= errors.nombre.msg %>
                                 </div>
                             <% } %>
+                            <div class="error-text error-msg-nombre"></div>
                         </div>
                     </div>
                     <div class="form-register-check">
                         <div class="form-register-check-bar">
                             <label for="apellido">Apellido<input class="input-register" id="<%= locals.errors && errors.apellido ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.apellido : usuario.apellido %>" type="text" name="apellido" id="apellido"></label>
                             <% if (locals.errors && errors.apellido) { %>
-                                <div class="error-text">
+                                <div class="error-text validator">
                                     <%= errors.apellido.msg %>
                                 </div>
                             <% } %>
+                            <div class="error-text error-msg-apellido"></div>
                         </div>
                     </div>
                 </div>
@@ -80,20 +85,22 @@
                         <div class="form-register-check-bar-top">
                             <label for="dni">DNI<input class="input-register" id="<%= locals.errors && errors.dni ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.dni : usuario.dni %>" type="text" name="dni" id="dni"></label>
                             <% if (locals.errors && errors.dni) { %>
-                                <div class="error-text">
+                                <div class="error-text validator">
                                     <%= errors.dni.msg %>
                                 </div>
                             <% } %>
+                            <div class="error-text error-msg-dni"></div>
                         </div>
                     </div>
                     <div class="form-register-check">
                         <div class="form-register-check-bar">
                             <label for="celular">Celular<input class="input-register" id="<%= locals.errors && errors.celular ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.celular : usuario.celular %>" type="number" name="celular" id="celular"></label>
                             <% if (locals.errors && errors.celular) { %>
-                                <div class="error-text">
+                                <div class="error-text validator">
                                     <%= errors.celular.msg %>
                                 </div>
                             <% } %>
+                            <div class="error-text error-msg-celular"></div>
                         </div>
                     </div>
                 </div>
@@ -103,20 +110,22 @@
                         <div class="form-register-check-bar-top">
                             <label for="direccion">Dirección de Envío<input class="input-register" id="<%= locals.errors && errors.direccion ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.direccion : usuario.direccion %>" type="text" name="direccion" id="direccion"></label>
                             <% if (locals.errors && errors.direccion) { %>
-                                <div class="error-text">
+                                <div class="error-text validator">
                                     <%= errors.direccion.msg %>
                                 </div>
                             <% } %>
+                            <div class="error-text error-msg-direccion"></div>
                         </div>
                     </div>
                     <div class="form-register-check">
                         <div class="form-register-check-bar">
                             <label for="cp">Código postal<input class="input-register" id="<%= locals.errors && errors.cp ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.cp : usuario.cp %>" type="number" name="cp" id="cp"></label>
                             <% if (locals.errors && errors.cp) { %>
-                                <div class="error-text">
+                                <div class="error-text validator">
                                     <%= errors.cp.msg %>
                                 </div>
                             <% } %>
+                            <div class="error-text error-msg-cp"></div>
                         </div>
                     </div>
                 </div>
@@ -125,10 +134,11 @@
                     <div class="form-register-check-bar-top">
                         <label for="localidad">Localidad<input class="input-register" id="<%= locals.errors && errors.localidad ? 'invalid' : 'null' %>" value="<%= locals.oldData ? oldData.localidad : usuario.localidad %>" type="text" name="localidad" id="localidad"></label>
                         <% if (locals.errors && errors.localidad) { %>
-                            <div class="error-text">
+                            <div class="error-text validator">
                                 <%= errors.localidad.msg %>
                             </div>
                         <% } %>
+                        <div class="error-text error-msg-localidad"></div>
                     </div>
                 </div>
 
@@ -138,10 +148,11 @@
                             <input  id="<%= locals.errors && errors.avatar ? 'invalid' : 'null' %>" type="file" value="<%= locals.oldFile ? oldFile.originalname : usuario.avatar %>" name="avatar" id="avatar">
                         </label>
                         <% if (locals.errors && errors.avatar) { %>
-                            <div class="error-text">
+                            <div class="error-text validator">
                                 <%= errors.avatar.msg %>
                             </div>
                         <% } %>
+                        <div class="error-text error-msg-avatar"></div>
                     </div>
                     <img src="/images/avatars/<%= usuario.avatar %>" id="avatar-img" alt="avatar">
                 </div>
