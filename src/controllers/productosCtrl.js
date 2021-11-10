@@ -69,6 +69,7 @@ const controller = {
       });
     }
   ,
+  // Efectua busqueda en vista de clientes
   search:
     function (req, res) {
       let misc = config.misc;
@@ -87,6 +88,24 @@ const controller = {
       .catch(function(errmsg) {
         res.send(errmsg);
       });
+    }
+  ,
+  // Efectua busqueda en vista de edicion/creacion
+  searching:
+    function (req, res) {
+      if (hasAdminRights) {
+        let misc = config.misc;
+        db.Product.findAll({
+          include: ["ages", "brands", "colors", "families", "headings", "sex"],
+          where: {model: {[Op.like]: "%" + req.query.searchString + "%"}}
+        })
+        .then(function(products) {
+          if (!products) {products = []}
+          res.render("listarProductos", {products, misc});
+        }).catch(function(errmsg) {
+          res.send(errmsg);
+        });
+      }
     }
   ,
   // Muestra todos los productos correspondientes a ese rubro

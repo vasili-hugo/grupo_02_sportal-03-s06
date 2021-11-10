@@ -5,7 +5,8 @@ const uploadMany = require('../middlewares/productoImages.js');
 const {validateCreate, validateUpdate} = require("../middlewares/productoValid.js");
 
 /* GET products page. */
-router.get("/search", productosCtrl.search);                                      // Muestra todos los productos segun el criterio de busqueda
+router.get("/search", productosCtrl.search);                                      // Muestra todos los productos segun el criterio de busqueda en vista clientes
+router.get("/searching", productosCtrl.searching);                                // Muestra todos los productos segun el criterio de busqueda en vista edicion/creacion
 router.get("/detail/:id",productosCtrl.readOne);                                  // Muestra un producto.
 router.get("/:id", productosCtrl.readAll);                                        // Muestra todos los productos correspondientes a ese rubro
 router.post("/crear", uploadMany, validateCreate, productosCtrl.abmInsert);       // Crea un nuevo producto
