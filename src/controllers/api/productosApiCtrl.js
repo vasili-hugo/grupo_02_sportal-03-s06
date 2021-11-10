@@ -22,27 +22,12 @@ const controller = {
           offset: Number(rpp * (page - 1))
         }
       }
-      // Contadores
-      let ids = [];
-      let descs = [];
-      let qtys = [];
       // Productos y categorias
-      let products = {};
-      products = db.Product.findAndCountAll(params)
-      let headings = db.Heading.findAll({order: [["desc", "ASC"]]});
-      Promise.all([products, headings])
-      .then(function([products, headings]) {
-        console.log("Count: ",products)
-        //Inicializo contadores
-        headings.map(function (elem) {
-          ids.push(elem.id);
-          descs.push(elem.desc);
-          qtys.push(0);
-        });
-        //Preparo armado del OL a devolver
-        let result = {};
+      db.Product.findAll(params)
+      .then(function(products) {
+        // Preparo array a devolver
         let productArray = [];
-        products.rows.map(function (elem) {
+        products.map(function (elem) {
           // Arma el OL del producto
           let product = {
             id: elem.id,
@@ -51,29 +36,13 @@ const controller = {
             detail: config.misc.urlSite + "/api/products/" + elem.id
           }
           productArray.push(product);
-          // Cuenta productos por categoria
-          let idx = ids.findIndex(function (item) {
-            return (elem.heading_id == item);
-          });
-          if (idx > -1) {
-            qtys[idx] = qtys[idx] + 1;
-          }
         });
-        // Arma array de productos por categoria
-        let headingArray = [];
-        for (let i = 0 ; i < ids.length ; i++) {
-          let countByCats = {
-            id: ids[i],
-            desc: descs[i],
-            count: qtys[i]
-          }
-          headingArray.push(countByCats);
-        }
         // Completo el OL a devolver
-        result.count = products.count;
-        result.countByCategory = headingArray;
-        result.products = productArray;
-        result.status = 200;
+        let result = {
+          count: products.length,
+          products: productArray,
+          status: 200
+        }
         res.status(200).json(result);
       })
       .catch(function(errMsg) {
@@ -171,6 +140,49 @@ const controller = {
         res.json(errMsg);
       });
     }
+  ,
+    // Devuelve un array con la cantidad de productos por categoria
+    totalByCategory:
+    // Uso: /api/products/total
+    function (req, res) {
+      // Productos y categorias
+      let products = db.Product.findAll();
+      let headings = db.Heading.findAll({order: [["desc", "ASC"]]});
+      Promise.all([products, headings])
+      .then(function([products, headings]) {
+        // Inicializo contadores
+        let headingArray = [];
+        let olCount = {};
+        headings.map(function (elem) {
+          olCount = {
+            id: elem.id,
+            desc: elem.desc,
+            count: 0
+          }
+          headingArray.push(olCount);
+        });
+        // Cuenta productos por categoria
+        products.map(function (elem) {
+          let idx = headingArray.findIndex(function (item) {
+            return (elem.heading_id == item.id);
+          });
+          if (idx > -1) {
+            headingArray[idx].count++
+          }
+        });
+        // Completo el OL a devolver
+        let result = {
+          count: products.length,
+          countByCategory: headingArray,
+          status: 200
+        }
+        res.status(200).json(result);
+      })
+      .catch(function(errMsg) {
+        res.json(errMsg);
+      });
+    }
+
 }
 
 module.exports = controller;

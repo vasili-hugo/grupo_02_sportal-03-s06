@@ -44,7 +44,15 @@ window.addEventListener('load', function() {
             pass.classList.add('invalid');
         }
 
-        if(errores){ e.preventDefault() }
+        let inputValidator = document.querySelectorAll('.validator');
+        if(errores){
+            if (inputValidator.length > 0){
+                inputValidator.forEach(input => {
+                    input.innerHTML = ' ';
+                })
+            }
+            e.preventDefault();
+        };
 
     })
 
