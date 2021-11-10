@@ -1,189 +1,136 @@
-
-/*
-========================================================================================================================
-MAIN
-========================================================================================================================
-*/
-main {
+#main {
   width: 100%;
   overflow: scroll;
+  --image-size: 135px;
+  --viewport: 100vw;
 }
 
-.goback-link {
-  margin-left: 15px;
-  color: #950000;
-  font-weight: 400;
-}
-.goback-link img{
-  transform: translateY(2px);
-  height: 1.3em;
-  filter:invert(9%) sepia(73%) saturate(5980%) hue-rotate(358deg) brightness(89%) contrast(112%);
-}
-
-
-.goback-link a:visited,
-.goback-link a:link,
-.goback-link a:active{
-  color: #950000
-}
-
-.goback-link a:hover{
-  color: black
-}
-
-.grid-buy {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(200px,1fr));
-  grid-template-rows: repeat(3, 200px);
-  grid-template-areas:
-    "art1 qty1"
-    "art2 qty2"
-    "art3 qty3";
-  justify-content: stretch;
-  align-content: stretch;
-  gap: 0 0;
-}
-
-.art1 {
+#carrito-container {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
-  grid-area: art1;
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+  padding-top: 10px;
 }
-
-.art2 {
+/* -----------------------------productos */
+#block_01 {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 100%;
-  grid-area: art2;
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+  height: fit-content;
 }
 
-.art3 {
+.product-container {
+  display: flex;
+  flex-direction: row;
   width: 100%;
-  height: 100%;
-  grid-area: art3;
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+  height: calc(var(--image-size) + 20px);
+  border-top: 1px solid #707070;
+  min-width: 360px;
 }
-
+.carrito-imagen {
+  display: inline-block;
+  width: var(--image-size);
+  height: var(--image-size);
+  margin: 10px 10px 10px 10px;
+}
 .lower-rect {
-  background-color: rgb(220, 220, 220);
-  width: 90%;
-  height: 90%;
-  margin: 10px;
+  width: 100%;
+  height: 100%;
+  margin: 0;
   border-radius: 20px;
 }
-
 .image {
   width: 100%;
   height: 100%;
   border: 2px solid rgb(200, 200, 200);
   border-radius: 20px;
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(../images/sport/run-update-2021-500x356-2.webp);
   background-position: center;
   background-size: cover;
 }
-
-.grid-item1 {
-  display: grid;
-  grid-area: qty1;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(4,50px);
-  grid-template-areas:
-    "gi-codigo gi-codigo"
-    "gi-precio gi-marca"
-    "gi-counter ."
-    "gi-info gi-trash";
-  justify-content: center;
-  align-content: center;
-  border-bottom: 1px solid black;
-  gap: 0 0;
+.carrito-producto-detalle {
+  display: inline-block;
+  width: 70%;
+  height: 100%;
+  padding: 10px;
+  font-size:15px;
 }
-
-.grid-item2 {
-  display: grid;
-  grid-area: qty2;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(4,50px);
-  grid-template-areas:
-    "gi-codigo gi-codigo"
-    "gi-precio gi-marca"
-    "gi-counter ."
-    "gi-info gi-trash";
-  justify-content: center;
-  align-content: center;
-  border-bottom: 1px solid black;
-  gap: 0 0;
+.carrito-marca-cantidad {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  text-align: right;
+  width: 30%;
+  height: 100%;
+  padding: 10px;
 }
-
-.grid-item3 {
-  display: grid;
-  grid-area: qty3;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(4,50px);
-  grid-template-areas:
-    "gi-codigo gi-codigo"
-    "gi-precio gi-marca"
-    "gi-counter ."
-    "gi-info gi-trash";
-  justify-content: center;
-  align-content: center;
-  border-bottom: 1px solid black;
-  gap: 0 0;
+.descripcion-container {
+  display: flex;
+  flex-direction: row;
+  width: calc(100% - var(--image-size));
+  height: 100%;
+  line-height: 1.2em;
 }
 
 .codigo {
   grid-area: gi-codigo;
-  margin: 20px 20px 20px 10px;
+  margin: 0;
   color: #950000;
-  font-size: 14px;
-  font-weight: bold;
-  text-align: left;
+  font-weight: 800;
 }
 
 .precio {
   grid-area: gi-precio;
+  font-weight: 300;
+  color: #950000;
+}
+.detalles {
+  grid-area: gi-precio;
   font-size: 14px;
-  font-weight: bold;
-  text-align: center;
+  font-weight: 300;
   color: #707070;
 }
 
 .icon {
-  grid-area: gi-marca;
-  align-self: flex-start;
-  width: 5em;
-  justify-self: center;
+  width: 3em;
 }
-
-.basura{
-  justify-self: center;
+.cantidad {
+  font-weight: 300;
+  margin-top: auto;
+}
+.centrar {
+  top: -1px;
+  position: relative;
+}
+.borrar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: #707070 1px solid;
+  color: #707070;
+  font-weight: 300;
+  padding: 1px;
+  text-align: center;
 }
 
 .counter {
-  grid-area: gi-counter;
   display: flex;
-  justify-content: space-around;
   font-size: 14;
   font-weight: bold;
-  text-align: center;
-  width: 80px;
-  height: 40px;
-  padding: 5px;
-  border-radius: 8px;
+  width: 70px;
+  height: 30px;
+  padding: 1px;
   color: #950000;
-  background-color: #b0b0b0;
   margin-left: 10px;
 }
 
 .upcount {
   width: 20px;
   height: 20px;
-  font-size: 18px;
-  font-weight: bolder;
-  margin:auto;
+  font-size: 16px;
+  font-weight: 700;
+  margin: auto;
   margin-left: 3px;
   transition: background-color 0.2s;
 }
@@ -193,15 +140,15 @@ main {
 }
 
 .count-value {
-  padding: 5px;
+  padding: 3px;
 }
 
 .dncount {
   width: 20px;
   height: 20px;
-  font-size: 18px;
-  font-weight: bolder;
-  margin:auto;
+  font-size: 16px;
+  font-weight: 700;
+  margin: auto;
   margin-right: 3px;
   transition: background-color 0.2s;
 }
@@ -210,282 +157,217 @@ main {
   background-color: #707070;
 }
 
-.informes {
-  grid-area: gi-info;
-  width: 100%;
-  font-size: 1em;
-  color: #950000;
-  width: 25px;
-  height: 25px;
-  border: 2px solid #950000;
-  border-radius: 50%;
-  padding-top: 2px;
-  padding-left: 8px;
-  margin-left: 10px;
+/* -----------------------------payment */
+.container_02_03{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.fa-trash {
-  grid-area: gi-trash;
+#block_02 {
+  width: 100%;
+  height: fit-content;
+  padding: 0 10px;
+}
+#payment {
+  margin: 15px auto;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 100%;
+  height: fit-content;
+  border-radius: 20px;
+  border: 1px solid black;
+  font-size: 1em;
+  color: #707070;
+  line-height: 2.5em;
+  max-width: 450px;
+}
+#pay-1st-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 2em;
   font-size: 1.5em;
   color: #950000;
 }
-/*
-========================================================================================================================
-FORMULARIO
-========================================================================================================================
-*/
-.payment {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin: calc((vw - 375px) / 2);
-  height: 350px;
-  border-radius: 20px;
-  border: 1px solid black;
-  font-size: 20px;
-  color: #707070;
-  position: relative;
-  max-width: 360px;
-  min-width: 360px;
-}
-
-.frm-title {
-  position: relative;
-  font-size: 24px;
-  left: 20px;
-  padding: 10px;
-  color: #950000;
-}
-
 .qty-items {
-  position: relative;
-  left: 302px;
-  top: -33px;
+  margin-left: auto;
+}
+
+#cart {
+  width: 1.2em;
+  height: 1.2em;
+  filter: invert(7%) sepia(84%) saturate(6708%) hue-rotate(359deg)
+    brightness(89%) contrast(107%);
+  margin: 0 0 0 5px;
+}
+
+.subtotal,
+.envio,
+.descuento,
+.total {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1em;
   color: #950000;
 }
+.total {
+  font-weight: 800;
+}
 
-.fa-shopping-cart {
+#cart-select,
+#btn-continuar,
+#btn-vaciar {
+  height: 2em;
+  border: #707070 1px solid;
+  border-radius: 20px;
+  color: #707070;
+  padding-bottom: 3px;
+}
+#cart-select {
   position: relative;
-  left: 318px;
-  top: -56px;
+  top: 4px;
+  left: -5px;
   color: #950000;
 }
-
-.st-lbl1 {
-  position: relative;
-  left: 30px;
-  top: -30px;
+#btn-pagar,
+#btn-continuar,
+#btn-vaciar {
+  margin: 5px 0 5px 0;
 }
-
-.st-lbl2 {
-  position: relative;
-  left: 160px;
-  top: -30px;
+#btn-pagar {
+  color: white;
+  background-color: #950000;
+  border: #950000 1px solid;
+  border-radius: 20px;
+  height: 2em;
 }
-
-.env-sel {
-  position: relative;
-  left: 30px;
-  top: -15px;
-  font-size: 14px;
-}
-
-.env-lbl {
-  position: relative;
-  left: 99px;
-  top: -13px;
-}
-
-.desc-lbl1 {
-  position: relative;
-  left: 30px;
-  top: 0px;
-}
-
-.desc-lbl2 {
-  position: relative;
-  left: 132px;
-  top: 2px;
-}
-
 .tot-line {
-  position: relative;
-  left: 31px;
-  top: -3px;
+  width: 100%;
+  height: 0;
+  display: block;
+  border: none;
+  border-bottom: 1px solid #707070;
 }
 
-.tot-lbl1 {
-  position: relative;
-  left: 30px;
-  top: 10px;
+/* ------------------------otros productos */
+#block_03 {
+  width: 100%;
+  height: fit-content;
+  max-width: 450px;
+  margin: 0 auto;
 }
 
-.tot-lbl2 {
-  position: relative;
-  left: 174px;
-  top: 10px;
-  font-size: 24px;
-}
-
-.btn-pagar {
-  position: relative;
-  left: 31px;
-  top: 27px;
-  background-color: #950000;
-  color: #b0b0b0;
-  border-radius: 15px;
-  width: 100px;
-  height: 39px;
-  transition: color 250ms;
-}
-
-.btn-pagar:hover {
-  color: white;
-}
-
-.btn-vaciar {
-  position: relative;
-  left: 47px;
-  top: 27px;
-  background-color: #950000;
-  color: #b0b0b0;
-  border-radius: 15px;
-  width: 189px;
-  height: 39px;
-  transition: color 250ms;
-}
-
-.btn-vaciar:hover {
-  color: white;
-}
-
-.btn-continuar {
-  position: relative;
-  left: 31px;
-  top: 40px;
-  background-color: #950000;
-  color: #b0b0b0;
-  border-radius: 15px;
-  width: 309px;
-  height: 39px;
-  transition: color 250ms;
-}
-
-.btn-continuar:hover {
-  color: white;
-}
-/*
-========================================================================================================================
-OTROS PRODUCTOS SIMILARES
-========================================================================================================================
-*/
-.grid-otros {
+#grid-otros {
+  --frame: minmax(100px, 175px);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: var(--frame) var(--frame);
+  grid-template-rows: var(--frame) var(--frame);
   grid-template-areas:
     "otros1 otros2"
     "otros3 otros4";
   justify-content: center;
   align-content: center;
-  margin-bottom: 20px;
-  gap: 0 0;
+  margin: 0 auto;
+  max-width: 450px;
+  max-height: 450px;
+}
+.image {
+  width: 100%;
+  height: 100%;
+  max-width: 225px;
+  max-height: 225px;
+  border: 2px solid rgb(200, 200, 200);
+  border-radius: 20px;
+  background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0)
+    ),
+    url(/images/sport/run-update-2021-500x356-2.webp);
+  background-position: center;
+  background-size: cover;
 }
 
 .txt-otros {
   text-align: center;
-  font-size: 24px;
+  font-size: 18px;
   color: #950000;
   font-weight: bold;
-  padding-top: 20px;
+  padding-top: 0px;
   padding-bottom: 10px;
+  margin-top:10px
 }
 
 .otros1 {
-  width: 100%;
-  height: 100%;
+  padding: 10px;
   grid-area: otros1;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
+  border-right: 1px solid #707070;
+  border-bottom: 1px solid #707070;
 }
 
 .otros2 {
   width: 100%;
   height: 100%;
+  padding: 10px;
   grid-area: otros2;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #707070;
 }
 
 .otros3 {
   width: 100%;
   height: 100%;
+  padding: 10px;
   grid-area: otros3;
-  border-right: 1px solid black;
+  border-right: 1px solid #707070;
 }
 
 .otros4 {
   width: 100%;
   height: 100%;
+  padding: 10px;
   grid-area: otros4;
 }
-
-.lower-otr {
-  background-color: rgb(220, 220, 220);
-  width: 90%;
-  height: 90%;
-  margin: 10px;
-  border-radius: 20px;
-}
-
-
-/*
-========================================================================================================================
-MEDIA QUERIES
-========================================================================================================================
-*/
-@media (min-width: 450px) {
-  .codigo {
-    font-size: 18px;
+@media (min-width: 800px){
+  #carrito-container {
+    display: flex;
+    flex-direction: row;
+  }
+  #block_01 {
+    height: fit-content;
+    width: 50%;
   }
 
-  .precio {
-    font-size: 18px;
+  /* #block_03 {
+    display: none;
+  } */
+  .txt-otros{
+    margin-top: 0;
   }
-}
-
-@media (min-width: 768px) {
-  .codigo {
-    font-size: 20px;
+  #payment {
+    margin-top: 0;
   }
-
-  .precio {
-    font-size: 20px;
+  .container_02_03{
+    width:50%
   }
 }
-
-@media (min-width: 1024px) {
-  
-  .grid-big {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 400px 400px;/*1fr 1fr;*/
-    grid-template-areas:
-      "buy pay"
-      "buy otros";
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0 30px;
+@media (min-width: 1070px){
+  #block_01 {
+    width: 33.3%;
+  }
+  #block_03 {
+    display: block;
+  }
+  .container_02_03{
+    display: flex;
+    flex-direction: row;
+    width:66.3%
   }
 
-  .grid-buy {
-    grid-area: buy;
-  }
-
-  .payment {
-    grid-area: pay;
-    margin: 20px;
-  }
-
-  .grid-txt-otros {
-    grid-area: otros;
-  }
 }
