@@ -164,6 +164,12 @@
 }
 
 /* -----------------------------payment */
+.container_02_03{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 #block_02 {
   background-color: white;
   width: 100%;
@@ -345,19 +351,33 @@
   }
   #block_01 {
     height: fit-content;
+    width: 50%;
   }
-  #block_03 {
+
+  /* #block_03 {
     display: none;
-  }
+  } */
   .txt-otros{
     margin-top: 0;
   }
   #payment {
     margin-top: 0;
   }
+  .container_02_03{
+    width:50%
+  }
 }
-@media (min-width: 1000px){
+@media (min-width: 1070px){
+  #block_01 {
+    width: 33.3%;
+  }
   #block_03 {
     display: block;
   }
+  .container_02_03{
+    display: flex;
+    flex-direction: row;
+    width:66.3%
+  }
+
 }
