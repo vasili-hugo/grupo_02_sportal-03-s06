@@ -109,7 +109,7 @@ main input[type=number]{
 .form-register-check {
     display: flex;
     flex-direction: column;
-    margin: 0px -10px 0 20px;
+    margin: 0px -7px 0 25px;
 }
 .form-register-check-top {
     display: flex;
@@ -136,16 +136,19 @@ main input[type=number]{
     margin: 5px 0px;
 }
 .form-register-check-bar-user label {
-    margin-left: 0px;
+    margin-left: 10px;
     margin-right: 6px;
 }
 #form-avatar{
     display: flex;
     flex-direction: row;
     padding: 0;
+    margin: 20px 0px 0px 5px;
 }
 #avatar-label{
     line-height: 2em;
+    display: flex;
+    flex-direction: column;
 }
 .form-register-check-bar-top {
     display: flex;
@@ -154,11 +157,10 @@ main input[type=number]{
 }
 
 #avatar-img{
-    width:50px;
+    width:60px;
     background-color: #AAA;
-    position: relative;
     border-radius: 20%;
-    top: -10px;
+    margin-left: 0px;
     right: 70px;
 }
 .form-register-check i {
@@ -179,6 +181,7 @@ main input[type=number]{
     height: 30px;
     max-width: 435px;
     margin-top: 10px;
+    padding-left: 5px;
     font-size: 16px;
     font-weight: bold;
 }
@@ -212,11 +215,11 @@ main input[type=number]{
 }
 .error-text {
     font-size: 11px;
-    margin-left: 15px;
+    margin-left: 5px;
     margin-top: 5px;
     color: #950000;
 }
-#invalid {
+.invalid {
     background-color: pink;
 }
 /*
@@ -231,14 +234,11 @@ MEDIA
     }
     .form-register-check-divided {
         flex-direction: row;
-        margin: 0px 0px 0px -30px;
+        margin: -5px 0px 0px -30px;
     }
     .input-register {
         width: 360px;
         max-width: 400px;
-    }
-    .form-register-check-bar-user label {
-        margin-left: 5px;
     }
     .header-options-login {
         top: 95px;
