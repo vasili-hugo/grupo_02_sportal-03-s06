@@ -208,23 +208,42 @@ window.addEventListener ('load', function () {
             cp.classList.add('invalid');
         }
 
-        //Validando el input de avatar para que no este en blanco y que tenga las extensiones permitidas.
         let avatar = document.getElementById('avatar');
-        let errmsgAvatar = document.querySelector(".error-msg-avatar");
-        if (avatar.value.length > 0) {
-            if (okImage(avatar.value, validExt)) {
-                errmsgAvatar.innerHTML = " ";
-                avatar.classList.remove('invalid');
+        let avatarEdit = document.getElementById('avatar-edit');
+        
+        if (avatar) {
+            //Validando el input de avatar para que no este en blanco y que tenga las extensiones permitidas.
+            let errmsgAvatar = document.querySelector(".error-msg-avatar");
+            if (avatar.value.length > 0) {
+                if (okImage(avatar.value, validExt)) {
+                    errmsgAvatar.innerHTML = " ";
+                    avatar.classList.remove('invalid');
+                } else {
+                    errores = true;
+                    errmsgAvatar.innerHTML = "Las extensiones permitidas son '" + validExt.toString() + "'.";
+                    avatar.classList.add('invalid');
+                }
             } else {
                 errores = true;
-                errmsgAvatar.innerHTML = "Las extensiones permitidas son '" + validExt.toString() + "'.";
+                errmsgAvatar.innerHTML = "Tenes que subir una imagen de perfil.";
                 avatar.classList.add('invalid');
             }
-        } else {
-            errores = true;
-            errmsgAvatar.innerHTML = "Tenes que subir una imagen de perfil.";
-            avatar.classList.add('invalid');
+
+        } else if (avatarEdit){
+            //Validando el input de avatar de la pagina de edit de usuario que tenga las extensiones permitidas.
+            let errmsgAvatarEdit = document.querySelector(".error-msg-avatar-edit");
+            if (avatarEdit.value.length > 0) {
+                if (okImage(avatarEdit.value, validExt)) {
+                    errmsgAvatarEdit.innerHTML = " ";
+                    avatarEdit.classList.remove('invalid');
+                } else {
+                    errores = true;
+                    errmsgAvatarEdit.innerHTML = "Las extensiones permitidas son '" + validExt.toString() + "'.";
+                    avatarEdit.classList.add('invalid');
+                }
+            }
         }
+
         let inputValidator = document.querySelectorAll('.validator');
         if(errores){
             if (inputValidator.length > 0){
