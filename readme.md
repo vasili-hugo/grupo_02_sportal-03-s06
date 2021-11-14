@@ -65,6 +65,9 @@ El archivo sportal_db.xml dispone el Diagrama Entidad Relación en formato XML. 
 Para acceder al listado de productos para su edición y/o creación se deberá acceder como administrador.<br>
 Para ello crear un usuario y posteriormente, acceder a la BD mediante cualquiera de los cliente mencionados, y cambiar el campo 'is_admin' con el valor '1' en la tabla Users.
 
+Para el sprint 7 se agregaron las validaciones del front-end. No se han utilizado paquetes adicionales para este sprint, ya que solo se ha utilizado JavaScript.<br>
+Se han corregido algunos bugs y se implementaron tareas pendientes.
+
 **REFERENCIAS CONSULTADAS PARA EL PROYECTO**
 
 - [SoloDeportes](https://www.solodeportes.com.ar/) 
@@ -79,5 +82,5 @@ Para ello crear un usuario y posteriormente, acceder a la BD mediante cualquiera
 - Under Armour</br>
 - Fila</br>
 - Mizuno</br>
-- Topper
+- Topper<br>
 - Gap

@@ -18,6 +18,8 @@ Resumen de Entregables:
 	○ Creación y modificación de productos.
 	○ (Opcional) Resto de los formularios del sitio.
 
+Todas listas.
+
 Estas son las tareas pendientes de completar ademas de las necesarias para cumplimentar los requerimiento de este Sprint:
 
 Todas las vistas:

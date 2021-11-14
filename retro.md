@@ -109,3 +109,21 @@ LESS OF
 
 STOP DOING
 - No modificar nombres de archivos o consensuarlo antes (tener en cuenta que windows no es case sensitive).
+
+** Retrospectiva del Sprint #6 **
+
+START DOING
+- Conocer los detalles de los paquetes necesarios para realizar una tarea antes de planificarlas.
+
+KEEP DOING
+- Buena onda del grupo y charlas divergentes.
+
+MORE OF
+- Reuniones de coordinación diarias.
+
+LESS OF
+- No dedicarle a una tarea más tiempo del que tiene establecido siempre y cuando de acuerdo a su importancia.
+- Muchas veces se sucede por planificar una tarea sin tener suficiente conocimiento de como desarrollarla.
+
+STOP DOING
+- Planificar tareas sin haber primero verificado que son factibles de hacer o lo que determinan las buenas prácticas.
