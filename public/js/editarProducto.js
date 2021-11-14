@@ -5,6 +5,13 @@ window.onload = function () {
   let errores = false;
   marca.focus();
 
+  let deleteButton = document.querySelector(".delete-button");
+  deleteButton.addEventListener("click", function(e) {
+    if (!confirm("Confirma eliminar el producto ?")) {
+      e.preventDefault();
+    }
+  });
+
   form.addEventListener("submit", function(e) {
     // marca
     let errmsg = document.querySelector(".errmsg-marca");

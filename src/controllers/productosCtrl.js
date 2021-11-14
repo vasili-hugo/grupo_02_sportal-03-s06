@@ -74,13 +74,12 @@ const controller = {
     function (req, res) {
       let misc = config.misc;
       misc.heading = "Búsqueda";
-      db.Product.findAll({
-        include: ["ages", "brands", "colors", "families", "headings", "sex"],
-        where: {
-          model: {[Op.like]: "%" + req.query.searchString + "%"},
-          inactive: false
-        }
-      })
+      misc.filter = req.query.filter;
+      misc.sort = req.query.sort;
+      // Prepara query (Busqueda, filtrado y ordenamiento)
+      query = queryOL(req.query.searchString, misc.filter, misc.sort);
+      // Selecciona productos segun query
+      db.Product.findAll(query)
       .then(function(products) {
         if (!products) {products = []}
         res.render("productos", {products, misc});
@@ -114,13 +113,14 @@ const controller = {
       let products = [];
       let misc = config.misc;
       let heading = req.params.id;
+      misc.filter = req.query.filter;
+      misc.sort = req.query.sort;
       switch (heading) {
         case "listar":
           // Muestra todos los productos para el administrador
           if (hasAdminRights) {
             db.Product.findAll({
-              include: ["ages", "brands", "colors", "families", "headings", "sex"],
-              where: {inactive: false}
+              include: ["ages", "brands", "colors", "families", "headings", "sex"]
             })
             .then(function(products) {
               if (!products) {products = []}
@@ -174,7 +174,10 @@ const controller = {
           res.render("productos", {products, misc});
           break;
         default:
-          //misc.heading = heading;
+          // Prepara query (Busqueda, filtrado y ordenamiento)
+          let query = queryOL(req.query.searchString, misc.filter, misc.sort);
+          query.where.heading_id = Number(heading);
+          // Obtiene descripcion para breadcrumb
           db.Heading.findByPk(heading)
           .then(function(oneHeading) {
             misc.heading = oneHeading.desc;  
@@ -182,10 +185,8 @@ const controller = {
           .catch(function(errmsg) {
             res.send(errmsg);
           });
-          db.Product.findAll({
-            include: ["ages", "brands", "colors", "families", "headings", "sex"],
-            where: {heading_id: heading, inactive: false}
-          })
+          // Selecciona productos segun query
+          db.Product.findAll(query)
           .then(function(products) {
             if (!products) {products = []}
             res.render("productos", {products, misc});
@@ -335,7 +336,6 @@ const controller = {
           showErrors = true;
         }
         // Verifico que se hayan ingresado los campos de imagenes que son obligatorios
-        console.log("Image: ", req.session.image, req.files.image, )
         if (!req.session.image) {
           errors["image"] = {msg: "Campo obligatorio"};
           showErrors = true;
@@ -462,6 +462,47 @@ function hasAdminRights () {
   } else {
     res.send("Para utilizar esta opción debe tener permisos de administrador.");
   }
+}
+
+function queryOL(model, filter, sort) {
+  let query = {};
+  query.where = {};
+  // Filtrado
+  if (filter) {
+    if (filter.includes("adulto")) {
+      if (filter.includes("mujer")) {
+        query.where.age_id = 1;
+        query.where.sex_id = 1;
+      } else if (filter.includes("hombre")) {
+        query.where.age_id = 1;
+        query.where.sex_id = 2;
+      }
+    } else if (filter.includes("ninos")) {
+      if (filter.includes("mujer")) {
+        query.where.age_id = 2;
+        query.where.sex_id = 1;
+      } else if (filter.includes("hombre")) {
+        query.where.age_id = 2;
+        query.where.sex_id = 2;
+      }
+    }
+  }
+  // Ordenamiento
+  if (sort) {
+    if (sort == "mayor-precio") {
+      query.order = [["price", "DESC"]];
+    } else if (sort == "menor-precio") {
+      query.order = [["price", "ASC"]];
+    }
+  }
+  // Busqueda
+  if (model) {
+    query.where.model = {[Op.like]: "%" + model + "%"}
+  }
+  // Otros
+  query.where.inactive = false;
+  query.include = ["ages", "brands", "colors", "families", "headings", "sex"];
+  return query;
 }
 
 module.exports = controller;

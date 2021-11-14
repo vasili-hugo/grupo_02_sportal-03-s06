@@ -24,7 +24,7 @@ Todas las vistas:
 - Formulario generico para presentar mensajes de error de forma mas elegante.
 
 Vista Productos:
-- Aplicar filtros y ordenamiento.
+Listo - Aplicar filtros y ordenamiento.
 
 Vista Producto:
 - El cliente solo puede informar la cantidad que desea comprar de ese producto. Los demas datos (Sexo, Edad y Color) solo deben ser informados para que los vea el cliente, ya que estan configurados en el producto.
@@ -39,8 +39,8 @@ Vistas Internas
 
 Vista listar Productos:
 - Agregar botones de editar y borrar en el listado.
-- Agregar confirmacion de borrado.
+Listo - Agregar confirmacion de borrado.
 - En la vista de editar agregar next y before.
 
 Menu de Opciones
-- Intermitentemente se muestra el menú ocultando algunas opciones. Esto de debe a que los ítems en vez de encolumnarse se enfilan.
+Listo - Intermitentemente se muestra el menú ocultando algunas opciones. Esto de debe a que los ítems en vez de encolumnarse se enfilan.

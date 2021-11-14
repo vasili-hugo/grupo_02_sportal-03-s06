@@ -12,23 +12,21 @@
             <div id="filter-title">Filtrar: </div>
             <select id="filter-options" name="cat-filter">
                 <option value="">por edad y sexo</option>
-                <option value="adulto-hombre">Adulto - Hombre</option>
-                <option value="adulto-mujer">Adulto - Mujer</option>
-                <option value="ninos-hombre">Niños - Hombre</option>
-                <option value="ninos-mujer">Niños - Mujer</option>
+                <option value="adulto-hombre" <%= (misc.filter == "adulto-hombre" ? "selected" : "") %>>Adulto - Hombre</option>
+                <option value="adulto-mujer" <%= (misc.filter == "adulto-mujer" ? "selected" : "") %>>Adulto - Mujer</option>
+                <option value="ninos-hombre" <%= (misc.filter == "ninos-hombre" ? "selected" : "") %>>Niños - Hombre</option>
+                <option value="ninos-mujer" <%= (misc.filter == "ninos-mujer" ? "selected" : "") %>>Niños - Mujer</option>
             </select>
         </div>
         <div id="sorting" name="cat-sort">
             <div id="sort-title">Ordenar: </div>
             <select id="sort-options">
                 <option value="">por precio</option>
-                <option value="mayor-precio">Mayor precio</option>
-                <option value="menor-precio">Menor precio</option>
-                <option value="mas-vendido">Mas vendido</option>
-                <!--<option value="novedades">Novedades</option>
-                <option value="ofertas">Ofertas</option>
-                <option value="saldos">Saldos</option>-->
+                <option value="mayor-precio" <%= (misc.sort == "mayor-precio" ? "selected" : "") %>>Mayor precio</option>
+                <option value="menor-precio" <%= (misc.sort == "menor-precio" ? "selected" : "") %>>Menor precio</option>
+                <option value="mas-vendido" <%= (misc.sort == "mas-vendido" ? "selected" : "") %>>Mas vendido</option>
             </select>
         </div>
     </div>
+    <script src="../js/filterSorting.js"></script>
 </nav>
