@@ -78,7 +78,7 @@ const controller = {
           uuid: uuidStr
         })
         .then(function() {
-          res.send("Se ha enviado un correo a " + email);                
+          res.send("Se ha enviado un correo a " + email);
         })
         .catch(function(errmsg) {
           res.send(errmsg);
@@ -105,7 +105,7 @@ const controller = {
         avatar: usuario.avatar
       }
       req.session.avatar = usuario.avatar;
-      res.render("userProfile", {usuario: editUser, oldData: editUser, errors: ""});  
+      res.render("userProfile", {usuario: editUser, oldData: editUser, errors: "", misc: config.misc});
     })
     .catch(function(errmsg) {
       res.send(errmsg);
@@ -116,11 +116,12 @@ const controller = {
   editStore: function (req, res) {
     let validacionDeErrores = validationResult(req);
     if (validacionDeErrores.errors.length > 0) {
-      return res.render('userProfile', {
-        errors: validacionDeErrores.mapped(),
-        oldData: req.body,
-        usuario: req.body
-      });
+          return res.render('userProfile', {
+            errors: validacionDeErrores.mapped(),
+            oldData: req.body,
+            usuario: req.body,
+            misc: config.misc
+          });
     } else {
       const email = req.body.usuario;
       db.User.update({
