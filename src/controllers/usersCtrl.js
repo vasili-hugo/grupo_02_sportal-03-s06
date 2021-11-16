@@ -206,7 +206,7 @@ const controller = {
                 localidad: usuario.city,
                 avatar: usuario.avatar
               }
-              res.render("userProfile", {usuario: editUser, oldData: editUser, errors: ""});
+              res.render("userProfile", {usuario: editUser, oldData: editUser, errors: "", misc: config.misc});
             } else {
               res.send("Error de autenticación.");
             }
