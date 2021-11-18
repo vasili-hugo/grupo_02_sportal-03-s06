@@ -54,6 +54,24 @@ window.addEventListener('load', function() {
             e.preventDefault();
         };
 
-    })
+    });
 
-})
+    // Si se presiona la tecla 'Enter' en ambos textboxes, se autopresiona el boton 'INGRESAR'
+    const enterKey = 13;
+    let buttonLogin = document.querySelector(".login-button");
+    
+    let textBoxUser = document.querySelector("#usuario");
+    textBoxUser.addEventListener("keydown", function(e) {
+        if (e.keyCode == enterKey) {
+            buttonLogin.click();
+        }
+    });
+
+    let textBoxPass = document.querySelector("#password");
+    textBoxPass.addEventListener("keydown", function(e) {
+        if (e.keyCode == enterKey) {
+            buttonLogin.click();
+        }
+    });
+
+});
