@@ -1,0 +1,152 @@
+<%- include("./partials/head.ejs") %>
+    <link href="/stylesheets/editarProducto.css" rel="stylesheet" />
+    <title>Sportal - Portal para Guerreros Urbanos - Edición de Productos</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-bar">
+          <div class="header-circle"><a href="/" ><span class="circle-link"></span></a></div>
+            <div class="header-title"><h3>Edición de Productos - Código: <%= prodList.code %></h3></div>
+        </div>
+    </header>
+    <main>
+        <div class="form-abm">
+            <form action="/productos/editar/<%= prodList.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                            
+              <div class="spacer"></div>
+
+              <div class="step-aside">
+                <div class="step-down-half">
+                  <label class="labels label-marca" for="marca">Marca</label>
+                  <select class="selects marca-options" name="brand" id="marca">
+                    <option value="">Seleccione una opción</option>
+                    <% for (let i = 0 ; i < brands.length ; i++) { %>
+                      <option value="<%= brands[i].id %>" <%= (prodList.brand_id == brands[i].id) ? "selected" : "" %>><%= brands[i].desc %></option>
+                    <% } %>
+                  </select>
+                  <label class="errmsg errmsg-marca"><%= ((errors.brand) ? errors.brand.msg : "") %></label>
+                </div>
+
+                <div class="step-down-half">
+                  <label class="labels label-rubro" for="marca">Rubro</label>
+                  <select class="selects rubro-options" name="heading" id="rubro">
+                    <option value="">Seleccione una opción</option>
+                    <% for (let i = 0 ; i < headings.length ; i++) { %>
+                      <option value="<%= headings[i].id %>" <%= (prodList.heading_id == headings[i].id) ? "selected" : "" %>><%= headings[i].desc %></option>
+                    <% } %>
+                  </select>
+                  <label class="errmsg errmsg-rubro"><%= ((errors.heading) ? errors.heading.msg : "") %></label>
+                </div>
+              </div>
+              
+              <div class="step-aside">
+                <div class="step-down-half">
+                  <label class="labels label-modelo" for="modelo">Modelo</label>
+                  <input class="inputs input-modelo" type="text" name="model" id="modelo" value="<%= prodList.model %>">
+                  <label class="errmsg errmsg-modelo"><%= ((errors.model) ? errors.model.msg : "") %></label>
+                </div>
+
+                <div class="step-down-half">
+                  <label class="labels label-familia" for="familia">Familia de Producto</label>
+                  <select class="selects family-options" name="family" id="familia">
+                    <option value="">Seleccione una opción</option>
+                    <% for (let i = 0 ; i < families.length ; i++) { %>
+                      <option value="<%= families[i].id %>" <%= (prodList.family_id == families[i].id) ? "selected" : "" %>><%= families[i].desc %></option>
+                    <% } %>
+                  </select>
+                  <label class="errmsg errmsg-familia"><%= ((errors.family) ? errors.family.msg : "") %></label>
+                </div>
+              </div>
+
+              <div class="step-down-desc">
+                <label class="labels label-desc" for="descripcion">Descripción</label>
+                <textarea class="inputs input-desc" type="text" name="desc" id="desc"><%= prodList.desc %></textarea>
+                <label class="errmsg errmsg-desc"><%= ((errors.desc) ? errors.desc.msg : "") %></label>
+              </div>
+
+              <div class="step-aside">
+                <div class="step-down-half">
+                  <label class="labels label-precio" for="precio">Precio</label>
+                  <input class="inputs input-precio" type="text" name="price" id="precio" value="<%= prodList.price %>">
+                  <label class="errmsg errmsg-precio"><%= ((errors.price) ? errors.price.msg : "") %></label>
+                </div>
+
+                <div class="step-down-half">
+                  <label class="labels label-edad" for="edad">Edad</label>
+                  <select class="selects edad-options" name="age" id="edad">
+                    <option value="">Seleccione una opción</option>
+                    <% for (let i = 0 ; i < ages.length ; i++) { %>
+                      <option value="<%= ages[i].id %>" <%= (prodList.age_id == ages[i].id) ? "selected" : "" %>><%= ages[i].desc %></option>
+                    <% } %>
+                  </select>
+                  <label class="errmsg errmsg-edad"><%= ((errors.age) ? errors.age.msg : "") %></label>
+                </div>
+              </div>
+
+              <div class="step-aside">
+                <div class="step-down-half">
+                  <label class="labels label-sexo" for="sexo">Sexo</label>
+                  <select class="selects sexo-options" name="sex" id="sexo">
+                    <option value="">Seleccione una opción</option>
+                    <% for (let i = 0 ; i < sex.length ; i++) { %>
+                      <option value="<%= sex[i].id %>" <%= (prodList.sex_id == sex[i].id) ? "selected" : "" %>><%= sex[i].desc %></option>
+                    <% } %>
+                  </select>
+                  <label class="errmsg errmsg-sexo"><%= ((errors.sex) ? errors.sex.msg : "") %></label>
+                </div>
+
+                <div class="step-down-half">
+                  <label class="labels label-color" for="color">Color</label>
+                  <select class="selects color-options" name="color" id="color">
+                    <option value="">Seleccione una opción</option>
+                    <% for (let i = 0 ; i < colors.length ; i++) { %>
+                      <option value="<%= colors[i].id %>" <%= (prodList.color_id == colors[i].id) ? "selected" : "" %>><%= colors[i].desc %></option>
+                    <% } %>
+                  </select>
+                  <label class="errmsg errmsg-color"><%= ((errors.color) ? errors.color.msg : "") %></label>
+                </div>
+              </div>
+
+              <div class="step-down-half">
+                <label class="labels label-inactive" for="inactive">Inactivo</label>
+                <input class="inputs input-inactive" type="checkbox" name="inactive" id="inactive" value="checked" <%= (prodList.inactive ? "checked" : "") %>>
+              </div>
+
+              <div class="grid-image">
+                <label class="labels label-image" for="image">Archivo de Imagen Principal<%= " (" + ((prodList.image) ? prodList.image : misc.defaultImage) + ")" %></label>
+                <input class="inputs input-image" type="file" name="image" id="image" accept="<%= misc.imageExt %>" value="<%= (prodList.image) ? prodList.image : misc.defaultImage %>">
+                <label class="errmsg errmsg-image"><%= ((errors.image) ? errors.image.msg : "") %></label>
+                <img class="image-image" src="<%= misc.pathImages %><%= (prodList.image) ? prodList.image : misc.defaultImage %>">
+
+                <label class="labels label-image1" for="image1">Archivo de Imagen Lateral Izquierda<%= " (" + ((prodList.left_image) ? prodList.left_image : misc.defaultImage) + ")" %></label>
+                <input class="inputs input-image1" type="file" name="leftImage" id="image1" accept="<%= misc.imageExt %>" value="<%= (prodList.left_image) ? prodList.left_image : misc.defaultImage %>">
+                <label class="errmsg errmsg-image1"><%= ((errors.leftImage) ? errors.leftImage.msg : "") %></label>
+                <img class="image-image1" src="<%= misc.pathImages %><%= (prodList.left_image) ? prodList.left_image : misc.defaultImage %>">
+
+                <label class="labels label-image2" for="image2">Archivo de Imagen Lateral Derecha<%= " (" + ((prodList.right_image) ? prodList.right_image : misc.defaultImage) + ")" %></label>
+                <input class="inputs input-image2" type="file" name="rightImage" id="image2" accept="<%= misc.imageExt %>" value="<%= (prodList.right_image) ? prodList.right_image : misc.defaultImage %>">
+                <label class="errmsg errmsg-image2"><%= ((errors.rightImage) ? errors.rightImage.msg : "") %></label>
+                <img class="image-image2" src="<%= misc.pathImages %><%= (prodList.right_image) ? prodList.right_image : misc.defaultImage %>">
+
+                <label class="labels label-image3" for="image3">Archivo de Imagen Superior<%= " (" + ((prodList.upper_image) ? prodList.upper_image : misc.defaultImage) + ")" %></label>
+                <input class="inputs input-image3" type="file" name="upperImage" id="image3" accept="<%= misc.imageExt %>" value="<%= (prodList.upper_image) ? prodList.upper_image : misc.defaultImage %>">
+                <label class="errmsg errmsg-image3"><%= ((errors.upperImage) ? errors.upperImage.msg : "") %></label>
+                <img class="image-image3" src="<%= misc.pathImages %><%= (prodList.upper_image) ? prodList.upper_image : misc.defaultImage %>">
+
+                <label class="labels label-image4" for="image4">Archivo de Imagen Inferior<%= " (" + ((prodList.lower_image) ? prodList.lower_image : misc.defaultImage) + ")" %></label>
+                <input class="inputs input-image4" type="file" name="lowerImage" id="image4" accept="<%= misc.imageExt %>" value="<%= (prodList.lower_image) ? prodList.lower_image : misc.defaultImage %>">
+                <label class="errmsg errmsg-image4"><%= ((errors.lowerImage) ? errors.lowerImage.msg : "") %></label>
+                <img class="image-image4" src="<%= misc.pathImages %><%= (prodList.lower_image) ? prodList.lower_image : misc.defaultImage %>">
+              </div>
+              <div class="buttons">
+                <button class="accept-button" type="submit">ACEPTAR</button>
+                <button class="delete-button" type="submit" formaction="/productos/editar/<%= prodList.id %>?_method=DELETE">ELIMINAR</button>
+              </div>
+            </form>
+        </div>
+    </main>
+    <script src="/js/editarProducto.js"></script>
+</body>
+
+</html>

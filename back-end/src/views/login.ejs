@@ -1,0 +1,59 @@
+<%- include("./partials/head.ejs") %>
+    <link href="./stylesheets/login.css" rel="stylesheet"/>
+    <title>Sportal - Portal para Guerreros Urbanos</title>
+</head>
+<body>
+    <header>
+        <div class="header-bar">
+            <div class="header-circle"></div>
+            <div class="header-title"><h3>Ingresa tu cuenta</h3></div>
+        </div>
+    </header>
+    <main>
+        <div class="form-login">
+            <form action="/login" method="POST" class='form'>
+                <div class="form-login-check">
+                    <div class="form-login-check-bar">
+                        <label for="usuario">e-mail<input class="input-login<%= locals.errors && errors.usuario ? ' invalid' : '' %>" value="<%= locals.oldData ? oldData.usuario : null %>" type="text" name="usuario" id='usuario'>
+                        <% if (locals.errors && errors.usuario) { %>
+                            <div class="error-text validator">
+                                <%= errors.usuario.msg %>
+                            </div>
+                        <% } %>
+                        <div class="error-text error-msg-usuario"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-login-check">
+                    <div class="form-login-check-bar">
+                        <label for="password">Contraseña<input class="input-login<%= locals.errors && errors.password ? ' invalid' : '' %>" type="password" name="password" id='password'>
+                        <% if (locals.errors && errors.password) { %>
+                            <div class="error-text validator">
+                                <%= errors.password.msg %>
+                            </div>
+                        <% } %>
+                        <div class="error-text error-msg-password"></div>
+                        </label>
+                    </div>
+                    <div class="check-recordame">
+                        <input type="checkbox" name="recordame" id="recordame"><label for="recordame">Recordarme</label>
+                    </div>
+                    <div class="form-login-check-restore">
+                        <button class="restore-button" type="submit" formaction="/login/restore" formmethod="POST">No recuerdo mi contraseña</button>
+                    </div>
+                </div>
+
+                <div class="login-buttons-login-button">
+                    <button type="submit" class="login-button">INGRESAR</button>
+                </div>
+            </form>
+            <div class="login-to-register">
+                <label>Si no tenés un usuario ingresá tus datos aquí</label>
+                <a href="/register" target="_self"><button class="register-button">REGISTRATE</button></a>
+            </div>
+        </div>
+    </main>
+    <script src='/js/loginValidations.js'></script>
+</body>
+</html>

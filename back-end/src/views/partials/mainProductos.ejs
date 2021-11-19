@@ -1,0 +1,29 @@
+<!-- Bitacora
+03/08/2021 - Se parametrizan los datos e imagenes. Para ello se elimino el estilo background-image de la clase 'pict' en mainProductos.css
+18/09/2021 - Se cambia la ruta para que contemple el codigo de producto a mostrar.
+-->
+<main id="main">
+    <div id="main-container">
+        <% for (let i = 0 ; i < (products.length) ? products.length : 0 ; i++) { %>
+            <div class='item <%= (Math.random()>0.6 & Math.random()>0.4 ) ? "large" : "" %>'>
+                <div class="cell">
+                    <a href="/productos/detail/<%= products[i].id %>" target="_self">
+                        <div class="pict" style="background-image: url(<%=misc.pathImages%><%=products[i].image%>);"></div>
+                    </a>
+                    <div class="producto-ficha">
+                        <div class="description"><%= products[i].model %></div>
+                        <div class="description-bottom">
+                            <img class="icon" src="<%=misc.pathLogos%><%= products[i].brands.icon %>">
+                            <div class="icon-info">
+                                <div class="precio">$ <%= products[i].price %></div>
+                                <a href="http://" target="_blank" rel="noopener noreferrer">
+                                   <i class="info fas fa-plus-circle"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</main>

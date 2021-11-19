@@ -1,0 +1,74 @@
+<title>Sportal - Portal para Guerreros Urbanos</title>
+</head>
+
+<body>
+    <div id="container">
+
+        <!-- HEADER--------------------------------------------------------- -->
+        <header id="header">
+            <div id="header-upper"></div>
+            <div id="header-banner"></div>
+            <div id="header-circle"><a href="/" ><span class="circle-link"></span></a></div>
+            
+            <% if (locals.logueado) { %>
+                <p id="header-login" onclick="openPanel()" ><%= locals.first_name%>
+                    <% if (locals.avatar) { %>
+                        <img id="profile-avatar-header" src="/images/avatars/<%= locals.avatar %>" height=50>
+                    <% } else { %>
+                        <i class="far fa-user-circle" ></i>
+                    <% } %>
+                    <div id="userPanel">
+                        <ul>
+                            <% if (locals.is_admin) { %>
+                                <li><a href="/productos/listar">Uso interno</a></li>
+                            <% } %>
+                            <li><a href="/carrito">Ver carrito</a></li>
+                            <li><a href="/profile/<%= locals.email %>">Editar perfil</a></li>
+                            <li><a href="/login/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                </p>
+            <% } else { %>
+                <a id="header-login" href="/login">Login
+                    <i class="far fa-user-circle"></i>
+                </a>
+            <% } %>
+
+            <div id="header-search-fill"></div>
+
+            <div id="header-search-box">
+                <form id="form-search-submit" action="/productos/search" method="GET">
+                    <input class="header-search-input" type="search" name="searchString" placeholder="Ingrese su búsqueda" autocomplete="false">
+                </form>
+            </div>
+
+            <i id="header-glass" class="fas fa-search"></i>
+            
+            <nav id="header-menu">
+                <ul class="header-menu">
+                    <li><a href="/productos/1">Básicos</a></li>
+                    <li><a href="/productos/2">Calzado</a></li>
+                    <li><a href="/productos/3">Equipo</a></li>
+                    <li><a href="/productos/4">Carga</a></li>
+                    <li><a href="/productos/8">Agua</a></li>
+                    <li><a href="/productos/5">Portátiles</a></li>
+                    <li><a href="/productos/7">Electro</a></li>
+                </ul>
+            </nav>
+
+            <a id="header-sandwich" href="" target="_self"><i class="fas fa-bars"></i></a>
+
+            <script>
+                function openPanel(){
+                    
+                    let x = document.getElementById("userPanel");
+                    if (x.style.display === "block"){
+                        x.style.display = "none";
+                    } else {
+                        x.style.display = "block"
+                        setTimeout(function(){x.style.display= "none";} , 8000)
+                    }
+                }
+            </script>
+
+        </header>
